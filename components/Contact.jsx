@@ -3,15 +3,15 @@ import Reveal from "./Reveal";
 
 const links = [
   { label: "INSTAGRAM",   handle: "@whyed.music",          href: "https://instagram.com/whyed.music" },
-  { label: "SOUNDBETTER", handle: "/whyed",                href: "https://soundbetter.com/profiles/650221-whyed" },
-  { label: "GITHUB",      handle: "github.com/whyed",      href: "https://github.com/whyed" },
+  { label: "SOUNDBETTER", handle: "soundbetter.com/whyed", href: "https://soundbetter.com/profiles/650221-whyed" },
+  { label: "GITHUB",      handle: "OfficialWhyEd",         href: "https://github.com/OfficialWhyEd" },
   { label: "EMAIL",       handle: "edoardello@gmail.com",  href: "mailto:edoardello@gmail.com" },
 ];
 
 export default function Contact() {
   return (
     <footer
-      id="contact"
+      id="contatti"
       style={{ padding: "8rem 2.5rem 3rem", position: "relative" }}
     >
       <Reveal>
@@ -25,7 +25,7 @@ export default function Contact() {
             marginBottom: "2rem",
           }}
         >
-          /// 04 — CONTACT
+          /// 07 — CONTATTI
         </div>
 
         <h2
@@ -37,8 +37,8 @@ export default function Contact() {
             marginBottom: "1rem",
           }}
         >
-          LET&apos;S<br />
-          <span style={{ color: "var(--signal)" }}>CONNECT.</span>
+          PARLIAMO<br />
+          <span style={{ color: "var(--signal)" }}>INSIEME.</span>
         </h2>
 
         <p
@@ -51,7 +51,7 @@ export default function Contact() {
             marginBottom: "4rem",
           }}
         >
-          Open to mix/mastering, sound design, audio-tech collaborations.
+          Aperto a mix/mastering, sound design, collaborazioni audio-tech e sviluppo plugin.
         </p>
       </Reveal>
 
@@ -158,7 +158,7 @@ export default function Contact() {
             textDecoration: "none",
           }}
         >
-          ↑ BACK TO TOP
+          ↑ TORNA SU
         </a>
       </div>
     </footer>

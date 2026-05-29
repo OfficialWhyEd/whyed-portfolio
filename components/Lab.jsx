@@ -43,10 +43,10 @@ export default function Lab() {
   return (
     <section id="lab" className="px-6 md:px-10 py-28 relative">
       <Reveal className="mb-16">
-        <div className="eyebrow text-plasma mb-4">/// 02 — R&D LAB</div>
+        <div className="eyebrow text-plasma mb-4">/// 04 — LABORATORIO R&D</div>
         <h2 className="display text-chrome" style={{ fontSize: "clamp(2.5rem, 8vw, 7rem)" }}>
-          PLUGINS<br />
-          <span className="glitch text-signal" data-text="WITH A SOUL">WITH A SOUL</span>
+          PLUGIN<br />
+          <span className="glitch text-signal" data-text="CON UN'ANIMA">CON UN&apos;ANIMA</span>
         </h2>
       </Reveal>
 
@@ -77,8 +77,9 @@ export default function Lab() {
           <div className="space-y-4">
             <p className="text-ash leading-relaxed">
               Ogni plugin ha una <span className="text-chrome">personalità interna</span>.
-              Non solo un processore di segnale: un agente che ascolta il signal path,
-              propone, dialoga via API. Paradigma ispirato a OpenCL.
+              Non è un effetto audio — è un agente che osserva il signal path,
+              registra ogni azione in un flight recorder JSONL, parla con 6 provider AI,
+              controlla il DAW via OSC. WhyCremisi in produzione.
             </p>
             {modules.map((m) => (
               <div

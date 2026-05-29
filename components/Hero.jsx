@@ -1,6 +1,7 @@
 "use client";
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback } from "react";
 import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
 import { SciPanelHorizontal } from "./SciPanel";
 import BackgroundBeams from "./BackgroundBeams";
 
@@ -19,38 +20,33 @@ export default function Hero({ ready }) {
     gsap.to(nameEl.current, { x, y, duration: 1.1, ease: "power2.out" });
   }, []);
 
-  useEffect(() => {
+  useGSAP(() => {
     if (!ready) return;
-    const ctx = gsap.context(() => {
-      const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
 
-      tl.from(".h-eyebrow span", {
-        opacity: 0, y: 14, stagger: 0.07, duration: 0.7,
-      })
-        .from(".h-first", {
-          yPercent: 108, duration: 1.3, ease: "power4.out",
-        }, "-=0.3")
-        .from(".h-second", {
-          yPercent: 108, duration: 1.15, ease: "power4.out",
-        }, "-=0.95")
-        .from(".h-tags span", {
-          opacity: 0, x: -16, stagger: 0.09, duration: 0.7,
-        }, "-=0.5")
-        .from(".h-tagline", {
-          opacity: 0, y: 12, duration: 0.9,
-        }, "-=0.45")
-        .from(".h-coord", {
-          opacity: 0, duration: 0.9, stagger: 0.12,
-        }, "-=0.6");
-    }, root);
+    const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
+    tl.from(".h-eyebrow span", {
+      opacity: 0, y: 14, stagger: 0.07, duration: 0.7,
+    })
+      .from(".h-first", {
+        yPercent: 108, duration: 1.3, ease: "power4.out",
+      }, "-=0.3")
+      .from(".h-second", {
+        yPercent: 108, duration: 1.15, ease: "power4.out",
+      }, "-=0.95")
+      .from(".h-tags span", {
+        opacity: 0, x: -16, stagger: 0.09, duration: 0.7,
+      }, "-=0.5")
+      .from(".h-tagline", {
+        opacity: 0, y: 12, duration: 0.9,
+      }, "-=0.45")
+      .from(".h-coord", {
+        opacity: 0, duration: 0.9, stagger: 0.12,
+      }, "-=0.6");
 
     const el = root.current;
     el?.addEventListener("mousemove", onMouseMove);
-    return () => {
-      ctx.revert();
-      el?.removeEventListener("mousemove", onMouseMove);
-    };
-  }, [ready, onMouseMove]);
+    return () => el?.removeEventListener("mousemove", onMouseMove);
+  }, { scope: root, dependencies: [ready] });
 
   return (
     <section
@@ -99,8 +95,8 @@ export default function Hero({ ready }) {
         }}
       >
         <span>EDOARDO PORCU</span>
-        <span style={{ color: "var(--signal)" }}>// SOUND ENGINEER × AUDIO-TECH DEV</span>
-        <span style={{ marginLeft: "auto" }}>CAGLIARI, SARDINIA</span>
+        <span style={{ color: "var(--signal)" }}>// INGEGNERE DEL SUONO × COSTRUTTORE AI</span>
+        <span style={{ marginLeft: "auto" }}>CAGLIARI, SARDEGNA</span>
       </div>
 
       {/* Name block */}
@@ -160,9 +156,9 @@ export default function Hero({ ready }) {
         >
           <div className="h-tags" style={{ display: "flex", flexDirection: "column", gap: "0.45rem" }}>
             {[
-              ["CA", "Sound Engineer"],
-              ["IT", "Audio-tech Developer"],
-              ["WW", "Why Ecosystem Builder"],
+              ["CA", "Ingegnere del Suono"],
+              ["IT", "Sviluppatore Audio-Tech"],
+              ["WW", "Costruttore Ecosistema Why"],
             ].map(([code, role]) => (
               <span
                 key={code}
@@ -195,7 +191,7 @@ export default function Hero({ ready }) {
               paddingLeft: "1.5rem",
             }}
           >
-            "I build sound that thinks — tools that{" "}
+            "Costruisco suono che pensa — strumenti che{" "}
             <span
               style={{
                 color: "var(--paper)",
@@ -205,7 +201,7 @@ export default function Hero({ ready }) {
                 fontWeight: 300,
               }}
             >
-              listen, respond, remember.
+              ascoltano, rispondono, ricordano.
             </span>
             "
           </p>
@@ -258,7 +254,7 @@ export default function Hero({ ready }) {
             textTransform: "uppercase",
           }}
         >
-          ↓ WORK
+          ↓ LAVORI
         </span>
       </div>
     </section>

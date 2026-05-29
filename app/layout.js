@@ -1,12 +1,12 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "WhyEd — Sound Engineer × Audio-Tech Developer",
+  title: "WhyEd — Ingegnere del Suono & Costruttore AI",
   description:
-    "Edoardo Porcu — WhyEd. Sound engineer, producer e sviluppatore di strumenti audio AI. Cagliari → London → worldwide.",
+    "Edoardo Porcu — WhyEd. Ingegnere del suono, produttore e sviluppatore di strumenti audio con intelligenza artificiale. Cagliari → Londra → everywhere.",
   openGraph: {
-    title: "WhyEd — Sound Engineer × Audio-Tech Developer",
-    description: "Sound engineer, producer e sviluppatore di strumenti audio AI.",
+    title: "WhyEd — Ingegnere del Suono & Costruttore AI",
+    description: "Ingegnere del suono e sviluppatore di strumenti audio AI. 15 progetti, 783M token, 5 app macOS native.",
     type: "website",
   },
 };

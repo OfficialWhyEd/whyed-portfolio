@@ -2,30 +2,37 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 import Reveal from "./Reveal";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const stats = [
-  { n: 13,  suffix: "",  label: "AGE STARTED"       },
-  { n: 15,  suffix: "",  label: "PROJECTS BUILT"    },
-  { n: 5,   suffix: "",  label: "macOS APPS"        },
-  { n: 783, suffix: "M", label: "TOKENS / 30 DAYS"  },
+  { n: 13,  suffix: "",   label: "Anni — ha iniziato" },
+  { n: 15,  suffix: "",   label: "Progetti costruiti"  },
+  { n: 5,   suffix: "",   label: "App macOS native"    },
+  { n: 783, suffix: "M",  label: "Token AI / 30 giorni" },
 ];
 
 const stack = [
   "Logic Pro X", "Pro Tools", "Ableton Live",
   "JUCE / C++", "React", "Next.js", "Tauri",
-  "Node.js", "Python", "OpenCL / DSP",
-  "Claude Code", "GSAP", "Electron",
+  "Node.js", "Python", "Rust", "OpenCL / DSP",
+  "Claude Code", "GSAP", "Electron", "Remotion",
+  "TypeScript", "Framer Motion", "Vite",
+];
+
+const piattaforme = [
+  "Spotify", "Apple Music", "SoundCloud", "SoundBetter", "Audius",
 ];
 
 function AnimatedStat({ n, suffix, label }) {
   const numRef = useRef(null);
-  useEffect(() => {
+
+  useGSAP(() => {
     const el = numRef.current;
     const obj = { v: 0 };
-    const st = ScrollTrigger.create({
+    ScrollTrigger.create({
       trigger: el,
       start: "top 88%",
       once: true,
@@ -37,8 +44,7 @@ function AnimatedStat({ n, suffix, label }) {
           onUpdate: () => (el.textContent = Math.round(obj.v) + suffix),
         }),
     });
-    return () => st.kill();
-  }, [n, suffix]);
+  });
 
   return (
     <div style={{ borderTop: "1px solid var(--line)", paddingTop: "1.2rem" }}>
@@ -71,10 +77,7 @@ function AnimatedStat({ n, suffix, label }) {
 
 export default function About() {
   return (
-    <section
-      id="about"
-      style={{ padding: "8rem 2.5rem", position: "relative" }}
-    >
+    <section id="profilo" style={{ padding: "8rem 2.5rem", position: "relative" }}>
       <Reveal>
         <div
           style={{
@@ -86,7 +89,7 @@ export default function About() {
             marginBottom: "2.5rem",
           }}
         >
-          /// 03 — PROFILE
+          /// 06 — PROFILO
         </div>
       </Reveal>
 
@@ -97,7 +100,7 @@ export default function About() {
           gap: "5rem",
         }}
       >
-        {/* Bio column */}
+        {/* Colonna bio */}
         <Reveal>
           <h2
             className="display"
@@ -108,8 +111,8 @@ export default function About() {
               marginBottom: "2.5rem",
             }}
           >
-            FROM CAGLIARI<br />
-            TO THE CONSOLE<br />
+            DA CAGLIARI<br />
+            ALLA CONSOLE<br />
             <span
               style={{
                 fontFamily: '"DM Serif Display", serif',
@@ -118,7 +121,7 @@ export default function About() {
                 fontSize: "0.75em",
               }}
             >
-              & the code.
+              & al codice.
             </span>
           </h2>
 
@@ -138,30 +141,39 @@ export default function About() {
               Iniziato a <span style={{ color: "var(--paper)", fontWeight: 500 }}>13 anni</span>.
               Formato alla{" "}
               <span style={{ color: "var(--paper)", fontWeight: 500 }}>London School of Sound</span>{" "}
-              (2017–18): acustica, tracking, mix, mastering.
-              Nel 2023 apro il mio studio a Cagliari.
+              (2017–18): acustica, tracking, mix, mastering in contesto professionale londinese.
+              Nel novembre 2023 apre il suo studio a Cagliari.
             </p>
             <p>
               Filosofia lenta: la musica come canale per emozioni che sfuggono alle parole.
-              Mix in-the-box per precisione chirurgica, calore analogico in fase di ripresa.
+              Produzione in-the-box per recall rapido e precisione chirurgica —
+              calore analogico riservato alla fase di ripresa voci e acustici.
+              Confronto costante con riferimenti commerciali, 10 revisioni standard, 2–4 settimane di consegna.
             </p>
             <p>
-              Oggi unisco due mondi — l&apos;orecchio del fonico e la mente del developer.
-              Costruisco strumenti audio con{" "}
+              La svolta nel 2024: l'orecchio del fonico non basta più. Serve codice.
+              Nasce il Why Ecosystem — strumenti audio con{" "}
               <span style={{ color: "var(--paper)", fontWeight: 500 }}>personalità interna</span>:
-              plugin che ascoltano, ricordano, propongono.
+              plugin che ascoltano il signal path, ricordano le sessioni, propongono soluzioni,
+              dialogano via AI.
             </p>
             <p>
-              15 progetti avviati. 5 app macOS in produzione. 783M token consumati in 30 giorni
-              costruendo il{" "}
-              <span style={{ color: "var(--signal)", fontWeight: 500 }}>Why Ecosystem</span>.
+              15 progetti avviati. 5 app macOS native in produzione. 783 milioni di token consumati
+              in 30 giorni costruendo il{" "}
+              <span style={{ color: "var(--signal)", fontWeight: 500 }}>Why Ecosystem</span> —
+              top 0.1% usage globale Claude Pro.
+              Ogni sistema gira localmente, a costo zero, sul MacBook Intel di Cagliari.
+            </p>
+            <p>
+              Collaborazioni: RAGEWINGS (rock/metal, Sardegna), Carlo/Aura (Linux backend per WhyCremisi),
+              Aramald Productions (videoclip). Piattaforme attive:{" "}
+              {piattaforme.join(" · ")}.
             </p>
           </div>
         </Reveal>
 
-        {/* Stats + stack column */}
+        {/* Colonna stats + stack */}
         <Reveal delay={0.12}>
-          {/* Stats grid */}
           <div
             style={{
               display: "grid",
@@ -175,7 +187,6 @@ export default function About() {
             ))}
           </div>
 
-          {/* Stack */}
           <div
             style={{
               fontFamily: '"JetBrains Mono", monospace',
@@ -186,9 +197,9 @@ export default function About() {
               marginBottom: "1rem",
             }}
           >
-            STACK
+            STACK TECNICO
           </div>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem" }}>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "3rem" }}>
             {stack.map((s) => (
               <span
                 key={s}
@@ -215,6 +226,70 @@ export default function About() {
               >
                 {s}
               </span>
+            ))}
+          </div>
+
+          {/* Formazione */}
+          <div
+            style={{
+              fontFamily: '"JetBrains Mono", monospace',
+              fontSize: "0.6rem",
+              letterSpacing: "0.16em",
+              textTransform: "uppercase",
+              color: "var(--faint)",
+              marginBottom: "1rem",
+            }}
+          >
+            FORMAZIONE
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
+            {[
+              { year: "2017–18", name: "London School of Sound", detail: "Certificate of Completion · Mixing, Mastering, Acustica" },
+              { year: "2019",    name: "European Bartender School", detail: "Londra — formazione internazionale" },
+              { year: "2012→",   name: "Autodidatta", detail: "Produzione, DAW, sound design — orecchio come guida" },
+            ].map((f) => (
+              <div
+                key={f.name}
+                style={{
+                  padding: "1rem 0",
+                  borderBottom: "1px solid var(--line)",
+                }}
+              >
+                <div style={{ display: "flex", alignItems: "baseline", gap: "1rem", marginBottom: "0.2rem" }}>
+                  <span
+                    style={{
+                      fontFamily: '"JetBrains Mono", monospace',
+                      fontSize: "0.58rem",
+                      color: "var(--signal)",
+                      letterSpacing: "0.1em",
+                      flexShrink: 0,
+                    }}
+                  >
+                    {f.year}
+                  </span>
+                  <span
+                    style={{
+                      fontFamily: '"JetBrains Mono", monospace',
+                      fontSize: "0.72rem",
+                      color: "var(--paper)",
+                      letterSpacing: "0.06em",
+                    }}
+                  >
+                    {f.name}
+                  </span>
+                </div>
+                <div
+                  style={{
+                    fontFamily: '"Outfit", sans-serif',
+                    fontSize: "0.8rem",
+                    color: "var(--dim)",
+                    fontWeight: 300,
+                    paddingLeft: "4.5rem",
+                  }}
+                >
+                  {f.detail}
+                </div>
+              </div>
             ))}
           </div>
         </Reveal>

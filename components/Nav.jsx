@@ -2,9 +2,11 @@
 import { useEffect, useState } from "react";
 
 const links = [
-  { href: "#work",    label: "Work"    },
-  { href: "#about",   label: "About"   },
-  { href: "#contact", label: "Contact" },
+  { href: "#lavori",      label: "Lavori"     },
+  { href: "#cronologia",  label: "Cronologia" },
+  { href: "#ecosistema",  label: "Ecosistema" },
+  { href: "#profilo",     label: "Profilo"    },
+  { href: "#contatti",    label: "Contatti"   },
 ];
 
 export default function Nav() {

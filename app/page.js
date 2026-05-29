@@ -8,6 +8,9 @@ import Nav from "../components/Nav";
 import Hero from "../components/Hero";
 import Marquee from "../components/Marquee";
 import Work from "../components/Work";
+import Timeline from "../components/Timeline";
+import Studio from "../components/Studio";
+import Ecosystem from "../components/Ecosystem";
 import Lab from "../components/Lab";
 import About from "../components/About";
 import Contact from "../components/Contact";
@@ -25,12 +28,15 @@ export default function Home() {
         <main className="relative z-10">
           <Hero ready={ready} />
           <Marquee
-            items={["MIX", "MASTER", "SOUND DESIGN", "DSP", "VOCALS", "AI AUDIO"]}
+            items={["MIX", "MASTER", "SOUND DESIGN", "DSP", "VOCE", "AI AUDIO", "VST3", "PLUGIN"]}
             accent
           />
           <Work />
+          <Timeline />
+          <Studio />
+          <Ecosystem />
           <Lab />
-          <Marquee items={["LOGIC PRO", "ABLETON", "PRO TOOLS", "OPENCL", "CLAUDE CODE"]} />
+          <Marquee items={["LOGIC PRO", "ABLETON", "PRO TOOLS", "OPENCL", "CLAUDE CODE", "JUCE", "TAURI", "REMOTION"]} />
           <About />
           <Contact />
         </main>

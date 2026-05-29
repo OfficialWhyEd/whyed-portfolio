@@ -239,9 +239,9 @@ function Section({ label, sectionNum, projects }) {
 
 export default function Work() {
   return (
-    <section id="work" style={{ padding: "8rem 2.5rem", position: "relative" }}>
-      <Section label="DEV PROJECTS" sectionNum="01 — SOFTWARE" projects={devProjects} />
-      <Section label="MUSIC" sectionNum="02 — DISCOGRAPHY" projects={musicProjects} />
+    <section id="lavori" style={{ padding: "8rem 2.5rem", position: "relative" }}>
+      <Section label="PROGETTI SOFTWARE" sectionNum="01 — SVILUPPO" projects={devProjects} />
+      <Section label="MUSICA & DISCOGRAFIA" sectionNum="02 — AUDIO" projects={musicProjects} />
     </section>
   );
 }
