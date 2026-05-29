@@ -2,7 +2,6 @@
 import { useState } from "react";
 import SmoothScroll from "../components/SmoothScroll";
 import Atmosphere from "../components/Atmosphere";
-import Cursor from "../components/Cursor";
 import Preloader from "../components/Preloader";
 import Nav from "../components/Nav";
 import Hero from "../components/Hero";
@@ -21,8 +20,7 @@ export default function Home() {
   return (
     <>
       {!ready && <Preloader onComplete={() => setReady(true)} />}
-      <Cursor />
-      <Atmosphere />
+<Atmosphere />
       <Nav />
       <SmoothScroll>
         <main className="relative z-10">

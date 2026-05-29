@@ -30,11 +30,6 @@ body {
   color: var(--paper);
   font-family: "Outfit", sans-serif;
   overflow-x: hidden;
-  cursor: none;
-}
-
-@media (max-width: 900px) {
-  body { cursor: auto; }
 }
 
 /* ── Grain overlay ─────────────────────────────────────────────── */
@@ -49,34 +44,6 @@ body::before {
   background-size: 256px 256px;
 }
 
-/* ── Custom cursor ─────────────────────────────────────────────── */
-.cursor-dot {
-  position: fixed;
-  width: 5px; height: 5px;
-  background: var(--paper);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: background 0.2s, transform 0.12s;
-  mix-blend-mode: difference;
-}
-
-.cursor-ring {
-  position: fixed;
-  width: 30px; height: 30px;
-  border: 1px solid rgba(240,237,232,0.25);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: width 0.4s cubic-bezier(0.16,1,0.3,1),
-              height 0.4s cubic-bezier(0.16,1,0.3,1),
-              border-color 0.25s;
-}
-
-.cursor-ring.hovered { width: 50px; height: 50px; border-color: var(--signal); }
-.cursor-dot.hovered  { background: var(--signal); transform: translate(-50%,-50%) scale(1.6); }
 
 /* ── Typography ────────────────────────────────────────────────── */
 .display {

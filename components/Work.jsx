@@ -4,7 +4,18 @@ import { devProjects, musicProjects } from "../lib/projects";
 import Reveal from "./Reveal";
 import HyperText from "./HyperText";
 
-/* ── Palette visiva ── */
+/* ── Immagini reali per progetto ── */
+const images = {
+  "001": { src: "/projects/whycremisi.jpg",                     fit: "contain", bg: "#0a0a0a" },
+  "002": { src: "/projects/whypost.png",                        fit: "cover",   bg: "#111" },
+  "003": { src: "/projects/whycalendar.png",                    fit: "contain", bg: "#050505" },
+  "004": { src: "/projects/whyemugba.png",                      fit: "contain", bg: "#c0000a" },
+  "005": { src: "/projects/whycavalry.jpg",                     fit: "contain", bg: "#1a2e30" },
+  "007": { src: "/projects/hyperframes.png",                    fit: "contain", bg: "#fff" },
+  "010": { src: "/projects/whygrommit-openclaw-monitor.png",    fit: "contain", bg: "#0a0f0a" },
+};
+
+/* ── Palette visiva (fallback SVG) ── */
 const visuals = {
   "001": { hue: "#c94b25", pattern: "waveform" },
   "002": { hue: "#2a8a5a", pattern: "flow"     },
@@ -294,12 +305,30 @@ function ProjectCard({ p, i, featured = false }) {
           style={{
             height: `${thumbH}px`,
             borderBottom: `1px solid ${hovered ? `${vis.hue}55` : "var(--line)"}`,
-            transition: "border-color 0.3s",
+            transition: "border-color 0.3s, transform 0.5s cubic-bezier(0.16,1,0.3,1)",
             overflow: "hidden",
             position: "relative",
+            background: images[p.id]?.bg || "var(--void2)",
+            transform: hovered ? "scale(1.02)" : "scale(1)",
           }}
         >
-          <ProjectThumb id={p.id} hue={vis.hue} pattern={vis.pattern} h={thumbH} />
+          {images[p.id] ? (
+            <img
+              src={images[p.id].src}
+              alt={p.title}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: images[p.id].fit,
+                objectPosition: "center",
+                display: "block",
+                transition: "transform 0.6s cubic-bezier(0.16,1,0.3,1)",
+                transform: hovered ? "scale(1.05)" : "scale(1)",
+              }}
+            />
+          ) : (
+            <ProjectThumb id={p.id} hue={vis.hue} pattern={vis.pattern} h={thumbH} />
+          )}
           {/* Overlay sfumato in basso */}
           <div
             style={{
@@ -307,11 +336,28 @@ function ProjectCard({ p, i, featured = false }) {
               bottom: 0,
               left: 0,
               right: 0,
-              height: "50px",
-              background: "linear-gradient(to bottom, transparent, rgba(8,9,14,0.8))",
+              height: "60px",
+              background: "linear-gradient(to bottom, transparent, rgba(8,9,14,0.9))",
               pointerEvents: "none",
             }}
           />
+          {/* Badge tipo progetto */}
+          <div style={{
+            position: "absolute",
+            top: "0.8rem",
+            right: "0.8rem",
+            fontFamily: '"JetBrains Mono", monospace',
+            fontSize: "0.5rem",
+            letterSpacing: "0.14em",
+            textTransform: "uppercase",
+            color: vis.hue,
+            background: "rgba(8,9,14,0.8)",
+            border: `1px solid ${vis.hue}44`,
+            padding: "0.2rem 0.5rem",
+            backdropFilter: "blur(4px)",
+          }}>
+            {p.id}
+          </div>
         </div>
 
         {/* Contenuto */}
