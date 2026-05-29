@@ -6,13 +6,12 @@ import HyperText from "./HyperText";
 
 /* ── Immagini reali per progetto ── */
 const images = {
-  "001": { src: "/projects/whycremisi.jpg",                     fit: "contain", bg: "#0a0a0a" },
-  "002": { src: "/projects/whypost.png",                        fit: "cover",   bg: "#111" },
-  "003": { src: "/projects/whycalendar.png",                    fit: "contain", bg: "#050505" },
-  "004": { src: "/projects/whyemugba.png",                      fit: "contain", bg: "#c0000a" },
-  "005": { src: "/projects/whycavalry.jpg",                     fit: "contain", bg: "#1a2e30" },
-  "007": { src: "/projects/hyperframes.png",                    fit: "contain", bg: "#fff" },
-  "010": { src: "/projects/whygrommit-openclaw-monitor.png",    fit: "contain", bg: "#0a0f0a" },
+  "001": { src: "/projects/whycremisi.jpg",                        fit: "contain", bg: "#050505",    pad: true },
+  "003": { src: "/projects/whycalendar-screen.png",                fit: "cover",   bg: "#0a0e14",    pad: false },
+  "004": { src: "/projects/whyemugba-2.png",                       fit: "contain", bg: "#cc0008",    pad: true },
+  "005": { src: "/projects/whycavalry-2.png",                      fit: "contain", bg: "#1a2e30",    pad: true },
+  "007": { src: "/projects/hyperframes.png",                       fit: "contain", bg: "#f5f5f5",    pad: true },
+  "010": { src: "/projects/whygrommit-openclaw-monitor-2.png",     fit: "contain", bg: "#080f08",    pad: true },
 };
 
 /* ── Palette visiva (fallback SVG) ── */
@@ -322,8 +321,9 @@ function ProjectCard({ p, i, featured = false }) {
                 objectFit: images[p.id].fit,
                 objectPosition: "center",
                 display: "block",
+                padding: images[p.id].pad ? "1.5rem" : "0",
                 transition: "transform 0.6s cubic-bezier(0.16,1,0.3,1)",
-                transform: hovered ? "scale(1.05)" : "scale(1)",
+                transform: hovered ? "scale(1.04)" : "scale(1)",
               }}
             />
           ) : (

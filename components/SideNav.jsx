@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState, useCallback } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
@@ -7,139 +7,133 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(ScrollTrigger);
 
 const sections = [
-  { id: "top",         label: "Intro",         num: "00" },
-  { id: "lavori",      label: "Lavori",         num: "01" },
-  { id: "cronologia",  label: "Cronologia",     num: "02" },
-  { id: "studio",      label: "Studio",         num: "03" },
-  { id: "ecosistema",  label: "Ecosistema Why", num: "04" },
-  { id: "lab",         label: "Laboratorio",    num: "05" },
-  { id: "profilo",     label: "Profilo",        num: "06" },
-  { id: "contatti",    label: "Contatti",       num: "07" },
+  { id: "top",        label: "Intro",     num: "00" },
+  { id: "lavori",     label: "Lavori",    num: "01" },
+  { id: "cronologia", label: "Storia",    num: "02" },
+  { id: "studio",     label: "Studio",    num: "03" },
+  { id: "ecosistema", label: "Ecosistema",num: "04" },
+  { id: "lab",        label: "Lab",       num: "05" },
+  { id: "profilo",    label: "Profilo",   num: "06" },
+  { id: "contatti",   label: "Contatti",  num: "07" },
 ];
 
 export default function SideNav() {
-  const [active, setActive] = useState("top");
-  const [hovered, setHovered] = useState(null);
-  const [progress, setProgress] = useState(0);
-  const lineRef = useRef(null);
-  const root = useRef(null);
+  const [active, setActive] = useState(0);
+  const [expanded, setExpanded] = useState(false);
+  const navRef = useRef(null);
 
   useGSAP(() => {
-    // Traccia progresso scroll globale
-    ScrollTrigger.create({
-      start: "top top",
-      end: "bottom bottom",
-      onUpdate: (self) => setProgress(self.progress),
-    });
-
-    // Attiva la sezione corrente
-    sections.forEach(({ id }) => {
+    sections.forEach(({ id }, i) => {
       const el = document.getElementById(id);
       if (!el) return;
       ScrollTrigger.create({
         trigger: el,
-        start: "top 50%",
-        end: "bottom 50%",
-        onEnter: () => setActive(id),
-        onEnterBack: () => setActive(id),
+        start: "top 55%",
+        end: "bottom 55%",
+        onEnter: () => setActive(i),
+        onEnterBack: () => setActive(i),
       });
     });
   });
 
   const scrollTo = (id) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.scrollIntoView({ behavior: "smooth" });
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
   };
 
-  const totalH = sections.length - 1;
-  const activeIdx = sections.findIndex(s => s.id === active);
+  const TRACK_H = (sections.length - 1) * 36; // px totali della linea
 
   return (
     <nav
-      ref={root}
+      ref={navRef}
+      onMouseEnter={() => setExpanded(true)}
+      onMouseLeave={() => setExpanded(false)}
       style={{
         position: "fixed",
-        right: "2rem",
+        right: 0,
         top: "50%",
         transform: "translateY(-50%)",
         zIndex: 400,
+        padding: "1.5rem 1.2rem 1.5rem 2rem",
         display: "flex",
-        flexDirection: "column",
         alignItems: "center",
         gap: 0,
-        pointerEvents: "none",
+        cursor: "default",
       }}
       aria-label="Navigazione sezioni"
     >
-      {sections.map((s, i) => {
-        const isActive = active === s.id;
-        const isHovered = hovered === s.id;
-        const isPast = i < activeIdx;
+      {/* Contenitore dots + linea */}
+      <div style={{ position: "relative", display: "flex", flexDirection: "column", alignItems: "center" }}>
 
-        return (
-          <div
-            key={s.id}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              position: "relative",
-            }}
-          >
-            {/* Linea sopra (tranne il primo) */}
-            {i > 0 && (
-              <div
-                style={{
-                  width: "1px",
-                  height: "32px",
-                  background: isPast || isActive
-                    ? "linear-gradient(to bottom, var(--signal), var(--signal))"
-                    : "var(--line2)",
-                  transition: "background 0.5s ease",
-                  flexShrink: 0,
-                }}
-              />
-            )}
+        {/* Linea verticale di sfondo */}
+        <div
+          style={{
+            position: "absolute",
+            left: "50%",
+            transform: "translateX(-50%)",
+            top: 0,
+            width: "1px",
+            height: `${TRACK_H}px`,
+            background: "var(--line2)",
+            transition: "opacity 0.4s",
+            opacity: expanded ? 1 : 0.4,
+          }}
+        />
 
-            {/* Dot + Label row */}
+        {/* Linea progresso */}
+        <div
+          style={{
+            position: "absolute",
+            left: "50%",
+            transform: "translateX(-50%)",
+            top: 0,
+            width: "1px",
+            height: `${(active / (sections.length - 1)) * TRACK_H}px`,
+            background: "var(--signal)",
+            transition: "height 0.6s cubic-bezier(0.16,1,0.3,1)",
+          }}
+        />
+
+        {/* Dots */}
+        {sections.map((s, i) => {
+          const isActive = i === active;
+          const isPast = i < active;
+
+          return (
             <div
+              key={s.id}
               style={{
+                position: "relative",
                 display: "flex",
                 alignItems: "center",
-                gap: "0.7rem",
-                position: "relative",
-                pointerEvents: "auto",
-                cursor: "pointer",
-                flexDirection: "row-reverse", // label a sinistra del dot
+                justifyContent: "flex-end",
+                height: i === 0 ? "auto" : "36px",
+                gap: "0.6rem",
               }}
-              onClick={() => scrollTo(s.id)}
-              onMouseEnter={() => setHovered(s.id)}
-              onMouseLeave={() => setHovered(null)}
             >
-              {/* Label + numero */}
+              {/* Label — appare solo se expanded */}
               <div
                 style={{
+                  opacity: expanded ? 1 : 0,
+                  transform: expanded ? "translateX(0)" : "translateX(8px)",
+                  transition: `opacity 0.25s ease ${i * 0.03}s, transform 0.3s cubic-bezier(0.16,1,0.3,1) ${i * 0.03}s`,
                   display: "flex",
                   flexDirection: "column",
                   alignItems: "flex-end",
-                  opacity: isActive || isHovered ? 1 : 0,
-                  transform: isActive || isHovered ? "translateX(0)" : "translateX(6px)",
-                  transition: "opacity 0.3s ease, transform 0.3s ease",
-                  pointerEvents: "none",
+                  pointerEvents: expanded ? "auto" : "none",
+                  cursor: "pointer",
                 }}
+                onClick={() => scrollTo(s.id)}
               >
                 <span
                   style={{
                     fontFamily: '"JetBrains Mono", monospace',
-                    fontSize: "0.52rem",
-                    letterSpacing: "0.14em",
+                    fontSize: "0.54rem",
+                    letterSpacing: "0.12em",
                     textTransform: "uppercase",
-                    color: isActive ? "var(--signal)" : "var(--dim)",
+                    color: isActive ? "var(--paper)" : "var(--faint)",
                     whiteSpace: "nowrap",
                     transition: "color 0.3s",
-                    lineHeight: 1,
-                    marginBottom: "0.15rem",
+                    lineHeight: 1.2,
                   }}
                 >
                   {s.label}
@@ -147,10 +141,10 @@ export default function SideNav() {
                 <span
                   style={{
                     fontFamily: '"JetBrains Mono", monospace',
-                    fontSize: "0.42rem",
-                    color: "var(--faint)",
-                    letterSpacing: "0.1em",
-                    lineHeight: 1,
+                    fontSize: "0.4rem",
+                    color: isActive ? "var(--signal)" : "var(--faint)",
+                    letterSpacing: "0.08em",
+                    transition: "color 0.3s",
                   }}
                 >
                   {s.num}
@@ -159,92 +153,41 @@ export default function SideNav() {
 
               {/* Dot */}
               <div
+                onClick={() => scrollTo(s.id)}
                 style={{
-                  position: "relative",
-                  width: isActive ? "10px" : isHovered ? "7px" : "5px",
-                  height: isActive ? "10px" : isHovered ? "7px" : "5px",
+                  width: isActive ? (expanded ? "9px" : "7px") : (isPast ? "4px" : "3px"),
+                  height: isActive ? (expanded ? "9px" : "7px") : (isPast ? "4px" : "3px"),
                   borderRadius: "50%",
-                  background: isActive
-                    ? "var(--signal)"
-                    : isPast
-                    ? "var(--dim)"
-                    : "var(--faint)",
-                  transition: "width 0.35s cubic-bezier(0.16,1,0.3,1), height 0.35s cubic-bezier(0.16,1,0.3,1), background 0.35s ease",
+                  background: isActive ? "var(--signal)" : isPast ? "var(--dim)" : "var(--faint)",
                   flexShrink: 0,
-                  boxShadow: isActive
-                    ? "0 0 12px rgba(201,75,37,0.8), 0 0 4px rgba(201,75,37,0.6)"
-                    : "none",
+                  transition: "all 0.4s cubic-bezier(0.16,1,0.3,1)",
+                  cursor: "pointer",
+                  zIndex: 1,
+                  boxShadow: isActive ? "0 0 8px rgba(201,75,37,0.7)" : "none",
+                  position: "relative",
                 }}
               >
-                {/* Pulse ring sul dot attivo */}
-                {isActive && (
-                  <span
-                    style={{
-                      position: "absolute",
-                      inset: "-5px",
-                      borderRadius: "50%",
-                      border: "1px solid var(--signal)",
-                      animation: "sidenav-pulse 1.8s ease-out infinite",
-                      opacity: 0,
-                    }}
-                  />
+                {/* Pulse solo sul dot attivo quando espanso */}
+                {isActive && expanded && (
+                  <span style={{
+                    position: "absolute",
+                    inset: "-5px",
+                    borderRadius: "50%",
+                    border: "1px solid var(--signal)",
+                    animation: "sn-pulse 1.6s ease-out infinite",
+                    opacity: 0,
+                  }} />
                 )}
               </div>
             </div>
-          </div>
-        );
-      })}
-
-      {/* Indicatore progresso globale */}
-      <div
-        style={{
-          marginTop: "1.5rem",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center",
-          gap: "0.4rem",
-          pointerEvents: "none",
-        }}
-      >
-        <div
-          style={{
-            width: "1px",
-            height: "40px",
-            background: "var(--line2)",
-            position: "relative",
-            overflow: "hidden",
-          }}
-        >
-          <div
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              width: "100%",
-              height: `${progress * 100}%`,
-              background: "var(--signal)",
-              transition: "height 0.1s linear",
-            }}
-          />
-        </div>
-        <span
-          style={{
-            fontFamily: '"JetBrains Mono", monospace',
-            fontSize: "0.42rem",
-            color: "var(--faint)",
-            letterSpacing: "0.1em",
-            writingMode: "vertical-rl",
-            textOrientation: "mixed",
-          }}
-        >
-          {Math.round(progress * 100)}%
-        </span>
+          );
+        })}
       </div>
 
       <style>{`
-        @keyframes sidenav-pulse {
-          0%   { transform: scale(1);   opacity: 0.7; }
-          100% { transform: scale(2.5); opacity: 0;   }
+        @keyframes sn-pulse {
+          0%   { transform: scale(1);   opacity: 0.6; }
+          100% { transform: scale(2.8); opacity: 0; }
         }
       `}</style>
     </nav>
