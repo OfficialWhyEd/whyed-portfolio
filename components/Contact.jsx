@@ -6,6 +6,7 @@ const links = [
   { label: "SOUNDBETTER", handle: "soundbetter.com/whyed", href: "https://soundbetter.com/profiles/650221-whyed" },
   { label: "GITHUB",      handle: "OfficialWhyEd",         href: "https://github.com/OfficialWhyEd" },
   { label: "EMAIL",       handle: "edoardello@gmail.com",  href: "mailto:edoardello@gmail.com" },
+  { label: "TELEFONO",    handle: "+39 351 792 1092",       href: "tel:+393517921092" },
 ];
 
 export default function Contact() {

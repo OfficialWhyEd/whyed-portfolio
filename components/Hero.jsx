@@ -96,7 +96,7 @@ export default function Hero({ ready }) {
       >
         <span>EDOARDO PORCU</span>
         <span style={{ color: "var(--signal)" }}>// INGEGNERE DEL SUONO × COSTRUTTORE AI</span>
-        <span style={{ marginLeft: "auto" }}>CAGLIARI, SARDEGNA</span>
+        <span style={{ marginLeft: "auto" }}>ELMAS, SARDEGNA</span>
       </div>
 
       {/* Name block */}
@@ -243,7 +243,7 @@ export default function Hero({ ready }) {
             textTransform: "uppercase",
           }}
         >
-          39.2238° N — 9.1217° E
+          39.2542° N — 9.0474° E — ELMAS
         </span>
         <span
           style={{

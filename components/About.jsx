@@ -139,11 +139,11 @@ export default function About() {
             }}
           >
             <p>
-              Iniziato a <span style={{ color: "var(--paper)", fontWeight: 500 }}>13 anni</span>.
-              Formato alla{" "}
+              Iniziato a <span style={{ color: "var(--paper)", fontWeight: 500 }}>13 anni</span>,
+              Elmas (Sardegna). Formato alla{" "}
               <span style={{ color: "var(--paper)", fontWeight: 500 }}>London School of Sound</span>{" "}
-              (2017–18): acustica, tracking, mix, mastering in contesto professionale londinese.
-              Nel novembre 2023 apre il suo studio a Cagliari.
+              (giugno 2018): acustica, tracking, mix, mastering in contesto professionale londinese.
+              Studio aperto a Elmas, Cagliari, nel 2023.
             </p>
             <p>
               Filosofia lenta: la musica come canale per emozioni che sfuggono alle parole.
@@ -163,7 +163,7 @@ export default function About() {
               in 30 giorni costruendo il{" "}
               <span style={{ color: "var(--signal)", fontWeight: 500 }}>Why Ecosystem</span> —
               top 0.1% usage globale Claude Pro.
-              Ogni sistema gira localmente, a costo zero, sul MacBook Intel di Cagliari.
+              Ogni sistema gira localmente, a costo zero, sul MacBook Intel di Elmas, Sardegna.
             </p>
             <p>
               Collaborazioni: RAGEWINGS (rock/metal, Sardegna), Carlo/Aura (Linux backend per WhyCremisi),
@@ -249,9 +249,11 @@ export default function About() {
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             {[
-              { year: "2017–18", name: "London School of Sound", detail: "Certificate of Completion · Mixing, Mastering, Acustica" },
+              { year: "giu 2018", name: "London School of Sound", detail: "Certificate of Completion · Mixing, Mastering, Acustica · Londra" },
               { year: "2019",    name: "European Bartender School", detail: "Londra — formazione internazionale" },
-              { year: "2012→",   name: "Autodidatta", detail: "Produzione, DAW, sound design — orecchio come guida" },
+              { year: "2017–19",  name: "Istituto Amerigo Vespucci", detail: "Diploma scuola secondaria · Elmas, Sardegna" },
+              { year: "nov–dic 2019", name: "European Bartender School", detail: "Londra — Certificate of Completion" },
+              { year: "2013→",   name: "Autodidatta", detail: "Produzione, DAW, sound design — orecchio come guida" },
             ].map((f) => (
               <div
                 key={f.name}
