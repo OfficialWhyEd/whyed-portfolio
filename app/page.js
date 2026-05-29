@@ -13,6 +13,7 @@ import Ecosystem from "../components/Ecosystem";
 import Lab from "../components/Lab";
 import About from "../components/About";
 import Contact from "../components/Contact";
+import SideNav from "../components/SideNav";
 
 export default function Home() {
   const [ready, setReady] = useState(false);
@@ -20,7 +21,8 @@ export default function Home() {
   return (
     <>
       {!ready && <Preloader onComplete={() => setReady(true)} />}
-<Atmosphere />
+      <Atmosphere />
+      <SideNav />
       <Nav />
       <SmoothScroll>
         <main className="relative z-10">
