@@ -140,10 +140,12 @@ export default function About() {
           >
             <p>
               Iniziato a <span style={{ color: "var(--paper)", fontWeight: 500 }}>13 anni</span>,
-              Elmas (Sardegna). Formato alla{" "}
-              <span style={{ color: "var(--paper)", fontWeight: 500 }}>London School of Sound</span>{" "}
-              (giugno 2018): acustica, tracking, mix, mastering in contesto professionale londinese.
-              Studio aperto a Elmas, Cagliari, nel 2023.
+              Elmas (Sardegna). Dal 2016 al 2019 formazione professionale intensiva a Londra:
+              {" "}<span style={{ color: "var(--paper)", fontWeight: 500 }}>London School of Sound</span>{" "}
+              e <span style={{ color: "var(--paper)", fontWeight: 500 }}>Garnish Music Production School</span>{" "}
+              — Mix & Mastering, Sound Design, Music Business.
+              La pandemia (2020) interrompe i corsi e la vita internazionale. Rientro a Elmas.
+              Studio aperto nel 2023.
             </p>
             <p>
               Filosofia lenta: la musica come canale per emozioni che sfuggono alle parole.
@@ -249,7 +251,8 @@ export default function About() {
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             {[
-              { year: "giu 2018", name: "London School of Sound", detail: "Certificate of Completion · Mixing, Mastering, Acustica · Londra" },
+              { year: "2016–19", name: "London School of Sound", detail: "Certificate of Completion · Mix, Mastering, Sound Design · Londra" },
+              { year: "2016–19", name: "Garnish Music Production School", detail: "Mix & Mastering, Sound Design, Music Business · Londra" },
               { year: "2019",    name: "European Bartender School", detail: "Londra — formazione internazionale" },
               { year: "2017–19",  name: "Istituto Amerigo Vespucci", detail: "Diploma scuola secondaria · Elmas, Sardegna" },
               { year: "nov–dic 2019", name: "European Bartender School", detail: "Londra — Certificate of Completion" },

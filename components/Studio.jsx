@@ -9,7 +9,7 @@ const hardware = [
   { name: "Slate Microphone System", detail: "Modeling microfono — versatilità massima" },
   { name: "AKG Overhead Mics", detail: "Set stereo — batteria, ambiente, colore" },
   { name: "MIDI Keyboard", detail: "Composizione, arrangiamento, design sonoro" },
-  { name: "MacBook Pro Intel", detail: "x86_64 — ambiente primario di sviluppo e produzione" },
+  { name: "MacBook Pro 15\" Mid 2015", detail: "i7 2.2GHz · 16GB RAM · Intel Iris Pro — sviluppo e produzione" },
 ];
 
 const daw = [
