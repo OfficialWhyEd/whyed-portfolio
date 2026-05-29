@@ -9,10 +9,16 @@ gsap.registerPlugin(ScrollTrigger);
 
 const events = [
   {
+    year: "2003",
+    label: "INIZIO",
+    title: "Pianoforte a 3 anni",
+    desc: "La musica prima di tutto il resto. A 3 anni inizia al pianoforte. Cresce con scuola di musica e canto — voce altissima in inglese. Amici e famiglia lo conoscono da sempre così: quello che fa musica.",
+  },
+  {
     year: "2013",
-    label: "ORIGINE",
+    label: "PRODUZIONE",
     title: "I primi beat",
-    desc: "Inizia a produrre musica a 13 anni, Elmas (Sardegna). Niente scuola, niente teoria — solo orecchio, curiosità e una DAW aperta h24.",
+    desc: "A 13 anni scopre la produzione. La passione che ha sempre avuto trova uno strumento nuovo: la DAW. L'orecchio formato da anni di musica classica incontra l'elettronica.",
   },
   {
     year: "2016–19",

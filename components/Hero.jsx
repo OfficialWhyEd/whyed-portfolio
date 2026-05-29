@@ -191,7 +191,7 @@ export default function Hero({ ready }) {
               paddingLeft: "1.5rem",
             }}
           >
-            "Costruisco suono che pensa — strumenti che{" "}
+            "La musica viene prima di tutto —{" "}
             <span
               style={{
                 color: "var(--paper)",
@@ -201,7 +201,7 @@ export default function Hero({ ready }) {
                 fontWeight: 300,
               }}
             >
-              ascoltano, rispondono, ricordano.
+              pianoforte a 3 anni, studio a Londra, codice dal 2024.
             </span>
             "
           </p>

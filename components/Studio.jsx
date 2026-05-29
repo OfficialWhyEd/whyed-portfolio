@@ -19,6 +19,8 @@ const daw = [
 ];
 
 const skills = [
+  "Pianoforte",
+  "Canto",
   "Mixing",
   "Mastering",
   "Produzione",

@@ -9,7 +9,7 @@ import IconGrid from "./IconGrid";
 gsap.registerPlugin(ScrollTrigger);
 
 const stats = [
-  { n: 13,  suffix: "",   label: "Anni — ha iniziato" },
+  { n: 3,   suffix: "",   label: "Anni — pianoforte"  },
   { n: 15,  suffix: "",   label: "Progetti costruiti"  },
   { n: 5,   suffix: "",   label: "App macOS native"    },
   { n: 783, suffix: "M",  label: "Token AI / 30 giorni" },
@@ -139,8 +139,15 @@ export default function About() {
             }}
           >
             <p>
-              Iniziato a <span style={{ color: "var(--paper)", fontWeight: 500 }}>13 anni</span>,
-              Elmas (Sardegna). Dal 2016 al 2019 formazione professionale intensiva a Londra:
+              La musica viene prima di tutto.{" "}
+              <span style={{ color: "var(--paper)", fontWeight: 500 }}>Pianoforte a 3 anni</span> —
+              poi scuola di musica, canto. Voce altissima, formazione in inglese.
+              Tutti, amici e famiglia, lo hanno sempre conosciuto così: quello che fa musica.
+              Non è una scelta di carriera. È quello che è sempre stato.
+            </p>
+            <p>
+              A 13 anni scopre la produzione — l'orecchio formato da anni di musica classica
+              incontra la DAW. Dal 2016 al 2019 formazione professionale intensiva a Londra:
               {" "}<span style={{ color: "var(--paper)", fontWeight: 500 }}>London School of Sound</span>{" "}
               e <span style={{ color: "var(--paper)", fontWeight: 500 }}>Garnish Music Production School</span>{" "}
               — Mix & Mastering, Sound Design, Music Business.
