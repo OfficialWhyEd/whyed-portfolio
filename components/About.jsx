@@ -4,6 +4,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import Reveal from "./Reveal";
+import IconGrid from "./IconGrid";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -198,6 +199,10 @@ export default function About() {
             }}
           >
             STACK TECNICO
+          </div>
+          {/* Icone brand con colori originali */}
+          <div style={{ marginBottom: "1.5rem" }}>
+            <IconGrid filter={["react", "nextdotjs", "typescript", "nodedotjs", "python", "rust", "cplusplus", "juce", "electron", "tauri", "vite", "gsap", "framer", "remotion", "anthropic", "github"]} />
           </div>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "3rem" }}>
             {stack.map((s) => (

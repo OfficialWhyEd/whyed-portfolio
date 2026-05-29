@@ -1,5 +1,6 @@
 "use client";
 import Reveal from "./Reveal";
+import IconGrid from "./IconGrid";
 
 const hardware = [
   { name: "Audient Interface", detail: "Conversione A/D + preamp microfonico" },
@@ -152,7 +153,7 @@ export default function Studio() {
               ))}
             </div>
 
-            {/* DAW */}
+            {/* DAW — icone reali */}
             <div style={{ marginTop: "3rem" }}>
               <div
                 style={{
@@ -161,12 +162,13 @@ export default function Studio() {
                   letterSpacing: "0.18em",
                   textTransform: "uppercase",
                   color: "var(--faint)",
-                  marginBottom: "1rem",
+                  marginBottom: "1.2rem",
                 }}
               >
                 DAW
               </div>
-              <div style={{ display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
+              <IconGrid filter={["logic", "protools", "ableton"]} />
+              <div style={{ marginTop: "1.5rem", display: "flex", gap: "0.5rem", flexWrap: "wrap" }}>
                 {daw.map((d) => (
                   <span
                     key={d.name}
@@ -320,6 +322,14 @@ export default function Studio() {
                   </span>
                 </div>
               ))}
+            </div>
+
+            {/* Piattaforme con icone */}
+            <div style={{ marginTop: "3rem" }}>
+              <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: "0.58rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--faint)", marginBottom: "1.2rem" }}>
+                PIATTAFORME
+              </div>
+              <IconGrid filter={["spotify", "applemusic", "soundcloud", "youtube", "instagram", "tiktok"]} />
             </div>
 
             {/* Lingue */}

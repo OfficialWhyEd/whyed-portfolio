@@ -6,12 +6,12 @@ import HyperText from "./HyperText";
 
 /* ── Immagini reali per progetto ── */
 const images = {
-  "001": { src: "/projects/whycremisi.jpg",                        fit: "contain", bg: "#050505",    pad: true },
-  "003": { src: "/projects/whycalendar-screen.png",                fit: "cover",   bg: "#0a0e14",    pad: false },
-  "004": { src: "/projects/whyemugba-2.png",                       fit: "contain", bg: "#cc0008",    pad: true },
-  "005": { src: "/projects/whycavalry-2.png",                      fit: "contain", bg: "#1a2e30",    pad: true },
-  "007": { src: "/projects/hyperframes.png",                       fit: "contain", bg: "#f5f5f5",    pad: true },
-  "010": { src: "/projects/whygrommit-openclaw-monitor-2.png",     fit: "contain", bg: "#080f08",    pad: true },
+  "001": { src: "/projects/whycremisi.jpg",                        fit: "contain", bg: "#050505",    pad: true  },
+  "003": { src: "/projects/whycalendar-screen.png",                fit: "cover",   bg: "#0a0e14",    pad: false, icon: "/projects/whycalendar.png" },
+  "004": { src: "/projects/whyemugba-2.png",                       fit: "contain", bg: "#cc0008",    pad: true  },
+  "005": { src: "/projects/whycavalry-2.png",                      fit: "contain", bg: "#1a2e30",    pad: true  },
+  "007": { src: "/projects/hyperframes.png",                       fit: "contain", bg: "#f5f5f5",    pad: true  },
+  "010": { src: "/projects/whycremisi-2.jpg",                       fit: "contain", bg: "#050505",    pad: true  },
 };
 
 /* ── Palette visiva (fallback SVG) ── */
@@ -341,6 +341,27 @@ function ProjectCard({ p, i, featured = false }) {
               pointerEvents: "none",
             }}
           />
+          {/* Icona app nell'angolo in basso a sinistra */}
+          {images[p.id]?.icon && (
+            <div style={{
+              position: "absolute",
+              bottom: "0.8rem",
+              left: "0.8rem",
+              width: "44px",
+              height: "44px",
+              borderRadius: "10px",
+              overflow: "hidden",
+              border: "1px solid rgba(255,255,255,0.15)",
+              boxShadow: "0 4px 16px rgba(0,0,0,0.6)",
+              zIndex: 2,
+            }}>
+              <img
+                src={images[p.id].icon}
+                alt="App icon"
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
+            </div>
+          )}
           {/* Badge tipo progetto */}
           <div style={{
             position: "absolute",
