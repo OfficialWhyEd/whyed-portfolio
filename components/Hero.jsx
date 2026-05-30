@@ -1,14 +1,18 @@
 "use client";
 import { useRef, useCallback } from "react";
 import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 import { SciPanelHorizontal } from "./SciPanel";
 import BackgroundBeams from "./BackgroundBeams";
 
+gsap.registerPlugin(ScrollTrigger);
+
 export default function Hero({ ready }) {
-  const root    = useRef(null);
-  const nameEl  = useRef(null);
-  const spotRef = useRef(null);
+  const root        = useRef(null);
+  const nameEl      = useRef(null);
+  const spotRef     = useRef(null);
+  const redLayerRef = useRef(null);
 
   const onMouseMove = useCallback((e) => {
     const rect = root.current?.getBoundingClientRect();
@@ -56,6 +60,20 @@ export default function Hero({ ready }) {
       .to(".h-tagline",   { opacity: 1, y: 0, duration: 0.9 }, "-=0.45")
       .to(".h-coord",     { opacity: 1, stagger: 0.12, duration: 0.9 }, "-=0.6");
 
+    // Cross-fade scroll: rosso → naturale mentre scorri via dall'hero
+    if (redLayerRef.current) {
+      gsap.to(redLayerRef.current, {
+        opacity: 0,
+        ease: "none",
+        scrollTrigger: {
+          trigger: root.current,
+          start: "top top",
+          end:   "80% top",
+          scrub: 1.2,
+        },
+      });
+    }
+
     const el = root.current;
     el?.addEventListener("mousemove", onMouseMove);
     return () => el?.removeEventListener("mousemove", onMouseMove);
@@ -78,7 +96,7 @@ export default function Hero({ ready }) {
       {/* Atmospheric beams */}
       <BackgroundBeams />
 
-      {/* Ritratto — destra, bleeding all'edge, si fonde con --void */}
+      {/* Ritratto — destra bleeding, due layer per cross-fade su scroll */}
       <div
         style={{
           position: "absolute",
@@ -90,10 +108,13 @@ export default function Hero({ ready }) {
           pointerEvents: "none",
         }}
       >
+        {/* Layer base: versione naturale (occhi ambra/caldi) — sempre visibile */}
         <img
-          src="/edoardo-eyes-amber.jpg"
+          src="/edoardo-eyes-dark.jpg"
           alt=""
           style={{
+            position: "absolute",
+            inset: 0,
             width: "100%",
             height: "100%",
             objectFit: "cover",
@@ -101,22 +122,41 @@ export default function Hero({ ready }) {
             display: "block",
           }}
         />
+
+        {/* Layer sopra: versione rossa — si dissolve mentre scorri */}
+        <div
+          ref={redLayerRef}
+          style={{ position: "absolute", inset: 0 }}
+        >
+          <img
+            src="/edoardo-eyes-amber.jpg"
+            alt=""
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center 30%",
+              display: "block",
+            }}
+          />
+        </div>
+
         {/* Fade sinistro — la foto emerge dal void */}
         <div style={{
           position: "absolute",
           inset: 0,
           background: "linear-gradient(to right, var(--void) 0%, rgba(8,9,14,0.6) 35%, transparent 70%)",
           pointerEvents: "none",
+          zIndex: 2,
         }} />
         {/* Fade in basso */}
         <div style={{
           position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
+          bottom: 0, left: 0, right: 0,
           height: "30%",
           background: "linear-gradient(to bottom, transparent, var(--void))",
           pointerEvents: "none",
+          zIndex: 2,
         }} />
       </div>
 
