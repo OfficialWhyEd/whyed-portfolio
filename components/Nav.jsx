@@ -78,18 +78,18 @@ export default function Nav() {
               style={{
                 fontFamily: '"JetBrains Mono", monospace',
                 fontSize: "0.62rem", letterSpacing: "0.13em",
-                textTransform: "uppercase", color: "#4a4c54",
+                textTransform: "uppercase", color: "#9ea1ac",
                 textDecoration: "none", transition: "color 0.2s",
               }}
               onMouseEnter={e => (e.currentTarget.style.color = "#f0ede8")}
-              onMouseLeave={e => (e.currentTarget.style.color = "#4a4c54")}
+              onMouseLeave={e => (e.currentTarget.style.color = "#9ea1ac")}
             >
               {label}
             </a>
           ))}
           <span style={{
             fontFamily: '"JetBrains Mono", monospace',
-            fontSize: "0.58rem", letterSpacing: "0.1em", color: "#2e3038",
+            fontSize: "0.58rem", letterSpacing: "0.1em", color: "#6e717c",
           }}>
             CET {time}
           </span>
