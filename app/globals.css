@@ -263,111 +263,136 @@ html.lenis { height: auto; }
 .contact-link { transition: transform 0.15s ease, background 0.25s; display: block; }
 .contact-link:active { transform: translateY(2px); }
 
+/* ── tl-year-mobile: nascosto su desktop ───────────────────────── */
+.tl-year-mobile {
+  display: none;
+}
+
 /* ── Mobile (iPhone first) ─────────────────────────────────────── */
 @media (max-width: 768px) {
 
-  /* Token mobile — colori più luminosi + timeline più stretta */
+  /* Colori molto più luminosi — leggibili su sfondo scuro */
   :root {
-    --dim:     #d0cdc8;
-    --faint:   #a8a5a0;
-    --tl-left: 3.8rem;
+    --dim:   #d2cfc9;
+    --faint: #aaa7a2;
   }
 
-  /* Hero — portrait full-bleed, molto trasparente */
+  /* ── Hero ───────────────────────────────── */
+
+  /* Portrait: full-bleed overlay, trasparente, mask semplice */
   .hero-portrait-mobile {
     left: 0 !important;
     top: 0 !important;
     width: 100% !important;
     height: 100% !important;
-    opacity: 0.18 !important;
+    opacity: 0.16 !important;
+    -webkit-mask-image: none !important;
+    mask-image: none !important;
   }
 
-  /* Hero — padding */
   #top {
-    padding: 5.5rem 1.25rem 2.5rem !important;
+    padding: 5.5rem 1.25rem 2rem !important;
+    min-height: 100dvh !important;
+    height: auto !important;
   }
 
-  /* Hero — eyebrow in colonna, testo più luminoso */
   .h-eyebrow {
     flex-direction: column !important;
-    gap: 0.35rem !important;
+    gap: 0.3rem !important;
   }
-  .h-eyebrow span:last-child {
-    margin-left: 0 !important;
+  .h-eyebrow span:last-child { margin-left: 0 !important; }
+
+  .h-tagline { display: none !important; }
+
+  .h-tags {
+    flex-wrap: wrap !important;
+    gap: 0.25rem 0.8rem !important;
   }
 
-  /* Hero — tagline nascosta */
-  .h-tagline {
+  .h-coord { display: none !important; }
+
+  /* ── Timeline: layout flat single-column ─ */
+  #cronologia {
+    padding: 4rem 1.25rem !important;
+  }
+
+  /* Nascondi linea assoluta, scan light, linea destra */
+  #cronologia > div > div:nth-child(1),
+  #cronologia > div > div:nth-child(2),
+  #cronologia > div > div:nth-child(3) {
     display: none !important;
   }
 
-  /* Hero — tags in riga wrappata */
-  .h-tags {
-    flex-direction: row !important;
-    flex-wrap: wrap !important;
-    gap: 0.25rem 1rem !important;
+  /* Ogni item: block con border-left come linea */
+  .tl-item {
+    display: block !important;
+    position: relative !important;
+    padding-left: 1.25rem !important;
+    border-left: 2px solid rgba(201, 75, 37, 0.35) !important;
+    margin-bottom: 2.2rem !important;
   }
-  /* Tags text più leggibile su mobile */
-  .h-tags span {
+
+  /* Dot sul bordo sinistro */
+  .tl-item::before {
+    content: '';
+    position: absolute;
+    left: -5px;
+    top: 0.3rem;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(201, 75, 37, 0.7);
+  }
+
+  /* Nascondi colonna anno (quella con dot/ring/connettore) */
+  .tl-item > div:first-child { display: none !important; }
+
+  /* Content: no padding extra, no border */
+  .tl-content {
+    padding-left: 0 !important;
+    border-left: none !important;
+  }
+
+  /* Anno mobile — ora visibile */
+  .tl-year-mobile {
+    display: block !important;
+    font-family: "JetBrains Mono", monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    color: var(--faint);
+    margin-bottom: 0.4rem;
+  }
+
+  /* Titoli timeline più compatti */
+  #cronologia h3.display {
+    font-size: clamp(1rem, 5vw, 1.35rem) !important;
+    margin-bottom: 0.4rem !important;
+  }
+
+  /* Descrizioni leggibili */
+  #cronologia p {
+    font-size: 0.83rem !important;
+    line-height: 1.65 !important;
     color: var(--dim) !important;
-    font-size: 0.65rem !important;
+    max-width: 100% !important;
   }
 
-  /* Hero coordinate — più visibili */
-  .h-coord span {
-    color: var(--faint) !important;
-    font-size: 0.58rem !important;
-  }
+  /* ── Resto ──────────────────────────────── */
 
-  /* Titoli display */
-  h1.display, h2.display {
-    line-height: 0.9 !important;
-  }
+  h1.display, h2.display { line-height: 0.9 !important; }
 
-  /* Marquee */
   .marquee-track { animation-duration: 18s !important; }
 
-  /* Work — 1 colonna */
   #lavori section > div:last-child,
   #lavori > section > div > div:last-child {
     grid-template-columns: 1fr !important;
   }
 
-  /* Timeline */
-  #cronologia {
-    padding: 4rem 1.1rem !important;
-  }
-  .tl-item {
-    grid-template-columns: var(--tl-left) 1fr !important;
-    margin-bottom: 2.2rem !important;
-  }
-  .tl-content {
-    padding-left: 1rem !important;
-  }
-  #cronologia h3.display {
-    font-size: clamp(1rem, 4.5vw, 1.4rem) !important;
-  }
-  #cronologia p {
-    font-size: 0.82rem !important;
-    line-height: 1.6 !important;
-    color: var(--dim) !important;
-  }
-  /* Linea destra nascosta su mobile */
-  #cronologia > div > div:nth-child(3) {
-    display: none !important;
-  }
+  #profilo .about-photos { height: 280px !important; }
+  #profilo .about-photos img:last-child { display: none !important; }
 
-  /* About — una foto */
-  #profilo .about-photos {
-    height: 280px !important;
-  }
-  #profilo .about-photos img:last-child {
-    display: none !important;
-  }
-
-  /* Sezioni */
   #lavori, #ecosistema, #profilo, #contatti {
-    padding: 5rem 1.25rem !important;
+    padding: 4.5rem 1.25rem !important;
   }
 
   /* Contact — 1 colonna */
@@ -382,7 +407,6 @@ html.lenis { height: auto; }
 
 /* ── iPhone SE / piccoli (max 390px) ──────────────────────────── */
 @media (max-width: 390px) {
-  :root { --tl-left: 3.2rem; }
   #top { padding: 5rem 1rem 1.5rem !important; }
-  #cronologia { padding: 3.5rem 0.9rem !important; }
+  #cronologia { padding: 3.5rem 1rem !important; }
 }

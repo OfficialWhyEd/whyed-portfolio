@@ -319,6 +319,11 @@ export default function Timeline() {
                   transition: "border-left-color 0.3s",
                 }}
               >
+                {/* Anno mobile — nascosto su desktop, visibile su mobile via CSS */}
+                <span className="tl-year-mobile">
+                  {ev.year}
+                </span>
+
                 {/* Label badge */}
                 <div style={{
                   display: "inline-flex",

@@ -111,10 +111,9 @@ export default function Hero({ ready }) {
           zIndex: 0,
           pointerEvents: "none",
           willChange: "transform",
-          WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 22%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 80%, transparent 100%)",
-          WebkitMaskComposite: "destination-in",
-          maskImage: "linear-gradient(to right, transparent 0%, black 22%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 80%, transparent 100%)",
-          maskComposite: "intersect",
+          WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 22%)",
+          maskImage: "linear-gradient(to right, transparent 0%, black 22%)",
+          overflow: "hidden",
         }}
       >
         {/* Layer base: foto naturale */}
@@ -131,6 +130,11 @@ export default function Hero({ ready }) {
             display: "block",
           }}
         />
+
+        {/* Fade alto */}
+        <div style={{ position:"absolute", top:0, left:0, right:0, height:"12%", background:"linear-gradient(to bottom, var(--void), transparent)", zIndex:2, pointerEvents:"none" }} />
+        {/* Fade basso */}
+        <div style={{ position:"absolute", bottom:0, left:0, right:0, height:"28%", background:"linear-gradient(to top, var(--void), transparent)", zIndex:2, pointerEvents:"none" }} />
 
         {/* Layer rosso — classe hero-red-layer, GSAP la fades su scroll */}
         <div className="hero-red-layer" style={{ position: "absolute", inset: 0 }}>
