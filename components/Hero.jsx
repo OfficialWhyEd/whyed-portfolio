@@ -13,6 +13,7 @@ export default function Hero({ ready }) {
   const nameEl      = useRef(null);
   const spotRef     = useRef(null);
   const redLayerRef = useRef(null);
+  const portraitRef = useRef(null);
 
   const onMouseMove = useCallback((e) => {
     const rect = root.current?.getBoundingClientRect();
@@ -23,7 +24,10 @@ export default function Hero({ ready }) {
     }
     const x = (e.clientX / window.innerWidth - 0.5) * 22;
     const y = (e.clientY / window.innerHeight - 0.5) * 13;
-    gsap.to(nameEl.current, { x, y, duration: 1.1, ease: "power2.out" });
+    // Titolo segue il mouse
+    gsap.to(nameEl.current,  { x,          y,          duration: 1.1, ease: "power2.out" });
+    // Immagine si muove in direzione opposta — senso di profondità
+    gsap.to(portraitRef.current, { x: -x * 0.32, y: -y * 0.32, duration: 1.5, ease: "power2.out" });
   }, []);
 
   // Nasconde subito gli elementi prima ancora che ready sia true
@@ -96,8 +100,9 @@ export default function Hero({ ready }) {
       {/* Atmospheric beams */}
       <BackgroundBeams />
 
-      {/* Ritratto — cross-fade scroll: rosso CSS → naturale, stessa foto */}
+      {/* Ritratto — cross-fade scroll + parallax opposto al titolo */}
       <div
+        ref={portraitRef}
         style={{
           position: "absolute",
           right: 0,
@@ -106,6 +111,7 @@ export default function Hero({ ready }) {
           height: "100%",
           zIndex: 0,
           pointerEvents: "none",
+          willChange: "transform",
         }}
       >
         {/* Layer base: foto naturale — qualità originale */}
