@@ -129,8 +129,8 @@ export default function Hero({ ready }) {
           }}
         />
 
-        {/* Layer rosso: foto con fascia orizzontale */}
-        <div ref={redLayerRef} style={{ position: "absolute", inset: 0 }}>
+        {/* Layer rosso: scalato per matchare il close-up della foto naturale */}
+        <div ref={redLayerRef} style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
           <img
             src="/edoardo-eyes-amber.jpg"
             alt=""
@@ -138,8 +138,10 @@ export default function Hero({ ready }) {
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              objectPosition: "28% 70%",
+              objectPosition: "38% 54%",
               display: "block",
+              transform: "scale(1.8)",
+              transformOrigin: "42% 54%",
             }}
           />
         </div>
