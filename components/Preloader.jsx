@@ -11,17 +11,12 @@ export default function Preloader({ onComplete }) {
     const obj = { v: 0 };
     const tl = gsap.timeline({
       onComplete: () => {
-        // Breve pausa a 100% prima di uscire
-        gsap.timeline()
-          .to(root.current, { opacity: 0.98, duration: 0.15 })
-          .to(root.current, {
-            yPercent: -102,
-            duration: 0.95,
-            ease: "expo.inOut",
-            // onComplete scatta durante l'uscita, non dopo
-            // così hero e preloader si sovrappongono leggermente
-            onStart: () => setTimeout(onComplete, 200),
-          });
+        gsap.to(root.current, {
+          yPercent: -105,
+          duration: 1.05,
+          ease: "expo.out",
+          onStart: () => setTimeout(onComplete, 380),
+        });
       },
     });
     tl.to(obj, {

@@ -77,20 +77,38 @@ const events = [
 ];
 
 export default function Timeline() {
-  const root = useRef(null);
+  const root    = useRef(null);
+  const lineRef = useRef(null);
 
   useGSAP(() => {
+    /* draw della linea verticale al scroll */
+    if (lineRef.current) {
+      gsap.fromTo(lineRef.current,
+        { scaleY: 0, transformOrigin: "top center" },
+        {
+          scaleY: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: root.current,
+            start: "top 80%",
+            end:   "bottom 20%",
+            scrub: 1,
+          },
+        }
+      );
+    }
+
     const items = root.current?.querySelectorAll(".tl-item");
     if (!items) return;
     items.forEach((el, i) => {
       gsap.from(el, {
         opacity: 0,
-        x: i % 2 === 0 ? -40 : 40,
-        duration: 0.8,
+        x: -32,
+        duration: 0.75,
         ease: "power3.out",
         scrollTrigger: {
           trigger: el,
-          start: "top 85%",
+          start: "top 87%",
           once: true,
         },
       });
@@ -146,15 +164,17 @@ export default function Timeline() {
           maxWidth: "1000px",
         }}
       >
-        {/* Vertical line */}
+        {/* Vertical line — animata al scroll */}
         <div
+          ref={lineRef}
           style={{
             position: "absolute",
             left: "clamp(3rem, 8vw, 7rem)",
             top: 0,
             bottom: 0,
             width: "1px",
-            background: "var(--line2)",
+            background: "linear-gradient(to bottom, var(--signal), var(--line2) 60%)",
+            transformOrigin: "top center",
           }}
         />
 
@@ -174,15 +194,18 @@ export default function Timeline() {
             <div style={{ textAlign: "right", paddingRight: "2.5rem", position: "relative" }}>
               {/* Dot */}
               <div
+                className={i === events.length - 1 ? "card-alive-dot" : ""}
                 style={{
                   position: "absolute",
                   right: "-5px",
                   top: "0.5rem",
-                  width: "9px",
-                  height: "9px",
+                  width: i === events.length - 1 ? "10px" : "8px",
+                  height: i === events.length - 1 ? "10px" : "8px",
                   borderRadius: "50%",
                   background: i === events.length - 1 ? "var(--signal)" : "var(--faint)",
-                  border: "1px solid var(--line2)",
+                  border: i === events.length - 1 ? "1px solid rgba(201,75,37,0.5)" : "1px solid var(--line2)",
+                  color: "var(--signal)",
+                  animation: i === events.length - 1 ? "alive-dot 2s ease-in-out infinite" : "none",
                 }}
               />
               <span

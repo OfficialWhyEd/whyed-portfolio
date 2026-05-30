@@ -73,13 +73,12 @@ export default function Contact() {
               target={l.href.startsWith("http") ? "_blank" : undefined}
               rel="noreferrer"
               data-hover
+              className="contact-link"
               style={{
-                display: "block",
                 padding: "1.8rem 0",
                 borderRight: i < links.length - 1 ? "1px solid var(--line)" : "none",
                 borderBottom: "1px solid var(--line)",
                 textDecoration: "none",
-                transition: "background 0.25s",
               }}
               onMouseEnter={(e) => (e.currentTarget.style.background = "rgba(201,75,37,0.04)")}
               onMouseLeave={(e) => (e.currentTarget.style.background = "transparent")}

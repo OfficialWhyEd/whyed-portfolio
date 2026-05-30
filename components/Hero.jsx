@@ -1,20 +1,22 @@
 "use client";
-import { useRef, useState, useCallback } from "react";
+import { useRef, useCallback } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { SciPanelHorizontal } from "./SciPanel";
 import BackgroundBeams from "./BackgroundBeams";
 
 export default function Hero({ ready }) {
-  const root   = useRef(null);
-  const nameEl = useRef(null);
+  const root    = useRef(null);
+  const nameEl  = useRef(null);
   const spotRef = useRef(null);
-  const [spotPos, setSpotPos] = useState({ x: -9999, y: -9999 });
 
   const onMouseMove = useCallback((e) => {
     const rect = root.current?.getBoundingClientRect();
     if (!rect) return;
-    setSpotPos({ x: e.clientX - rect.left, y: e.clientY - rect.top });
+    if (spotRef.current) {
+      spotRef.current.style.left = (e.clientX - rect.left) + "px";
+      spotRef.current.style.top  = (e.clientY - rect.top)  + "px";
+    }
     const x = (e.clientX / window.innerWidth - 0.5) * 22;
     const y = (e.clientY / window.innerHeight - 0.5) * 13;
     gsap.to(nameEl.current, { x, y, duration: 1.1, ease: "power2.out" });
@@ -43,7 +45,7 @@ export default function Hero({ ready }) {
     gsap.set(".h-coord",        { opacity: 0 });
 
     const tl = gsap.timeline({
-      delay: 0.1,
+      delay: 0.05,
       defaults: { ease: "power4.out" },
     });
 
@@ -86,11 +88,10 @@ export default function Hero({ ready }) {
           borderRadius: "50%",
           background: `radial-gradient(circle, rgba(201,75,37,0.055) 0%, transparent 70%)`,
           transform: "translate(-50%, -50%)",
-          left: spotPos.x,
-          top: spotPos.y,
+          left: -9999,
+          top: -9999,
           pointerEvents: "none",
           zIndex: 1,
-          transition: "left 0.08s linear, top 0.08s linear",
         }}
       />
 

@@ -1,5 +1,5 @@
 "use client";
-import { useState, useCallback, useRef, useEffect } from "react";
+import { useState, useCallback, useRef } from "react";
 import { devProjects, musicProjects } from "../lib/projects";
 import Reveal from "./Reveal";
 import HyperText from "./HyperText";
@@ -244,9 +244,8 @@ function ProjectThumb({ id, hue, pattern, h = 180 }) {
 }
 
 /* ── Card con 3D tilt ── */
-function ProjectCard({ p, i, featured = false }) {
+function ProjectCard({ p, i, featured = false, wide = false }) {
   const cardRef = useRef(null);
-  const [style, setStyle] = useState({});
   const [hovered, setHovered] = useState(false);
   const vis = visuals[p.id] || { hue: "#c94b25", pattern: "waveform" };
 
@@ -256,17 +255,17 @@ function ProjectCard({ p, i, featured = false }) {
     const rect = el.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width - 0.5;
     const y = (e.clientY - rect.top) / rect.height - 0.5;
-    setStyle({
-      transform: `perspective(900px) rotateY(${x * 12}deg) rotateX(${-y * 10}deg) translateZ(8px)`,
-    });
+    el.style.transform = `perspective(900px) rotateY(${x * 12}deg) rotateX(${-y * 10}deg) translateZ(8px)`;
   }, []);
 
   const onMouseLeave = useCallback(() => {
     setHovered(false);
-    setStyle({ transform: "perspective(900px) rotateY(0deg) rotateX(0deg) translateZ(0px)" });
+    if (cardRef.current) {
+      cardRef.current.style.transform = "perspective(900px) rotateY(0deg) rotateX(0deg) translateZ(0px)";
+    }
   }, []);
 
-  const thumbH = featured ? 240 : 180;
+  const thumbH = featured ? 240 : wide ? 220 : 180;
 
   return (
     <Reveal delay={i * 0.05}>
@@ -283,7 +282,6 @@ function ProjectCard({ p, i, featured = false }) {
           clipPath: "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))",
           transition: "border-color 0.3s ease",
           willChange: "transform",
-          ...style,
         }}
       >
         {/* Spotlight interno */}
@@ -362,22 +360,27 @@ function ProjectCard({ p, i, featured = false }) {
               />
             </div>
           )}
-          {/* Badge tipo progetto */}
+          {/* Status dot alive */}
           <div style={{
             position: "absolute",
-            top: "0.8rem",
-            right: "0.8rem",
-            fontFamily: '"JetBrains Mono", monospace',
-            fontSize: "0.5rem",
-            letterSpacing: "0.14em",
-            textTransform: "uppercase",
-            color: vis.hue,
-            background: "rgba(8,9,14,0.8)",
-            border: `1px solid ${vis.hue}44`,
-            padding: "0.2rem 0.5rem",
+            top: "0.9rem",
+            right: "0.9rem",
+            display: "flex",
+            alignItems: "center",
+            gap: "0.4rem",
+            background: "rgba(8,9,14,0.75)",
+            border: `1px solid ${vis.hue}33`,
+            padding: "0.2rem 0.5rem 0.2rem 0.4rem",
             backdropFilter: "blur(4px)",
           }}>
-            {p.id}
+            <span className="card-alive-dot" style={{ color: vis.hue }} />
+            <span style={{
+              fontFamily: '"JetBrains Mono", monospace',
+              fontSize: "0.46rem",
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
+              color: vis.hue,
+            }}>LIVE</span>
           </div>
         </div>
 
@@ -438,6 +441,9 @@ function ProjectCard({ p, i, featured = false }) {
   );
 }
 
+/* pattern asimmetrico DESIGN_VARIANCE 8: span 2 ogni 3 item */
+const spanPattern = [2, 1, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1];
+
 /* ── Sezione con layout bento ── */
 function Section({ label, sectionNum, projects }) {
   const [featured, ...rest] = projects;
@@ -462,15 +468,20 @@ function Section({ label, sectionNum, projects }) {
         </div>
       )}
 
-      {/* Griglia resto */}
+      {/* Griglia asimmetrica 3 colonne */}
       <div style={{
         display: "grid",
-        gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 400px), 1fr))",
+        gridTemplateColumns: "repeat(3, 1fr)",
         gap: "1.2rem",
       }}>
-        {rest.map((p, i) => (
-          <ProjectCard key={p.id} p={p} i={i + 1} />
-        ))}
+        {rest.map((p, i) => {
+          const span = spanPattern[i] ?? 1;
+          return (
+            <div key={p.id} style={{ gridColumn: `span ${span}` }}>
+              <ProjectCard p={p} i={i + 1} wide={span === 2} />
+            </div>
+          );
+        })}
       </div>
     </div>
   );
