@@ -100,15 +100,15 @@ export default function Hero({ ready }) {
       {/* Atmospheric beams */}
       <BackgroundBeams />
 
-      {/* Ritratto — cross-fade scroll + parallax opposto al titolo */}
+      {/* Ritratto — leggermente spostato sinistra/basso, tra EDOARDO e Porcu */}
       <div
         ref={portraitRef}
         style={{
           position: "absolute",
           right: 0,
-          top: 0,
-          width: "46%",
-          height: "100%",
+          top: "4%",
+          left: "44%",
+          height: "96%",
           zIndex: 0,
           pointerEvents: "none",
           willChange: "transform",
@@ -125,14 +125,13 @@ export default function Hero({ ready }) {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            objectPosition: "28% 46%",
+            objectPosition: "35% 44%",
             display: "block",
           }}
         />
 
-        {/* Layer rosso: stessa foto generata (allineamento perfetto) + fascia CSS */}
+        {/* Layer rosso: stessa foto generata + fascia animata */}
         <div ref={redLayerRef} style={{ position: "absolute", inset: 0 }}>
-          {/* Foto rossa — stesso scatto, stesso crop */}
           <img
             src="/edoardo-eyes-red-gen.jpg"
             alt=""
@@ -140,20 +139,20 @@ export default function Hero({ ready }) {
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              objectPosition: "28% 46%",
+              objectPosition: "35% 44%",
               display: "block",
             }}
           />
-          {/* Fascia rossa orizzontale — striscia di luce, contenuta nel portrait */}
+          {/* Fascia luce — sottile, animata, non piatta */}
           <div style={{
             position: "absolute",
-            top: "44%",
+            top: "41%",
             left: 0,
             right: 0,
-            height: "13%",
-            background: "linear-gradient(to bottom, transparent, rgba(200,28,8,0.65) 30%, rgba(210,32,10,0.72) 50%, rgba(200,28,8,0.65) 70%, transparent)",
+            height: "16%",
+            background: "linear-gradient(175deg, transparent 10%, rgba(195,25,6,0.38) 35%, rgba(205,28,8,0.44) 50%, rgba(195,25,6,0.38) 65%, transparent 90%)",
+            animation: "red-shift 9s ease-in-out infinite",
             pointerEvents: "none",
-            mixBlendMode: "screen",
           }} />
         </div>
 
