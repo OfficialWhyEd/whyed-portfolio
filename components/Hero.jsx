@@ -116,6 +116,24 @@ export default function Hero({ ready }) {
           overflow: "hidden",
         }}
       >
+        {/* SVG filter defs — chromatic aberration */}
+        <svg style={{ position: "absolute", width: 0, height: 0, overflow: "hidden" }}>
+          <defs>
+            <filter id="hero-chroma" x="-4%" y="-4%" width="108%" height="108%" colorInterpolationFilters="sRGB">
+              <feOffset in="SourceGraphic" dx="2.5" dy="0" result="rShift" />
+              <feColorMatrix in="rShift" type="matrix" values="1 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 0" result="r" />
+              <feColorMatrix in="SourceGraphic" type="matrix" values="0 0 0 0 0  0 1 0 0 0  0 0 0 0 0  0 0 0 1 0" result="g" />
+              <feOffset in="SourceGraphic" dx="-2.5" dy="0" result="bShift" />
+              <feColorMatrix in="bShift" type="matrix" values="0 0 0 0 0  0 0 0 0 0  0 0 1 0 0  0 0 0 1 0" result="b" />
+              <feMerge>
+                <feMergeNode in="r" />
+                <feMergeNode in="g" />
+                <feMergeNode in="b" />
+              </feMerge>
+            </filter>
+          </defs>
+        </svg>
+
         {/* Layer base: foto naturale */}
         <img
           src="/edoardo-eyes-dark.jpg"
@@ -128,6 +146,7 @@ export default function Hero({ ready }) {
             objectFit: "cover",
             objectPosition: "35% 44%",
             display: "block",
+            filter: "url(#hero-chroma) contrast(1.18) brightness(0.86)",
           }}
         />
 
@@ -151,6 +170,26 @@ export default function Hero({ ready }) {
             }}
           />
         </div>
+
+        {/* Scanlines */}
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          zIndex: 5,
+          pointerEvents: "none",
+          backgroundImage: "repeating-linear-gradient(to bottom, transparent 0px, transparent 3px, rgba(0,0,0,0.11) 3px, rgba(0,0,0,0.11) 4px)",
+          mixBlendMode: "multiply",
+        }} />
+
+        {/* HUD targeting corners */}
+        {[
+          { top: 14, left: 14, borderTop: "1px solid var(--signal)", borderLeft: "1px solid var(--signal)" },
+          { top: 14, right: 14, borderTop: "1px solid var(--signal)", borderRight: "1px solid var(--signal)" },
+          { bottom: 14, left: 14, borderBottom: "1px solid var(--signal)", borderLeft: "1px solid var(--signal)" },
+          { bottom: 14, right: 14, borderBottom: "1px solid var(--signal)", borderRight: "1px solid var(--signal)" },
+        ].map((s, i) => (
+          <div key={i} style={{ position: "absolute", width: 18, height: 18, zIndex: 6, pointerEvents: "none", ...s }} />
+        ))}
 
       </div>
 
