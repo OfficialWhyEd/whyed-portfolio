@@ -112,6 +112,7 @@ export default function Hero({ ready }) {
           zIndex: 0,
           pointerEvents: "none",
           willChange: "transform",
+          overflow: "hidden",
         }}
       >
         {/* Layer base: foto naturale */}
@@ -143,14 +144,14 @@ export default function Hero({ ready }) {
               display: "block",
             }}
           />
-          {/* Fascia rossa orizzontale — simula la striscia di luce reale */}
+          {/* Fascia rossa orizzontale — striscia di luce, contenuta nel portrait */}
           <div style={{
             position: "absolute",
-            top: "43%",
-            left: "-5%",
-            right: "-5%",
-            height: "14%",
-            background: "linear-gradient(to bottom, transparent, rgba(200,28,8,0.72) 30%, rgba(210,32,10,0.78) 50%, rgba(200,28,8,0.72) 70%, transparent)",
+            top: "44%",
+            left: 0,
+            right: 0,
+            height: "13%",
+            background: "linear-gradient(to bottom, transparent, rgba(200,28,8,0.65) 30%, rgba(210,32,10,0.72) 50%, rgba(200,28,8,0.65) 70%, transparent)",
             pointerEvents: "none",
             mixBlendMode: "screen",
           }} />
