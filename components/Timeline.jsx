@@ -53,7 +53,7 @@ const events = [
   {
     year: "2023",
     label: "STUDIO",
-    title: "Studio a Elmas + Vodafone Bologna",
+    title: "Studio a Cagliari/Elmas + Vodafone Bologna",
     desc: "Apre lo studio fisico. Mixing e mastering freelance: album indie, EP pop-rock. Dealer Vodafone Bologna (mag–ott 2023) — telecomunicazioni B2B. Bartender Sphera Locura Milano (mar–giu 2023).",
   },
   {
@@ -72,7 +72,7 @@ const events = [
     year: "2026",
     label: "ECOSISTEMA",
     title: "15 progetti — top 0.1% globale",
-    desc: "783M token AI in 30 giorni. WhyEmuGBA, WhyCavalry, Designo, HyperFrames completati. Top 0.1% usage Claude Pro globale. L'ecosistema gira autonomamente da Elmas, Sardegna.",
+    desc: "783M token AI in 30 giorni. WhyEmuGBA, WhyCavalry, Designo, HyperFrames completati. Top 0.1% usage Claude Pro globale. L'ecosistema gira autonomamente da Cagliari, Elmas, Sardegna.",
   },
 ];
 

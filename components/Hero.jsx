@@ -96,7 +96,7 @@ export default function Hero({ ready }) {
       >
         <span>EDOARDO PORCU</span>
         <span style={{ color: "var(--signal)" }}>// INGEGNERE DEL SUONO × COSTRUTTORE AI</span>
-        <span style={{ marginLeft: "auto" }}>ELMAS, SARDEGNA</span>
+        <span style={{ marginLeft: "auto" }}>CAGLIARI / ELMAS, SARDEGNA</span>
       </div>
 
       {/* Name block */}
@@ -191,7 +191,7 @@ export default function Hero({ ready }) {
               paddingLeft: "1.5rem",
             }}
           >
-            "La musica viene prima di tutto —{" "}
+            "Costruisco suono che pensa — strumenti che{" "}
             <span
               style={{
                 color: "var(--paper)",
@@ -201,7 +201,7 @@ export default function Hero({ ready }) {
                 fontWeight: 300,
               }}
             >
-              pianoforte a 3 anni, studio a Londra, codice dal 2024.
+              ascoltano, rispondono, ricordano.
             </span>
             "
           </p>
@@ -243,7 +243,7 @@ export default function Hero({ ready }) {
             textTransform: "uppercase",
           }}
         >
-          39.2542° N — 9.0474° E — ELMAS
+          39.2542° N — 9.0474° E — CAGLIARI / ELMAS
         </span>
         <span
           style={{

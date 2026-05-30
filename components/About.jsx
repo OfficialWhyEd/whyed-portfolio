@@ -157,7 +157,7 @@ export default function About() {
               {" "}<span style={{ color: "var(--paper)", fontWeight: 500 }}>London School of Sound</span>{" "}
               e <span style={{ color: "var(--paper)", fontWeight: 500 }}>Garnish Music Production School</span>{" "}
               — Mix & Mastering, Sound Design, Music Business.
-              La pandemia (2020) interrompe i corsi e la vita internazionale. Rientro a Elmas.
+              La pandemia (2020) interrompe i corsi e la vita internazionale. Rientro a Cagliari, Elmas.
               Studio aperto nel 2023.
             </p>
             <p>
@@ -178,7 +178,7 @@ export default function About() {
               in 30 giorni costruendo il{" "}
               <span style={{ color: "var(--signal)", fontWeight: 500 }}>Why Ecosystem</span> —
               top 0.1% usage globale Claude Pro.
-              Ogni sistema gira localmente, a costo zero, sul MacBook Intel di Elmas, Sardegna.
+              Ogni sistema gira localmente, a costo zero, sul MacBook Intel di Cagliari, Elmas, Sardegna.
             </p>
             <p>
               Collaborazioni: RAGEWINGS (rock/metal, Sardegna), Carlo/Aura (Linux backend per WhyCremisi),
@@ -331,7 +331,7 @@ export default function About() {
               { year: "2016–19", name: "London School of Sound", detail: "Certificate of Completion · Mix, Mastering, Sound Design · Londra" },
               { year: "2016–19", name: "Garnish Music Production School", detail: "Mix & Mastering, Sound Design, Music Business · Londra" },
               { year: "2019",    name: "European Bartender School", detail: "Londra — formazione internazionale" },
-              { year: "2017–19",  name: "Istituto Amerigo Vespucci", detail: "Diploma scuola secondaria · Elmas, Sardegna" },
+              { year: "2017–19",  name: "Istituto Amerigo Vespucci", detail: "Diploma scuola secondaria · Cagliari, Elmas, Sardegna" },
               { year: "nov–dic 2019", name: "European Bartender School", detail: "Londra — Certificate of Completion" },
               { year: "2013→",   name: "Autodidatta", detail: "Produzione, DAW, sound design — orecchio come guida" },
             ].map((f) => (
