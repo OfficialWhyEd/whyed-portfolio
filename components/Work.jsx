@@ -1,19 +1,19 @@
 "use client";
-import { useState, useCallback, useRef } from "react";
+import { useState, useCallback, useRef, useEffect } from "react";
 import { devProjects, musicProjects } from "../lib/projects";
 import Reveal from "./Reveal";
 import HyperText from "./HyperText";
 
-/* ── Immagini reali per progetto ── */
+/* ── Immagini per progetto — screens[] include tutte le immagini disponibili ── */
 const images = {
-  "001": { src: "/projects/whycremisi.jpg",       fit: "contain", bg: "#050505", pad: true  },
-  "002": { src: "/projects/whypost-dashboard.jpg",  fit: "cover",   bg: "#0a120e", pad: false },
-  "003": { src: "/projects/whycalendar-dark.png",  fit: "cover",   bg: "#040c10", pad: false, icon: "/projects/whycalendar.png" },
-  "004": { src: "/projects/whyemugba-2.png",       fit: "contain", bg: "#cc0008", pad: true  },
-  "005": { src: "/projects/whycavalry-2.png",      fit: "contain", bg: "#1a2e30", pad: true  },
-  "007": { src: "/projects/hyperframes.png",       fit: "contain", bg: "#f5f5f5", pad: true  },
-  "009": { src: "/projects/whygrommit-openclaw-monitor.png", fit: "cover", bg: "#050a0a", pad: false },
-  "010": { src: "/projects/whycremisi-2.jpg",      fit: "contain", bg: "#050505", pad: true  },
+  "001": { screens: ["/projects/whycremisi-live.png", "/projects/whycremisi.jpg", "/projects/whycremisi-2.jpg"], fit: "cover",   bg: "#050505", pad: false },
+  "002": { screens: ["/projects/whypost-dashboard.jpg", "/projects/whypost-2.png", "/projects/whypost-3.png"],  fit: "cover",   bg: "#0a120e", pad: false },
+  "003": { screens: ["/projects/whycalendar-live.png", "/projects/whycalendar-dark.png", "/projects/whycalendar-screen.png"], fit: "cover", bg: "#040c10", pad: false, icon: "/projects/whycalendar.png" },
+  "004": { screens: ["/projects/whyemugba-2.png", "/projects/whyemugba-3.png", "/projects/whyemugba.png"],      fit: "contain", bg: "#cc0008", pad: true  },
+  "005": { screens: ["/projects/whycavalry-live.png", "/projects/whycavalry-2.png", "/projects/whycavalry-3.png"], fit: "cover", bg: "#1a2e30", pad: false },
+  "007": { screens: ["/projects/hyperframes.png", "/projects/hyperframes-2.png"],                               fit: "contain", bg: "#f5f5f5", pad: true  },
+  "009": { screens: ["/projects/whygrommit-openclaw-monitor.png", "/projects/whygrommit-openclaw-monitor-2.png"], fit: "cover", bg: "#050a0a", pad: false },
+  "010": { screens: ["/projects/whycremisi-2.jpg", "/projects/whycremisi-live.png"],                            fit: "contain", bg: "#050505", pad: true  },
 };
 
 /* ── Palette visiva (fallback SVG) ── */
@@ -245,11 +245,21 @@ function ProjectThumb({ id, hue, pattern, h = 180 }) {
   );
 }
 
-/* ── Card con 3D tilt ── */
+/* ── Card con 3D tilt + gallery cycling ── */
 function ProjectCard({ p, i, featured = false, wide = false }) {
   const cardRef = useRef(null);
   const [hovered, setHovered] = useState(false);
+  const [imgIdx, setImgIdx] = useState(0);
   const vis = visuals[p.id] || { hue: "#c94b25", pattern: "waveform" };
+  const imgData = images[p.id];
+  const screens = imgData?.screens || [];
+
+  // Auto-ciclo immagini ogni 3s quando in hover
+  useEffect(() => {
+    if (!hovered || screens.length <= 1) return;
+    const id = setInterval(() => setImgIdx(n => (n + 1) % screens.length), 3000);
+    return () => clearInterval(id);
+  }, [hovered, screens.length]);
 
   const onMouseMove = useCallback((e) => {
     const el = cardRef.current;
@@ -308,25 +318,56 @@ function ProjectCard({ p, i, featured = false, wide = false }) {
             transition: "border-color 0.3s, transform 0.5s cubic-bezier(0.16,1,0.3,1)",
             overflow: "hidden",
             position: "relative",
-            background: images[p.id]?.bg || "var(--void2)",
+            background: imgData?.bg || "var(--void2)",
             transform: hovered ? "scale(1.02)" : "scale(1)",
           }}
         >
-          {images[p.id] ? (
-            <img
-              src={images[p.id].src}
-              alt={p.title}
-              style={{
-                width: "100%",
-                height: "100%",
-                objectFit: images[p.id].fit,
-                objectPosition: "center",
-                display: "block",
-                padding: images[p.id].pad ? "1.5rem" : "0",
-                transition: "transform 0.6s cubic-bezier(0.16,1,0.3,1)",
-                transform: hovered ? "scale(1.04)" : "scale(1)",
-              }}
-            />
+          {screens.length > 0 ? (
+            <>
+              <img
+                key={imgIdx}
+                src={screens[imgIdx]}
+                alt={p.title}
+                style={{
+                  position: "absolute",
+                  inset: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: imgData.fit,
+                  objectPosition: "center top",
+                  display: "block",
+                  padding: imgData.pad ? "1.5rem" : "0",
+                  transition: "transform 0.6s cubic-bezier(0.16,1,0.3,1), opacity 0.5s",
+                  transform: hovered ? "scale(1.03)" : "scale(1)",
+                }}
+              />
+              {/* Dot gallery indicator */}
+              {screens.length > 1 && (
+                <div style={{
+                  position: "absolute",
+                  bottom: "0.7rem",
+                  right: "0.7rem",
+                  display: "flex",
+                  gap: "4px",
+                  zIndex: 3,
+                }}>
+                  {screens.map((_, di) => (
+                    <div
+                      key={di}
+                      onClick={e => { e.stopPropagation(); setImgIdx(di); }}
+                      style={{
+                        width: di === imgIdx ? "14px" : "4px",
+                        height: "4px",
+                        borderRadius: "2px",
+                        background: di === imgIdx ? vis.hue : "rgba(255,255,255,0.35)",
+                        transition: "all 0.3s cubic-bezier(0.16,1,0.3,1)",
+                        cursor: "pointer",
+                      }}
+                    />
+                  ))}
+                </div>
+              )}
+            </>
           ) : (
             <ProjectThumb id={p.id} hue={vis.hue} pattern={vis.pattern} h={thumbH} />
           )}
@@ -343,7 +384,7 @@ function ProjectCard({ p, i, featured = false, wide = false }) {
             }}
           />
           {/* Icona app nell'angolo in basso a sinistra */}
-          {images[p.id]?.icon && (
+          {imgData?.icon && (
             <div style={{
               position: "absolute",
               bottom: "0.8rem",
@@ -357,7 +398,7 @@ function ProjectCard({ p, i, featured = false, wide = false }) {
               zIndex: 2,
             }}>
               <img
-                src={images[p.id].icon}
+                src={imgData.icon}
                 alt="App icon"
                 style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
               />
