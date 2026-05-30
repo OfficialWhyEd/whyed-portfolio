@@ -64,19 +64,17 @@ export default function Hero({ ready }) {
       .to(".h-tagline",   { opacity: 1, y: 0, duration: 0.9 }, "-=0.45")
       .to(".h-coord",     { opacity: 1, stagger: 0.12, duration: 0.9 }, "-=0.6");
 
-    // Cross-fade scroll: rosso → naturale — range lungo per vedere la transizione
-    if (redLayerRef.current) {
-      gsap.to(redLayerRef.current, {
-        opacity: 0,
-        ease: "none",
-        scrollTrigger: {
-          trigger: root.current,
-          start: "top top",
-          end:   "22% top",
-          scrub: 0.4,
-        },
-      });
-    }
+    // Cross-fade scroll: tutti i layer rossi (.hero-red-layer) → opacity 0
+    gsap.to(".hero-red-layer", {
+      opacity: 0,
+      ease: "none",
+      scrollTrigger: {
+        trigger: root.current,
+        start: "top top",
+        end:   "22% top",
+        scrub: 0.4,
+      },
+    });
 
     const el = root.current;
     el?.addEventListener("mousemove", onMouseMove);
@@ -130,15 +128,8 @@ export default function Hero({ ready }) {
           }}
         />
 
-        {/* Layer rosso: foto con spiraglio rosso già integrato — nessun overlay */}
-        <div
-          ref={redLayerRef}
-          style={{
-            position: "absolute",
-            inset: 0,
-            animation: "red-breathe 6s ease-in-out infinite",
-          }}
-        >
+        {/* Layer rosso — classe hero-red-layer, GSAP la fades su scroll */}
+        <div className="hero-red-layer" style={{ position: "absolute", inset: 0 }}>
           <img
             src="/edoardo-eyes-red-gen.jpg"
             alt=""
@@ -148,6 +139,7 @@ export default function Hero({ ready }) {
               objectFit: "cover",
               objectPosition: "35% 44%",
               display: "block",
+              animation: "red-breathe 6s ease-in-out infinite",
             }}
           />
         </div>
@@ -170,6 +162,22 @@ export default function Hero({ ready }) {
           zIndex: 2,
         }} />
       </div>
+
+      {/* Luce rossa che sanguina a sinistra — tocco artistico, fades con scroll */}
+      <div
+        className="hero-red-layer"
+        style={{
+          position: "absolute",
+          right: "52%",
+          top: "30%",
+          width: "28%",
+          height: "30%",
+          background: "radial-gradient(ellipse 100% 60% at 100% 48%, rgba(210,16,4,0.22) 0%, rgba(185,10,3,0.1) 50%, transparent 80%)",
+          animation: "red-breathe 6s ease-in-out infinite 0.8s",
+          pointerEvents: "none",
+          zIndex: 1,
+        }}
+      />
 
       {/* Cursor spotlight */}
       <div
