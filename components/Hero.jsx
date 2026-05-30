@@ -114,7 +114,7 @@ export default function Hero({ ready }) {
           willChange: "transform",
         }}
       >
-        {/* Layer base: foto naturale — qualità originale */}
+        {/* Layer base: foto naturale */}
         <img
           src="/edoardo-eyes-dark.jpg"
           alt=""
@@ -124,12 +124,12 @@ export default function Hero({ ready }) {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            objectPosition: "38% 52%",
+            objectPosition: "34% 50%",
             display: "block",
           }}
         />
 
-        {/* Layer rosso: foto originale con fascia rossa orizzontale */}
+        {/* Layer rosso: foto con fascia orizzontale */}
         <div ref={redLayerRef} style={{ position: "absolute", inset: 0 }}>
           <img
             src="/edoardo-eyes-amber.jpg"
@@ -138,7 +138,7 @@ export default function Hero({ ready }) {
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              objectPosition: "48% 50%",
+              objectPosition: "34% 44%",
               display: "block",
             }}
           />
