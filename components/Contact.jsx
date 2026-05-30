@@ -32,7 +32,7 @@ export default function Contact() {
         <h2
           className="display"
           style={{
-            fontSize: "clamp(3.5rem, 16vw, 18rem)",
+            fontSize: "clamp(3.5rem, 12vw, 12rem)",
             color: "var(--paper)",
             lineHeight: 0.88,
             marginBottom: "1rem",

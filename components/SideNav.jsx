@@ -55,6 +55,7 @@ export default function SideNav() {
 
   return (
     <nav
+      className="side-nav"
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
       style={{

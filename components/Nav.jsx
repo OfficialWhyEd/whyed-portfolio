@@ -50,11 +50,13 @@ export default function Nav() {
     <nav
       style={{
         position: "fixed", top: 0, left: 0, right: 0, zIndex: 500,
-        mixBlendMode: "difference",
         padding: "1.6rem 2.5rem",
         display: "flex", alignItems: "center", justifyContent: "space-between",
-        opacity: scrolled ? 0.65 : 1,
-        transition: "opacity 0.4s",
+        background: scrolled ? "rgba(8,9,14,0.7)" : "transparent",
+        backdropFilter: scrolled ? "blur(12px)" : "none",
+        WebkitBackdropFilter: scrolled ? "blur(12px)" : "none",
+        borderBottom: scrolled ? "1px solid rgba(255,255,255,0.05)" : "none",
+        transition: "background 0.4s, backdrop-filter 0.4s, border-color 0.4s",
       }}
     >
       <a

@@ -1,13 +1,15 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Reveal({ children, className = "", y = 40, delay = 0 }) {
   const ref = useRef(null);
-  useEffect(() => {
+
+  useGSAP(() => {
     const el = ref.current;
     const anim = gsap.fromTo(
       el,
@@ -25,7 +27,8 @@ export default function Reveal({ children, className = "", y = 40, delay = 0 }) 
       anim.scrollTrigger?.kill();
       anim.kill();
     };
-  }, [y, delay]);
+  }, { scope: ref, dependencies: [y, delay] });
+
   return (
     <div ref={ref} className={className}>
       {children}
