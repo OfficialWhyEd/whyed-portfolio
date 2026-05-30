@@ -129,16 +129,16 @@ export default function Hero({ ready }) {
           }}
         />
 
-        {/* Layer rosso: stessa foto convertita in rosso via ffmpeg — allineamento perfetto */}
+        {/* Layer rosso: foto originale con fascia rossa orizzontale */}
         <div ref={redLayerRef} style={{ position: "absolute", inset: 0 }}>
           <img
-            src="/edoardo-eyes-red-gen.jpg"
+            src="/edoardo-eyes-amber.jpg"
             alt=""
             style={{
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              objectPosition: "38% 52%",
+              objectPosition: "48% 50%",
               display: "block",
             }}
           />
