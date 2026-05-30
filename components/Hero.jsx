@@ -129,21 +129,31 @@ export default function Hero({ ready }) {
           }}
         />
 
-        {/* Layer rosso: scalato per matchare il close-up della foto naturale */}
-        <div ref={redLayerRef} style={{ position: "absolute", inset: 0, overflow: "hidden" }}>
+        {/* Layer rosso: stessa foto generata (allineamento perfetto) + fascia CSS */}
+        <div ref={redLayerRef} style={{ position: "absolute", inset: 0 }}>
+          {/* Foto rossa — stesso scatto, stesso crop */}
           <img
-            src="/edoardo-eyes-amber.jpg"
+            src="/edoardo-eyes-red-gen.jpg"
             alt=""
             style={{
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              objectPosition: "38% 54%",
+              objectPosition: "28% 46%",
               display: "block",
-              transform: "scale(1.8)",
-              transformOrigin: "42% 54%",
             }}
           />
+          {/* Fascia rossa orizzontale — simula la striscia di luce reale */}
+          <div style={{
+            position: "absolute",
+            top: "43%",
+            left: "-5%",
+            right: "-5%",
+            height: "14%",
+            background: "linear-gradient(to bottom, transparent, rgba(200,28,8,0.72) 30%, rgba(210,32,10,0.78) 50%, rgba(200,28,8,0.72) 70%, transparent)",
+            pointerEvents: "none",
+            mixBlendMode: "screen",
+          }} />
         </div>
 
         {/* Fade sinistro */}
