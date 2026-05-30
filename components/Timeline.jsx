@@ -60,13 +60,13 @@ const events = [
     year: "2025",
     label: "BOLOGNA",
     title: "051 Osteria + Ecosistema",
-    desc: "Front-of-House Specialist — 051 Osteria, Quadrilatero di Bologna, di fronte alla Fontana del Nettuno (mag–set 2025). Come sempre: lavorare intensamente mentre lo scopo reale è produrre, conoscere artisti, costruire nuove collaborazioni musicali. WhyPost, WhyCalendar, CLACK attivi.",
+    desc: "Front-of-House Specialist — 051 Osteria, Quadrilatero di Bologna, di fronte alla Fontana del Nettuno (mag–set 2025). Come sempre: lavorare intensamente mentre lo scopo reale è produrre, conoscere artisti, costruire nuove collaborazioni musicali.",
   },
   {
     year: "2025",
     label: "MEDIA",
     title: "People Podcast — \"Il Fallimento come Elogio\"",
-    desc: "Ospite al People Podcast: una conversazione pubblica sulla storia di riscatto, sul fallimento come strumento e sulla scelta di costruire un ecosistema personale invece di seguire le vie convenzionali. Una storia di riscatto raccontata in prima persona.",
+    desc: "Ospite al People Podcast: una conversazione pubblica sulla storia di riscatto, sul fallimento come strumento e sulla scelta di costruire un ecosistema personale invece di seguire le vie convenzionali.",
     image: "/people-podcast.png",
   },
   {
@@ -80,44 +80,61 @@ const events = [
     label: "ECOSISTEMA",
     title: "15 progetti — top 0.1% globale",
     desc: "783M token AI in 30 giorni. WhyEmuGBA, WhyCavalry, Designo, HyperFrames completati. Top 0.1% usage Claude Pro globale. L'ecosistema gira autonomamente da Cagliari, Elmas, Sardegna.",
+    isLast: true,
   },
 ];
+
+const LINE_LEFT = "clamp(5.5rem, 10vw, 9rem)";
 
 export default function Timeline() {
   const root    = useRef(null);
   const lineRef = useRef(null);
+  const scanRef = useRef(null);
 
   useGSAP(() => {
-    /* draw della linea verticale al scroll */
-    if (lineRef.current) {
-      gsap.fromTo(lineRef.current,
-        { scaleY: 0, transformOrigin: "top center" },
+    if (!lineRef.current) return;
+
+    /* Linea che cresce al scroll */
+    gsap.fromTo(lineRef.current,
+      { scaleY: 0, transformOrigin: "top center" },
+      {
+        scaleY: 1,
+        ease: "none",
+        scrollTrigger: {
+          trigger: root.current,
+          start: "top 75%",
+          end:   "bottom 25%",
+          scrub: 1.2,
+        },
+      }
+    );
+
+    /* Scan light che scende sulla linea */
+    if (scanRef.current) {
+      gsap.fromTo(scanRef.current,
+        { top: "0%", opacity: 0 },
         {
-          scaleY: 1,
+          top: "100%",
+          opacity: 1,
           ease: "none",
           scrollTrigger: {
             trigger: root.current,
-            start: "top 80%",
-            end:   "bottom 20%",
-            scrub: 1,
+            start: "top 75%",
+            end:   "bottom 25%",
+            scrub: 1.2,
           },
         }
       );
     }
 
-    const items = root.current?.querySelectorAll(".tl-item");
-    if (!items) return;
-    items.forEach((el, i) => {
+    /* Ogni item entra da sinistra */
+    root.current?.querySelectorAll(".tl-item").forEach((el) => {
       gsap.from(el, {
         opacity: 0,
-        x: -32,
-        duration: 0.75,
+        x: -24,
+        duration: 0.8,
         ease: "power3.out",
-        scrollTrigger: {
-          trigger: el,
-          start: "top 87%",
-          once: true,
-        },
+        scrollTrigger: { trigger: el, start: "top 88%", once: true },
       });
     });
   }, { scope: root });
@@ -128,173 +145,244 @@ export default function Timeline() {
       ref={root}
       style={{ padding: "8rem 2.5rem", position: "relative" }}
     >
+      <style>{`
+        @keyframes ring-pulse {
+          0%   { transform: scale(1);   opacity: 0.7; }
+          60%  { transform: scale(2.2); opacity: 0;   }
+          100% { transform: scale(2.2); opacity: 0;   }
+        }
+        @keyframes dot-live {
+          0%, 100% { opacity: 1;   box-shadow: 0 0 0 0 rgba(201,75,37,0.7); }
+          50%       { opacity: 0.7; box-shadow: 0 0 0 6px rgba(201,75,37,0); }
+        }
+        .tl-item:hover .tl-content {
+          border-left-color: rgba(201,75,37,0.4) !important;
+        }
+      `}</style>
+
       <Reveal>
-        <div
-          style={{
-            fontFamily: '"JetBrains Mono", monospace',
-            fontSize: "0.6rem",
-            letterSpacing: "0.16em",
-            textTransform: "uppercase",
-            color: "var(--signal)",
-            marginBottom: "1rem",
-          }}
-        >
+        <div style={{
+          fontFamily: '"JetBrains Mono", monospace',
+          fontSize: "0.6rem",
+          letterSpacing: "0.16em",
+          textTransform: "uppercase",
+          color: "var(--signal)",
+          marginBottom: "1rem",
+        }}>
           /// 02 — CRONOLOGIA
         </div>
-        <h2
-          className="display"
-          style={{
-            fontSize: "clamp(3rem, 8vw, 8rem)",
-            color: "var(--paper)",
-            lineHeight: 0.9,
-            marginBottom: "6rem",
-          }}
-        >
+        <h2 className="display" style={{
+          fontSize: "clamp(3rem, 8vw, 8rem)",
+          color: "var(--paper)",
+          lineHeight: 0.9,
+          marginBottom: "6rem",
+        }}>
           LA STORIA<br />
-          <span
-            style={{
-              fontFamily: '"DM Serif Display", serif',
-              fontStyle: "italic",
-              color: "var(--dim)",
-              fontSize: "0.65em",
-            }}
-          >
+          <span style={{
+            fontFamily: '"DM Serif Display", serif',
+            fontStyle: "italic",
+            color: "var(--dim)",
+            fontSize: "0.65em",
+          }}>
             dal suono al codice.
           </span>
         </h2>
       </Reveal>
 
-      {/* Timeline line */}
-      <div
-        style={{
-          position: "relative",
-          maxWidth: "940px",
-        }}
-      >
-        {/* Linea verticale sinistra — animata al scroll */}
+      <div style={{ position: "relative", maxWidth: "960px" }}>
+
+        {/* ── Linea verticale principale con glow ── */}
         <div
           ref={lineRef}
           style={{
             position: "absolute",
-            left: "clamp(3rem, 8vw, 7rem)",
+            left: LINE_LEFT,
             top: 0,
             bottom: 0,
-            width: "1px",
-            background: "linear-gradient(to bottom, var(--signal), rgba(201,75,37,0.15) 70%, transparent)",
+            width: "2px",
+            background: "linear-gradient(to bottom, var(--signal) 0%, rgba(201,75,37,0.5) 50%, rgba(201,75,37,0.1) 85%, transparent 100%)",
+            boxShadow: "0 0 12px rgba(201,75,37,0.35), 0 0 4px rgba(201,75,37,0.6)",
             transformOrigin: "top center",
+            zIndex: 1,
           }}
         />
-        {/* Linea verticale destra — simmetria */}
+
+        {/* ── Scan light in movimento ── */}
+        <div
+          ref={scanRef}
+          style={{
+            position: "absolute",
+            left: LINE_LEFT,
+            top: 0,
+            width: "2px",
+            height: "80px",
+            background: "linear-gradient(to bottom, transparent, rgba(240,237,232,0.9), transparent)",
+            filter: "blur(1px)",
+            zIndex: 2,
+            pointerEvents: "none",
+            transform: "translateX(0)",
+          }}
+        />
+
+        {/* ── Linea destra — simmetria ── */}
         <div style={{
           position: "absolute",
           right: 0,
           top: 0,
           bottom: 0,
           width: "1px",
-          background: "linear-gradient(to bottom, transparent 0%, var(--line2) 8%, var(--line2) 92%, transparent 100%)",
+          background: "linear-gradient(to bottom, transparent 0%, var(--line2) 10%, var(--line2) 90%, transparent 100%)",
           pointerEvents: "none",
         }} />
 
-        {events.map((ev, i) => (
-          <div
-            key={ev.year}
-            className="tl-item"
-            style={{
-              display: "grid",
-              gridTemplateColumns: "clamp(3rem, 8vw, 7rem) 1fr",
-              gap: "2.5rem",
-              marginBottom: "3.5rem",
-              alignItems: "start",
-            }}
-          >
-            {/* Year column */}
-            <div style={{ textAlign: "right", paddingRight: "2.5rem", position: "relative" }}>
-              {/* Dot */}
-              <div
-                className={i === events.length - 1 ? "card-alive-dot" : ""}
-                style={{
+        {events.map((ev, i) => {
+          const isLast = !!ev.isLast;
+          const isPast = i < events.length - 3;
+
+          return (
+            <div
+              key={`${ev.year}-${i}`}
+              className="tl-item"
+              style={{
+                display: "grid",
+                gridTemplateColumns: `${LINE_LEFT} 1fr`,
+                marginBottom: "3.5rem",
+                alignItems: "start",
+                position: "relative",
+              }}
+            >
+              {/* ── Year column ── */}
+              <div style={{
+                textAlign: "right",
+                paddingRight: "2rem",
+                position: "relative",
+                paddingTop: "0.15rem",
+              }}>
+                {/* Ring esterno — pulse per tutti, più forte sull'ultimo */}
+                {!isPast && (
+                  <div style={{
+                    position: "absolute",
+                    right: "-8px",
+                    top: "0.35rem",
+                    width: "14px",
+                    height: "14px",
+                    borderRadius: "50%",
+                    border: `1px solid ${isLast ? "rgba(201,75,37,0.9)" : "rgba(201,75,37,0.4)"}`,
+                    animation: `ring-pulse ${isLast ? "1.8s" : "3s"} ease-out infinite`,
+                    pointerEvents: "none",
+                  }} />
+                )}
+                {/* Dot centrale */}
+                <div style={{
                   position: "absolute",
-                  right: "-5px",
-                  top: "0.5rem",
-                  width: i === events.length - 1 ? "10px" : "8px",
-                  height: i === events.length - 1 ? "10px" : "8px",
+                  right: "-3px",
+                  top: "0.55rem",
+                  width: isLast ? "8px" : "6px",
+                  height: isLast ? "8px" : "6px",
                   borderRadius: "50%",
-                  background: i === events.length - 1 ? "var(--signal)" : "var(--faint)",
-                  border: i === events.length - 1 ? "1px solid rgba(201,75,37,0.5)" : "1px solid var(--line2)",
-                  color: "var(--signal)",
-                  animation: i === events.length - 1 ? "alive-dot 2s ease-in-out infinite" : "none",
-                }}
-              />
-              <span
-                style={{
+                  background: isLast ? "var(--signal)" : isPast ? "var(--faint)" : "rgba(201,75,37,0.7)",
+                  boxShadow: isLast ? "0 0 8px rgba(201,75,37,0.8)" : "none",
+                  animation: isLast ? "dot-live 2s ease-in-out infinite" : "none",
+                  zIndex: 3,
+                }} />
+                {/* Connettore orizzontale */}
+                <div style={{
+                  position: "absolute",
+                  right: 0,
+                  top: "0.78rem",
+                  width: "1.8rem",
+                  height: "1px",
+                  background: isLast
+                    ? "linear-gradient(to right, var(--signal), transparent)"
+                    : "linear-gradient(to right, var(--line2), transparent)",
+                }} />
+
+                <span style={{
                   fontFamily: '"JetBrains Mono", monospace',
-                  fontSize: "0.62rem",
-                  letterSpacing: "0.08em",
-                  color: "var(--dim)",
+                  fontSize: "0.65rem",
+                  letterSpacing: "0.06em",
+                  color: isLast ? "var(--paper)" : isPast ? "var(--faint)" : "var(--dim)",
                   display: "block",
                   lineHeight: 1.2,
+                  fontVariantNumeric: "tabular-nums",
+                }}>
+                  {ev.year}
+                </span>
+              </div>
+
+              {/* ── Content column ── */}
+              <div
+                className="tl-content"
+                style={{
+                  paddingLeft: "2rem",
+                  borderLeft: `1px solid ${isLast ? "rgba(201,75,37,0.2)" : "transparent"}`,
+                  transition: "border-left-color 0.3s",
                 }}
               >
-                {ev.year}
-              </span>
-            </div>
-
-            {/* Content column */}
-            <div>
-              <div
-                style={{
+                {/* Label badge */}
+                <div style={{
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "0.4rem",
                   fontFamily: '"JetBrains Mono", monospace',
-                  fontSize: "0.52rem",
-                  letterSpacing: "0.18em",
+                  fontSize: "0.5rem",
+                  letterSpacing: "0.2em",
                   textTransform: "uppercase",
                   color: "var(--signal)",
-                  marginBottom: "0.3rem",
-                }}
-              >
-                {ev.label}
-              </div>
-              <h3
-                className="display"
-                style={{
-                  fontSize: "clamp(1.2rem, 2.5vw, 2rem)",
+                  border: "1px solid rgba(201,75,37,0.25)",
+                  borderRadius: "2px",
+                  padding: "0.15rem 0.5rem",
+                  marginBottom: "0.5rem",
+                }}>
+                  <span style={{
+                    width: "3px",
+                    height: "3px",
+                    borderRadius: "50%",
+                    background: "var(--signal)",
+                    display: "inline-block",
+                    flexShrink: 0,
+                  }} />
+                  {ev.label}
+                </div>
+
+                <h3 className="display" style={{
+                  fontSize: "clamp(1.1rem, 2.2vw, 1.85rem)",
                   color: "var(--paper)",
-                  marginBottom: "0.6rem",
-                  lineHeight: 1,
-                }}
-              >
-                {ev.title}
-              </h3>
-              <p
-                style={{
+                  marginBottom: "0.55rem",
+                  lineHeight: 1.0,
+                }}>
+                  {ev.title}
+                </h3>
+                <p style={{
                   fontFamily: '"Outfit", sans-serif',
                   fontWeight: 300,
-                  fontSize: "0.88rem",
+                  fontSize: "0.87rem",
                   color: "var(--dim)",
-                  lineHeight: 1.68,
-                  maxWidth: "38rem",
+                  lineHeight: 1.72,
+                  maxWidth: "36rem",
                   marginBottom: ev.image ? "1rem" : 0,
-                }}
-              >
-                {ev.desc}
-              </p>
-              {ev.image && (
-                <div style={{
-                  maxWidth: "38rem",
-                  borderRadius: "2px",
-                  overflow: "hidden",
-                  border: "1px solid var(--line2)",
-                  marginTop: "0.8rem",
                 }}>
-                  <img
-                    src={ev.image}
-                    alt={ev.title}
-                    style={{ width: "100%", display: "block", objectFit: "cover", maxHeight: "220px" }}
-                  />
-                </div>
-              )}
+                  {ev.desc}
+                </p>
+                {ev.image && (
+                  <div style={{
+                    maxWidth: "36rem",
+                    borderRadius: "2px",
+                    overflow: "hidden",
+                    border: "1px solid var(--line2)",
+                    marginTop: "0.8rem",
+                  }}>
+                    <img
+                      src={ev.image}
+                      alt={ev.title}
+                      style={{ width: "100%", display: "block", objectFit: "cover", maxHeight: "200px" }}
+                    />
+                  </div>
+                )}
+              </div>
             </div>
-          </div>
-        ))}
+          );
+        })}
       </div>
     </section>
   );
