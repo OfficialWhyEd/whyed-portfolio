@@ -13,6 +13,7 @@
   --signal2: #e8603a;
   --line:    rgba(255,255,255,0.06);
   --line2:   rgba(255,255,255,0.1);
+  --tl-left: clamp(5.5rem, 10vw, 9rem);
 }
 
 /* ── Base ──────────────────────────────────────────────────────── */
@@ -265,10 +266,11 @@ html.lenis { height: auto; }
 /* ── Mobile (iPhone first) ─────────────────────────────────────── */
 @media (max-width: 768px) {
 
-  /* Alza tutti i colori dimmed su mobile per leggibilità */
+  /* Token mobile — colori più luminosi + timeline più stretta */
   :root {
-    --dim:   #d0cdc8;
-    --faint: #a8a5a0;
+    --dim:     #d0cdc8;
+    --faint:   #a8a5a0;
+    --tl-left: 3.8rem;
   }
 
   /* Hero — portrait full-bleed, molto trasparente */
@@ -333,22 +335,26 @@ html.lenis { height: auto; }
 
   /* Timeline */
   #cronologia {
-    padding: 5rem 1.25rem !important;
+    padding: 4rem 1.1rem !important;
   }
   .tl-item {
-    grid-template-columns: 3.2rem 1fr !important;
-    gap: 0.75rem !important;
-    margin-bottom: 2.5rem !important;
+    grid-template-columns: var(--tl-left) 1fr !important;
+    margin-bottom: 2.2rem !important;
   }
-  /* Anno nella timeline — leggibile */
-  .tl-item span[style] {
-    color: var(--dim) !important;
-    font-size: 0.6rem !important;
+  .tl-content {
+    padding-left: 1rem !important;
   }
-  /* Desc nella timeline */
-  .tl-item p {
-    font-size: 0.84rem !important;
+  #cronologia h3.display {
+    font-size: clamp(1rem, 4.5vw, 1.4rem) !important;
+  }
+  #cronologia p {
+    font-size: 0.82rem !important;
+    line-height: 1.6 !important;
     color: var(--dim) !important;
+  }
+  /* Linea destra nascosta su mobile */
+  #cronologia > div > div:nth-child(3) {
+    display: none !important;
   }
 
   /* About — una foto */
@@ -376,11 +382,7 @@ html.lenis { height: auto; }
 
 /* ── iPhone SE / piccoli (max 390px) ──────────────────────────── */
 @media (max-width: 390px) {
-  #top {
-    padding: 5rem 1rem 1.5rem !important;
-  }
-  .tl-item {
-    grid-template-columns: 2.8rem 1fr !important;
-    gap: 0.5rem !important;
-  }
+  :root { --tl-left: 3.2rem; }
+  #top { padding: 5rem 1rem 1.5rem !important; }
+  #cronologia { padding: 3.5rem 0.9rem !important; }
 }

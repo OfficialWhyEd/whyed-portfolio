@@ -84,7 +84,7 @@ const events = [
   },
 ];
 
-const LINE_LEFT = "clamp(5.5rem, 10vw, 9rem)";
+const LINE_LEFT = "var(--tl-left)";
 
 export default function Timeline() {
   const root    = useRef(null);
