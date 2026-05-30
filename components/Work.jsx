@@ -267,7 +267,7 @@ function ProjectCard({ p, i, featured = false, wide = false }) {
     }
   }, []);
 
-  const thumbH = featured ? 240 : wide ? 220 : 180;
+  const thumbH = featured ? 320 : wide ? 220 : 180;
 
   return (
     <Reveal delay={i * 0.05}>
@@ -282,8 +282,8 @@ function ProjectCard({ p, i, featured = false, wide = false }) {
           background: "rgba(255,255,255,0.015)",
           border: `1px solid ${hovered ? `${vis.hue}66` : "var(--line)"}`,
           clipPath: "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 16px 100%, 0 calc(100% - 16px))",
-          transition: "border-color 0.3s ease",
-          willChange: "transform",
+          transition: "border-color 0.3s ease, transform 0.15s ease",
+          cursor: "pointer",
         }}
       >
         {/* Spotlight interno */}

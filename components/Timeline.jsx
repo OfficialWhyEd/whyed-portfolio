@@ -246,7 +246,7 @@ export default function Timeline() {
               style={{
                 display: "grid",
                 gridTemplateColumns: `${LINE_LEFT} 1fr`,
-                marginBottom: "3.5rem",
+                marginBottom: isLast ? "0" : ["VITTORIA", "FORMAZIONE", "ECOSISTEMA", "DEVELOPER"].includes(ev.label) ? "5.5rem" : "3.5rem",
                 alignItems: "start",
                 position: "relative",
               }}
@@ -299,12 +299,13 @@ export default function Timeline() {
 
                 <span style={{
                   fontFamily: '"JetBrains Mono", monospace',
-                  fontSize: "0.65rem",
-                  letterSpacing: "0.06em",
-                  color: isLast ? "var(--paper)" : isPast ? "var(--faint)" : "var(--dim)",
+                  fontSize: "0.82rem",
+                  letterSpacing: "0.04em",
+                  color: isLast ? "var(--signal)" : isPast ? "var(--dim)" : "var(--paper)",
                   display: "block",
                   lineHeight: 1.2,
                   fontVariantNumeric: "tabular-nums",
+                  fontWeight: isLast ? 500 : 400,
                 }}>
                   {ev.year}
                 </span>
@@ -325,30 +326,31 @@ export default function Timeline() {
                 </span>
 
                 {/* Label badge */}
-                <div style={{
-                  display: "inline-flex",
-                  alignItems: "center",
-                  gap: "0.4rem",
-                  fontFamily: '"JetBrains Mono", monospace',
-                  fontSize: "0.5rem",
-                  letterSpacing: "0.2em",
-                  textTransform: "uppercase",
-                  color: "var(--signal)",
-                  border: "1px solid rgba(201,75,37,0.25)",
-                  borderRadius: "2px",
-                  padding: "0.15rem 0.5rem",
-                  marginBottom: "0.5rem",
-                }}>
-                  <span style={{
-                    width: "3px",
-                    height: "3px",
-                    borderRadius: "50%",
-                    background: "var(--signal)",
-                    display: "inline-block",
-                    flexShrink: 0,
-                  }} />
-                  {ev.label}
-                </div>
+                {(() => {
+                  const accent = ev.label === "VITTORIA" ? "#c9a025"
+                    : ev.label === "ECOSISTEMA" || ev.label === "DEVELOPER" ? "var(--signal)"
+                    : ev.label === "FORMAZIONE" ? "#4a9eba"
+                    : "var(--signal)";
+                  return (
+                    <div style={{
+                      display: "inline-flex",
+                      alignItems: "center",
+                      gap: "0.4rem",
+                      fontFamily: '"JetBrains Mono", monospace',
+                      fontSize: "0.5rem",
+                      letterSpacing: "0.2em",
+                      textTransform: "uppercase",
+                      color: accent,
+                      border: `1px solid ${accent}40`,
+                      borderRadius: "2px",
+                      padding: "0.15rem 0.5rem",
+                      marginBottom: "0.5rem",
+                    }}>
+                      <span style={{ width: "3px", height: "3px", borderRadius: "50%", background: accent, display: "inline-block", flexShrink: 0 }} />
+                      {ev.label}
+                    </div>
+                  );
+                })()}
 
                 <h3 className="display" style={{
                   fontSize: "clamp(1.1rem, 2.2vw, 1.85rem)",

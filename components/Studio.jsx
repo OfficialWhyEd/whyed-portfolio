@@ -1,6 +1,40 @@
 "use client";
+import { useState } from "react";
 import Reveal from "./Reveal";
 import IconGrid from "./IconGrid";
+
+function HardwareRow({ h, i }) {
+  const [hov, setHov] = useState(false);
+  return (
+    <div
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      style={{
+        display: "grid",
+        gridTemplateColumns: "1fr auto",
+        alignItems: "baseline",
+        padding: "1rem 0.6rem",
+        margin: "0 -0.6rem",
+        borderBottom: "1px solid var(--line)",
+        background: hov ? "rgba(201,75,37,0.04)" : "transparent",
+        transition: "background 0.2s",
+        gap: "1rem",
+      }}
+    >
+      <div>
+        <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: "0.72rem", color: hov ? "var(--paper)" : "var(--paper)", letterSpacing: "0.06em", marginBottom: "0.2rem", transition: "color 0.2s" }}>
+          {h.name}
+        </div>
+        <div style={{ fontFamily: '"Outfit", sans-serif', fontSize: "0.78rem", color: "var(--dim)", fontWeight: 300 }}>
+          {h.detail}
+        </div>
+      </div>
+      <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: "0.52rem", color: hov ? "var(--signal)" : "var(--faint)", letterSpacing: "0.1em", flexShrink: 0, transition: "color 0.2s" }}>
+        {String(i + 1).padStart(2, "0")}
+      </span>
+    </div>
+  );
+}
 
 const hardware = [
   { name: "Audient Interface", detail: "Conversione A/D + preamp microfonico" },
@@ -93,66 +127,21 @@ export default function Studio() {
         {/* Hardware */}
         <Reveal>
           <div>
-            <div
-              style={{
-                fontFamily: '"JetBrains Mono", monospace',
-                fontSize: "0.58rem",
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-                color: "var(--faint)",
-                marginBottom: "1.5rem",
-              }}
-            >
+            <div style={{
+              fontFamily: '"JetBrains Mono", monospace',
+              fontSize: "0.58rem",
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "var(--dim)",
+              marginBottom: "0.8rem",
+              paddingTop: "0.6rem",
+              borderTop: "1px solid var(--line2)",
+            }}>
               HARDWARE
             </div>
             <div>
               {hardware.map((h, i) => (
-                <div
-                  key={h.name}
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr auto",
-                    alignItems: "baseline",
-                    padding: "1rem 0",
-                    borderBottom: "1px solid var(--line)",
-                    gap: "1rem",
-                  }}
-                >
-                  <div>
-                    <div
-                      style={{
-                        fontFamily: '"JetBrains Mono", monospace',
-                        fontSize: "0.72rem",
-                        color: "var(--paper)",
-                        letterSpacing: "0.06em",
-                        marginBottom: "0.2rem",
-                      }}
-                    >
-                      {h.name}
-                    </div>
-                    <div
-                      style={{
-                        fontFamily: '"Outfit", sans-serif',
-                        fontSize: "0.78rem",
-                        color: "var(--dim)",
-                        fontWeight: 300,
-                      }}
-                    >
-                      {h.detail}
-                    </div>
-                  </div>
-                  <span
-                    style={{
-                      fontFamily: '"JetBrains Mono", monospace',
-                      fontSize: "0.52rem",
-                      color: "var(--faint)",
-                      letterSpacing: "0.1em",
-                      flexShrink: 0,
-                    }}
-                  >
-                    {String(i + 1).padStart(2, "0")}
-                  </span>
-                </div>
+                <HardwareRow key={h.name} h={h} i={i} />
               ))}
             </div>
 
@@ -200,16 +189,16 @@ export default function Studio() {
         <Reveal delay={0.12}>
           {/* Skills */}
           <div>
-            <div
-              style={{
-                fontFamily: '"JetBrains Mono", monospace',
-                fontSize: "0.58rem",
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-                color: "var(--faint)",
-                marginBottom: "1rem",
-              }}
-            >
+            <div style={{
+              fontFamily: '"JetBrains Mono", monospace',
+              fontSize: "0.58rem",
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "var(--dim)",
+              marginBottom: "0.8rem",
+              paddingTop: "0.6rem",
+              borderTop: "1px solid var(--line2)",
+            }}>
               COMPETENZE
             </div>
             <div
@@ -239,16 +228,16 @@ export default function Studio() {
             </div>
 
             {/* Generi */}
-            <div
-              style={{
-                fontFamily: '"JetBrains Mono", monospace',
-                fontSize: "0.58rem",
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-                color: "var(--faint)",
-                marginBottom: "1rem",
-              }}
-            >
+            <div style={{
+              fontFamily: '"JetBrains Mono", monospace',
+              fontSize: "0.58rem",
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "var(--dim)",
+              marginBottom: "0.8rem",
+              paddingTop: "0.6rem",
+              borderTop: "1px solid var(--line2)",
+            }}>
               GENERI
             </div>
             <div
@@ -278,49 +267,42 @@ export default function Studio() {
             </div>
 
             {/* Riferimenti */}
-            <div
-              style={{
-                fontFamily: '"JetBrains Mono", monospace',
-                fontSize: "0.58rem",
-                letterSpacing: "0.18em",
-                textTransform: "uppercase",
-                color: "var(--faint)",
-                marginBottom: "1.2rem",
-              }}
-            >
+            <div style={{
+              fontFamily: '"JetBrains Mono", monospace',
+              fontSize: "0.58rem",
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "var(--dim)",
+              marginBottom: "0.8rem",
+              paddingTop: "0.6rem",
+              borderTop: "1px solid var(--line2)",
+            }}>
               RIFERIMENTI ARTISTICI
             </div>
-            <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
-              {refs.map((r) => (
-                <div
-                  key={r.name}
-                  style={{
-                    display: "flex",
-                    alignItems: "baseline",
-                    gap: "1.5rem",
-                    borderBottom: "1px solid var(--line)",
-                    paddingBottom: "1rem",
-                  }}
-                >
-                  <span
-                    className="display"
-                    style={{
-                      fontSize: "clamp(1.2rem, 2vw, 1.6rem)",
-                      color: "var(--paper)",
-                      lineHeight: 1,
-                      flexShrink: 0,
-                    }}
-                  >
+            <div style={{ display: "flex", flexDirection: "column" }}>
+              {refs.map((r, i) => (
+                <div key={r.name} style={{
+                  borderTop: i === 0 ? "none" : "1px solid var(--line)",
+                  paddingTop: "1.4rem",
+                  paddingBottom: "1.4rem",
+                }}>
+                  <span className="display" style={{
+                    fontSize: "clamp(2rem, 4.5vw, 3.8rem)",
+                    color: "var(--paper)",
+                    lineHeight: 0.92,
+                    display: "block",
+                    marginBottom: "0.4rem",
+                    letterSpacing: "0.02em",
+                  }}>
                     {r.name}
                   </span>
-                  <span
-                    style={{
-                      fontFamily: '"Outfit", sans-serif',
-                      fontSize: "0.78rem",
-                      color: "var(--dim)",
-                      fontWeight: 300,
-                    }}
-                  >
+                  <span style={{
+                    fontFamily: '"Outfit", sans-serif',
+                    fontSize: "0.8rem",
+                    color: "var(--dim)",
+                    fontWeight: 300,
+                    letterSpacing: "0.02em",
+                  }}>
                     {r.role}
                   </span>
                 </div>
