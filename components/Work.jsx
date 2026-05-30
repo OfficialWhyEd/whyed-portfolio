@@ -245,7 +245,179 @@ function ProjectThumb({ id, hue, pattern, h = 180 }) {
   );
 }
 
-/* ── Card con 3D tilt + gallery cycling ── */
+/* ── Gallery helper condiviso ── */
+function GalleryImgs({ screens, imgData, imgIdx, hovered, scale = false }) {
+  return screens.map((src, di) => (
+    <img key={src} src={src} alt=""
+      style={{
+        position: "absolute", inset: 0, width: "100%", height: "100%",
+        objectFit: imgData?.fit || "cover",
+        objectPosition: "center top",
+        display: "block",
+        padding: imgData?.pad ? "1.5rem" : "0",
+        opacity: di === imgIdx ? 1 : 0,
+        transition: "opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.6s cubic-bezier(0.16,1,0.3,1)",
+        transform: scale && hovered ? "scale(1.04)" : "scale(1)",
+        zIndex: di === imgIdx ? 1 : 0,
+      }}
+    />
+  ));
+}
+
+function GalleryDots({ screens, imgIdx, setImgIdx, hue }) {
+  if (screens.length <= 1) return null;
+  return (
+    <div style={{ position: "absolute", bottom: "0.7rem", right: "0.7rem", display: "flex", gap: "4px", zIndex: 3 }}>
+      {screens.map((_, di) => (
+        <div key={di} onClick={e => { e.stopPropagation(); setImgIdx(di); }}
+          style={{
+            width: di === imgIdx ? "14px" : "4px", height: "4px", borderRadius: "2px",
+            background: di === imgIdx ? hue : "rgba(255,255,255,0.35)",
+            transition: "all 0.3s cubic-bezier(0.16,1,0.3,1)", cursor: "pointer",
+          }}
+        />
+      ))}
+    </div>
+  );
+}
+
+/* ── Featured card — layout ORIZZONTALE ── */
+function FeaturedCard({ p, i }) {
+  const [hovered, setHovered] = useState(false);
+  const [imgIdx, setImgIdx] = useState(0);
+  const vis = visuals[p.id] || { hue: "#c94b25", pattern: "waveform" };
+  const imgData = images[p.id];
+  const screens = imgData?.screens || [];
+
+  useEffect(() => {
+    if (screens.length <= 1) return;
+    const id = setInterval(() => setImgIdx(n => (n + 1) % screens.length), 3500);
+    return () => clearInterval(id);
+  }, [screens.length]);
+
+  return (
+    <Reveal delay={i * 0.05}>
+      <article
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        style={{
+          display: "grid",
+          gridTemplateColumns: "58% 42%",
+          minHeight: "400px",
+          border: `1px solid ${hovered ? `${vis.hue}55` : "var(--line)"}`,
+          background: "rgba(255,255,255,0.012)",
+          transition: "border-color 0.3s",
+          cursor: "pointer",
+          position: "relative",
+          overflow: "hidden",
+        }}
+      >
+        {/* Immagine sinistra */}
+        <div style={{
+          position: "relative", overflow: "hidden",
+          background: imgData?.bg || "var(--void2)",
+          borderRight: `1px solid ${hovered ? `${vis.hue}33` : "var(--line)"}`,
+        }}>
+          <GalleryImgs screens={screens} imgData={imgData} imgIdx={imgIdx} hovered={hovered} scale />
+          <GalleryDots screens={screens} imgIdx={imgIdx} setImgIdx={setImgIdx} hue={vis.hue} />
+          {imgData?.icon && (
+            <div style={{ position: "absolute", bottom: "0.8rem", left: "0.8rem", width: "44px", height: "44px", borderRadius: "10px", overflow: "hidden", border: "1px solid rgba(255,255,255,0.15)", zIndex: 2 }}>
+              <img src={imgData.icon} alt="" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+            </div>
+          )}
+        </div>
+
+        {/* Contenuto destra */}
+        <div style={{ padding: "2.8rem 2.5rem", display: "flex", flexDirection: "column", justifyContent: "space-between", position: "relative", zIndex: 2 }}>
+          <div>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", marginBottom: "1.8rem" }}>
+              <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: "0.54rem", color: vis.hue, letterSpacing: "0.14em" }}>{p.id}</span>
+              <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: "0.54rem", color: "var(--dim)", letterSpacing: "0.1em" }}>{p.year}</span>
+            </div>
+            <h3 className="display" style={{ fontSize: "clamp(2.2rem, 3.8vw, 4rem)", color: hovered ? vis.hue : "var(--paper)", lineHeight: 0.92, marginBottom: "1rem", transition: "color 0.3s" }}>
+              <HyperText text={p.title} />
+            </h3>
+            <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: "0.52rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--dim)", marginBottom: "1.2rem" }}>
+              {p.type}
+            </div>
+            <p style={{ fontFamily: '"Outfit", sans-serif', fontWeight: 300, fontSize: "0.88rem", color: "var(--dim)", lineHeight: 1.7 }}>
+              {p.desc}
+            </p>
+          </div>
+          <div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.3rem", marginBottom: "1rem" }}>
+              {p.tags.map(t => (
+                <span key={t} style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: "0.5rem", letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--dim)", border: "1px solid var(--line)", padding: "0.2rem 0.5rem" }}>
+                  {t}
+                </span>
+              ))}
+            </div>
+            <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: "0.56rem", color: vis.hue, letterSpacing: "0.08em", textTransform: "uppercase" }}>
+              {p.role} →
+            </span>
+          </div>
+        </div>
+      </article>
+    </Reveal>
+  );
+}
+
+/* ── Music row — lista editoriale ── */
+function MusicRow({ p, i }) {
+  const [hovered, setHovered] = useState(false);
+  const [imgIdx, setImgIdx] = useState(0);
+  const vis = visuals[p.id] || { hue: "#c94b25", pattern: "waveform" };
+  const imgData = images[p.id];
+  const screens = imgData?.screens || [];
+
+  useEffect(() => {
+    if (screens.length <= 1) return;
+    const id = setInterval(() => setImgIdx(n => (n + 1) % screens.length), 3500);
+    return () => clearInterval(id);
+  }, [screens.length]);
+
+  return (
+    <Reveal delay={i * 0.04}>
+      <div
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+        style={{
+          display: "grid",
+          gridTemplateColumns: "3rem 1fr auto",
+          gap: "2rem",
+          padding: "2rem 0",
+          borderTop: "1px solid var(--line)",
+          alignItems: "center",
+          cursor: "pointer",
+          transition: "opacity 0.3s",
+          opacity: hovered ? 1 : 0.7,
+        }}
+      >
+        <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: "0.52rem", color: vis.hue, letterSpacing: "0.1em" }}>
+          {p.id}
+        </span>
+        <div>
+          <h3 className="display" style={{ fontSize: "clamp(1.6rem, 3.2vw, 2.8rem)", color: hovered ? vis.hue : "var(--paper)", lineHeight: 0.95, marginBottom: "0.5rem", transition: "color 0.3s" }}>
+            {p.title}
+          </h3>
+          <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: "0.5rem", color: "var(--dim)", letterSpacing: "0.1em", textTransform: "uppercase", marginBottom: "0.4rem" }}>
+            {p.type} · {p.year}
+          </div>
+          <p style={{ fontFamily: '"Outfit", sans-serif', fontWeight: 300, fontSize: "0.82rem", color: "var(--dim)", lineHeight: 1.6, maxWidth: "44rem" }}>
+            {p.desc}
+          </p>
+        </div>
+        {screens.length > 0 && (
+          <div style={{ width: "130px", height: "90px", overflow: "hidden", flexShrink: 0, position: "relative", background: imgData?.bg || "var(--void2)" }}>
+            <GalleryImgs screens={screens} imgData={imgData} imgIdx={imgIdx} hovered={hovered} />
+          </div>
+        )}
+      </div>
+    </Reveal>
+  );
+}
+
+/* ── Card griglia dev — 3D tilt + gallery cycling ── */
 function ProjectCard({ p, i, featured = false, wide = false }) {
   const cardRef = useRef(null);
   const [hovered, setHovered] = useState(false);
@@ -324,53 +496,8 @@ function ProjectCard({ p, i, featured = false, wide = false }) {
         >
           {screens.length > 0 ? (
             <>
-              {screens.map((src, di) => (
-                <img
-                  key={src}
-                  src={src}
-                  alt={di === 0 ? p.title : ""}
-                  style={{
-                    position: "absolute",
-                    inset: 0,
-                    width: "100%",
-                    height: "100%",
-                    objectFit: imgData.fit,
-                    objectPosition: "center top",
-                    display: "block",
-                    padding: imgData.pad ? "1.5rem" : "0",
-                    opacity: di === imgIdx ? 1 : 0,
-                    transition: "opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.6s cubic-bezier(0.16,1,0.3,1)",
-                    transform: hovered ? "scale(1.03)" : "scale(1)",
-                    zIndex: di === imgIdx ? 1 : 0,
-                  }}
-                />
-              ))}
-              {/* Dot gallery indicator */}
-              {screens.length > 1 && (
-                <div style={{
-                  position: "absolute",
-                  bottom: "0.7rem",
-                  right: "0.7rem",
-                  display: "flex",
-                  gap: "4px",
-                  zIndex: 3,
-                }}>
-                  {screens.map((_, di) => (
-                    <div
-                      key={di}
-                      onClick={e => { e.stopPropagation(); setImgIdx(di); }}
-                      style={{
-                        width: di === imgIdx ? "14px" : "4px",
-                        height: "4px",
-                        borderRadius: "2px",
-                        background: di === imgIdx ? vis.hue : "rgba(255,255,255,0.35)",
-                        transition: "all 0.3s cubic-bezier(0.16,1,0.3,1)",
-                        cursor: "pointer",
-                      }}
-                    />
-                  ))}
-                </div>
-              )}
+              <GalleryImgs screens={screens} imgData={imgData} imgIdx={imgIdx} hovered={hovered} scale />
+              <GalleryDots screens={screens} imgIdx={imgIdx} setImgIdx={setImgIdx} hue={vis.hue} />
             </>
           ) : (
             <ProjectThumb id={p.id} hue={vis.hue} pattern={vis.pattern} h={thumbH} />
@@ -489,39 +616,31 @@ function ProjectCard({ p, i, featured = false, wide = false }) {
   );
 }
 
-/* pattern asimmetrico DESIGN_VARIANCE 8: span 2 ogni 3 item */
 const spanPattern = [2, 1, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1];
 
-/* ── Sezione con layout bento ── */
-function Section({ label, sectionNum, projects }) {
-  const [featured, ...rest] = projects;
-
+function SectionHeader({ label, sectionNum }) {
   return (
-    <div style={{ marginBottom: "7rem" }}>
-      <Reveal>
-        <div style={{ display: "flex", alignItems: "baseline", gap: "1.5rem", marginBottom: "3rem" }}>
-          <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: "0.58rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--signal)" }}>
-            /// {sectionNum}
-          </span>
-          <h2 className="display" style={{ fontSize: "clamp(2rem, 6vw, 5.5rem)", color: "var(--paper)" }}>
-            {label}
-          </h2>
-        </div>
-      </Reveal>
+    <Reveal>
+      <div style={{ display: "flex", alignItems: "baseline", gap: "1.5rem", marginBottom: "3rem" }}>
+        <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: "0.58rem", letterSpacing: "0.16em", textTransform: "uppercase", color: "var(--signal)" }}>
+          /// {sectionNum}
+        </span>
+        <h2 className="display" style={{ fontSize: "clamp(2rem, 6vw, 5.5rem)", color: "var(--paper)" }}>
+          {label}
+        </h2>
+      </div>
+    </Reveal>
+  );
+}
 
-      {/* Featured card (prima, intera larghezza) */}
-      {featured && (
-        <div style={{ marginBottom: "1.2rem" }}>
-          <ProjectCard p={featured} i={0} featured />
-        </div>
-      )}
-
-      {/* Griglia asimmetrica 3 colonne */}
-      <div className="work-grid" style={{
-        display: "grid",
-        gridTemplateColumns: "repeat(3, 1fr)",
-        gap: "1.2rem",
-      }}>
+/* ── Dev section: featured orizzontale + griglia asimmetrica ── */
+function DevSection({ label, sectionNum, projects }) {
+  const [featured, ...rest] = projects;
+  return (
+    <div style={{ marginBottom: "8rem" }}>
+      <SectionHeader label={label} sectionNum={sectionNum} />
+      {featured && <div style={{ marginBottom: "1.2rem" }}><FeaturedCard p={featured} i={0} /></div>}
+      <div className="work-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.2rem" }}>
         {rest.map((p, i) => {
           const span = spanPattern[i] ?? 1;
           return (
@@ -535,11 +654,24 @@ function Section({ label, sectionNum, projects }) {
   );
 }
 
+/* ── Music section: lista editoriale numerata ── */
+function MusicSection({ label, sectionNum, projects }) {
+  return (
+    <div style={{ marginBottom: "7rem" }}>
+      <SectionHeader label={label} sectionNum={sectionNum} />
+      <div>
+        {projects.map((p, i) => <MusicRow key={p.id} p={p} i={i} />)}
+        <div style={{ borderTop: "1px solid var(--line)" }} />
+      </div>
+    </div>
+  );
+}
+
 export default function Work() {
   return (
     <section id="lavori" style={{ padding: "8rem 2.5rem", position: "relative" }}>
-      <Section label="PROGETTI SOFTWARE" sectionNum="01 — SVILUPPO" projects={devProjects} />
-      <Section label="MUSICA & DISCOGRAFIA" sectionNum="02 — AUDIO" projects={musicProjects} />
+      <DevSection label="PROGETTI SOFTWARE" sectionNum="01 — SVILUPPO" projects={devProjects} />
+      <MusicSection label="MUSICA & DISCOGRAFIA" sectionNum="02 — AUDIO" projects={musicProjects} />
     </section>
   );
 }

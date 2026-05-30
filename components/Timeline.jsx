@@ -299,13 +299,13 @@ export default function Timeline() {
 
                 <span style={{
                   fontFamily: '"JetBrains Mono", monospace',
-                  fontSize: "0.82rem",
-                  letterSpacing: "0.04em",
+                  fontSize: "clamp(1rem, 1.8vw, 1.5rem)",
+                  letterSpacing: "0.02em",
                   color: isLast ? "var(--signal)" : isPast ? "var(--dim)" : "var(--paper)",
                   display: "block",
-                  lineHeight: 1.2,
+                  lineHeight: 1,
                   fontVariantNumeric: "tabular-nums",
-                  fontWeight: isLast ? 500 : 400,
+                  fontWeight: isLast ? 600 : 400,
                 }}>
                   {ev.year}
                 </span>
@@ -353,7 +353,9 @@ export default function Timeline() {
                 })()}
 
                 <h3 className="display" style={{
-                  fontSize: "clamp(1.1rem, 2.2vw, 1.85rem)",
+                  fontSize: ["VITTORIA","FORMAZIONE","ECOSISTEMA","DEVELOPER"].includes(ev.label)
+                    ? "clamp(1.4rem, 2.8vw, 2.4rem)"
+                    : "clamp(1.1rem, 2.2vw, 1.85rem)",
                   color: "var(--paper)",
                   marginBottom: "0.55rem",
                   lineHeight: 1.0,
