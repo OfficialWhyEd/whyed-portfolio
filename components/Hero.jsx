@@ -20,28 +20,39 @@ export default function Hero({ ready }) {
     gsap.to(nameEl.current, { x, y, duration: 1.1, ease: "power2.out" });
   }, []);
 
+  // Nasconde subito gli elementi prima ancora che ready sia true
+  useGSAP(() => {
+    if (ready) return;
+    gsap.set(".h-eyebrow span", { opacity: 0, y: 14 });
+    gsap.set(".h-first",        { yPercent: 108 });
+    gsap.set(".h-second",       { yPercent: 108 });
+    gsap.set(".h-tags span",    { opacity: 0, x: -16 });
+    gsap.set(".h-tagline",      { opacity: 0, y: 12 });
+    gsap.set(".h-coord",        { opacity: 0 });
+  }, { scope: root, dependencies: [ready] });
+
   useGSAP(() => {
     if (!ready) return;
 
-    const tl = gsap.timeline({ defaults: { ease: "power4.out" } });
-    tl.from(".h-eyebrow span", {
-      opacity: 0, y: 14, stagger: 0.07, duration: 0.7,
-    })
-      .from(".h-first", {
-        yPercent: 108, duration: 1.3, ease: "power4.out",
-      }, "-=0.3")
-      .from(".h-second", {
-        yPercent: 108, duration: 1.15, ease: "power4.out",
-      }, "-=0.95")
-      .from(".h-tags span", {
-        opacity: 0, x: -16, stagger: 0.09, duration: 0.7,
-      }, "-=0.5")
-      .from(".h-tagline", {
-        opacity: 0, y: 12, duration: 0.9,
-      }, "-=0.45")
-      .from(".h-coord", {
-        opacity: 0, duration: 0.9, stagger: 0.12,
-      }, "-=0.6");
+    // gsap.set istantaneo garantisce stato iniziale corretto senza flash
+    gsap.set(".h-eyebrow span", { opacity: 0, y: 14 });
+    gsap.set(".h-first",        { yPercent: 108 });
+    gsap.set(".h-second",       { yPercent: 108 });
+    gsap.set(".h-tags span",    { opacity: 0, x: -16 });
+    gsap.set(".h-tagline",      { opacity: 0, y: 12 });
+    gsap.set(".h-coord",        { opacity: 0 });
+
+    const tl = gsap.timeline({
+      delay: 0.1,
+      defaults: { ease: "power4.out" },
+    });
+
+    tl.to(".h-eyebrow span", { opacity: 1, y: 0, stagger: 0.07, duration: 0.75 })
+      .to(".h-first",  { yPercent: 0, duration: 1.35 }, "-=0.35")
+      .to(".h-second", { yPercent: 0, duration: 1.15 }, "-=1.0")
+      .to(".h-tags span", { opacity: 1, x: 0, stagger: 0.09, duration: 0.7 }, "-=0.5")
+      .to(".h-tagline",   { opacity: 1, y: 0, duration: 0.9 }, "-=0.45")
+      .to(".h-coord",     { opacity: 1, stagger: 0.12, duration: 0.9 }, "-=0.6");
 
     const el = root.current;
     el?.addEventListener("mousemove", onMouseMove);
