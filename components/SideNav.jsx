@@ -131,7 +131,7 @@ export default function SideNav() {
                   fontSize: "0.52rem",
                   letterSpacing: "0.14em",
                   textTransform: "uppercase",
-                  color: isActive ? "var(--paper)" : "var(--faint)",
+                  color: isActive ? "var(--paper)" : "#9ea1ac",
                   whiteSpace: "nowrap",
                   transition: "color 0.3s",
                   display: "block",
@@ -152,8 +152,8 @@ export default function SideNav() {
                   background: isActive
                     ? "var(--signal)"
                     : isPast
-                    ? "rgba(255,255,255,0.3)"
-                    : "rgba(255,255,255,0.12)",
+                    ? "rgba(255,255,255,0.5)"
+                    : "rgba(255,255,255,0.25)",
                   transition: "all 0.4s cubic-bezier(0.16,1,0.3,1)",
                   cursor: "pointer",
                   zIndex: 1,
