@@ -105,13 +105,16 @@ export default function Hero({ ready }) {
         style={{
           position: "absolute",
           right: 0,
-          top: "2%",
-          left: "46%",
-          height: "98%",
+          top: 0,
+          left: "38%",
+          height: "100%",
           zIndex: 0,
           pointerEvents: "none",
           willChange: "transform",
-          overflow: "hidden",
+          WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 22%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 80%, transparent 100%)",
+          WebkitMaskComposite: "destination-in",
+          maskImage: "linear-gradient(to right, transparent 0%, black 22%, black 85%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%, black 80%, transparent 100%)",
+          maskComposite: "intersect",
         }}
       >
         {/* Layer base: foto naturale */}
@@ -145,23 +148,6 @@ export default function Hero({ ready }) {
           />
         </div>
 
-        {/* Fade sinistro */}
-        <div style={{
-          position: "absolute",
-          inset: 0,
-          background: "linear-gradient(to right, var(--void) 0%, rgba(8,9,14,0.55) 30%, transparent 65%)",
-          pointerEvents: "none",
-          zIndex: 2,
-        }} />
-        {/* Fade basso */}
-        <div style={{
-          position: "absolute",
-          bottom: 0, left: 0, right: 0,
-          height: "30%",
-          background: "linear-gradient(to bottom, transparent, var(--void))",
-          pointerEvents: "none",
-          zIndex: 2,
-        }} />
       </div>
 
       {/* Cursor spotlight */}
