@@ -108,7 +108,7 @@ export default function Hero({ ready }) {
           pointerEvents: "none",
         }}
       >
-        {/* Foto originale — una sola, qualità 100%, mai toccata */}
+        {/* Layer base: foto naturale */}
         <img
           src="/edoardo-eyes-dark.jpg"
           alt=""
@@ -118,21 +118,25 @@ export default function Hero({ ready }) {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            objectPosition: "center 30%",
+            objectPosition: "50% 42%",
             display: "block",
           }}
         />
 
-        {/* Velo rosso — overlay puro sopra la foto, sparisce con lo scroll */}
-        <div
-          ref={redLayerRef}
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "rgba(160, 18, 6, 0.48)",
-            pointerEvents: "none",
-          }}
-        />
+        {/* Layer top: foto rossa — stessa posizione, si dissolve su scroll */}
+        <div ref={redLayerRef} style={{ position: "absolute", inset: 0 }}>
+          <img
+            src="/edoardo-eyes-amber.jpg"
+            alt=""
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "50% 42%",
+              display: "block",
+            }}
+          />
+        </div>
 
         {/* Fade sinistro */}
         <div style={{
