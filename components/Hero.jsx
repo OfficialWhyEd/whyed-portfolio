@@ -78,6 +78,48 @@ export default function Hero({ ready }) {
       {/* Atmospheric beams */}
       <BackgroundBeams />
 
+      {/* Ritratto — destra, bleeding all'edge, si fonde con --void */}
+      <div
+        style={{
+          position: "absolute",
+          right: 0,
+          top: 0,
+          width: "46%",
+          height: "100%",
+          zIndex: 0,
+          pointerEvents: "none",
+        }}
+      >
+        <img
+          src="/edoardo-eyes-amber.jpg"
+          alt=""
+          style={{
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center 30%",
+            display: "block",
+          }}
+        />
+        {/* Fade sinistro — la foto emerge dal void */}
+        <div style={{
+          position: "absolute",
+          inset: 0,
+          background: "linear-gradient(to right, var(--void) 0%, rgba(8,9,14,0.6) 35%, transparent 70%)",
+          pointerEvents: "none",
+        }} />
+        {/* Fade in basso */}
+        <div style={{
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          right: 0,
+          height: "30%",
+          background: "linear-gradient(to bottom, transparent, var(--void))",
+          pointerEvents: "none",
+        }} />
+      </div>
+
       {/* Cursor spotlight */}
       <div
         ref={spotRef}

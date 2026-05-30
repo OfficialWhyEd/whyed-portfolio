@@ -246,40 +246,80 @@ export default function About() {
 
         {/* Colonna stats + stack */}
         <Reveal delay={0.12}>
-          {/* Foto profilo */}
-          <div style={{ position: "relative", marginBottom: "3rem", overflow: "hidden" }}>
-            <img
-              src="/edoardo-portrait-green.jpg"
-              alt="Edoardo Porcu"
-              style={{
-                width: "100%",
-                maxHeight: "520px",
-                objectFit: "cover",
-                objectPosition: "top center",
-                display: "block",
-                filter: "grayscale(0%) contrast(1.05)",
-                mixBlendMode: "normal",
-              }}
-            />
-            {/* Gradient fade bottom */}
+          {/* Layout editoriale sfalsato — due ritratti sovrapposti */}
+          <div style={{
+            position: "relative",
+            height: "580px",
+            marginBottom: "3rem",
+          }}>
+            {/* Ritratto principale — crewneck, verde */}
+            <div style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "68%",
+              height: "88%",
+              overflow: "hidden",
+            }}>
+              <img
+                src="/edoardo-portrait-green.jpg"
+                alt="Edoardo Porcu"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: "top center",
+                  display: "block",
+                }}
+              />
+              <div style={{
+                position: "absolute",
+                inset: 0,
+                background: "linear-gradient(to bottom, transparent 60%, var(--void) 100%)",
+                pointerEvents: "none",
+              }} />
+            </div>
+
+            {/* Ritratto secondario — hoodie, sfalsato in basso a destra */}
             <div style={{
               position: "absolute",
               bottom: 0,
-              left: 0,
               right: 0,
-              height: "120px",
-              background: "linear-gradient(to bottom, transparent, var(--ink))",
-              pointerEvents: "none",
-            }} />
+              width: "52%",
+              height: "72%",
+              overflow: "hidden",
+              outline: "1px solid var(--line2)",
+            }}>
+              <img
+                src="/edoardo-portrait-green2.jpg"
+                alt=""
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                  objectPosition: "top center",
+                  display: "block",
+                }}
+              />
+              <div style={{
+                position: "absolute",
+                inset: 0,
+                background: "linear-gradient(to top, transparent 60%, var(--void) 100%)",
+                pointerEvents: "none",
+              }} />
+            </div>
+
+            {/* Label */}
             <div style={{
               position: "absolute",
-              bottom: "1.2rem",
-              left: "1.5rem",
+              bottom: "1rem",
+              left: "1rem",
               fontFamily: '"JetBrains Mono", monospace',
-              fontSize: "0.52rem",
+              fontSize: "0.5rem",
               letterSpacing: "0.18em",
               textTransform: "uppercase",
               color: "var(--faint)",
+              zIndex: 2,
             }}>
               EDOARDO PORCU — CAGLIARI / ELMAS, SARDEGNA
             </div>
