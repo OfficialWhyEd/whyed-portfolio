@@ -301,6 +301,7 @@ function ProjectCard({ p, i, featured = false, wide = false }) {
 
         {/* Thumbnail */}
         <div
+          className="work-card-thumb"
           style={{
             height: `${thumbH}px`,
             borderBottom: `1px solid ${hovered ? `${vis.hue}55` : "var(--line)"}`,
@@ -471,7 +472,7 @@ function Section({ label, sectionNum, projects }) {
       )}
 
       {/* Griglia asimmetrica 3 colonne */}
-      <div style={{
+      <div className="work-grid" style={{
         display: "grid",
         gridTemplateColumns: "repeat(3, 1fr)",
         gap: "1.2rem",
@@ -479,7 +480,7 @@ function Section({ label, sectionNum, projects }) {
         {rest.map((p, i) => {
           const span = spanPattern[i] ?? 1;
           return (
-            <div key={p.id} style={{ gridColumn: `span ${span}` }}>
+            <div key={p.id} className="work-grid-item" style={{ gridColumn: `span ${span}` }}>
               <ProjectCard p={p} i={i + 1} wide={span === 2} />
             </div>
           );

@@ -377,25 +377,63 @@ html.lenis { height: auto; }
     max-width: 100% !important;
   }
 
-  /* ── Resto ──────────────────────────────── */
-
+  /* ── Tipografia generale ────────────────── */
   h1.display, h2.display { line-height: 0.9 !important; }
-
   .marquee-track { animation-duration: 18s !important; }
 
-  #lavori section > div:last-child,
-  #lavori > section > div > div:last-child {
-    grid-template-columns: 1fr !important;
+  /* Eyebrow labels — leggibili */
+  [style*="0.6rem"], [style*="0.58rem"], [style*="0.54rem"], [style*="0.52rem"] {
+    font-size: 0.7rem !important;
   }
 
-  #profilo .about-photos { height: 280px !important; }
-  #profilo .about-photos img:last-child { display: none !important; }
-
+  /* ── Sezioni — padding base ─────────────── */
   #lavori, #ecosistema, #profilo, #contatti {
     padding: 4.5rem 1.25rem !important;
   }
 
-  /* Contact — 1 colonna */
+  /* ── Work: griglia 3 colonne → 1 colonna ─ */
+  .work-grid {
+    grid-template-columns: 1fr !important;
+  }
+  .work-grid-item {
+    grid-column: span 1 !important;
+  }
+  .work-card-thumb {
+    height: 200px !important;
+  }
+  #lavori article {
+    transform: none !important;
+  }
+
+  /* ── About: foto overlapping → singola foto ─ */
+  .about-photos {
+    height: 260px !important;
+    margin-bottom: 1.5rem !important;
+  }
+  .about-photo-secondary {
+    display: none !important;
+  }
+  /* Prima foto full-width */
+  .about-photos > div:first-child {
+    width: 100% !important;
+    height: 100% !important;
+    position: absolute !important;
+  }
+
+  /* Formazione: elimina indent overflow */
+  .about-formation-detail {
+    padding-left: 0 !important;
+    margin-top: 0.3rem !important;
+  }
+
+  /* Esperienze: ruolo e data in colonna */
+  .about-exp-header {
+    flex-direction: column !important;
+    gap: 0.15rem !important;
+    align-items: flex-start !important;
+  }
+
+  /* ── Contact ─────────────────────────────── */
   #contatti > footer > div:nth-child(2) {
     grid-template-columns: 1fr !important;
   }

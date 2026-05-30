@@ -224,7 +224,7 @@ export default function About() {
                 },
               ].map((exp) => (
                 <div key={exp.role + exp.period} style={{ borderBottom: "1px solid var(--line)", paddingBottom: "1.2rem", marginBottom: "1.2rem" }}>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: "1rem", flexWrap: "wrap", marginBottom: "0.3rem" }}>
+                  <div className="about-exp-header" style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: "1rem", flexWrap: "wrap", marginBottom: "0.3rem" }}>
                     <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: "0.72rem", color: "var(--paper)", letterSpacing: "0.04em" }}>
                       {exp.role}
                     </span>
@@ -247,7 +247,7 @@ export default function About() {
         {/* Colonna stats + stack */}
         <Reveal delay={0.12}>
           {/* Layout editoriale sfalsato — due ritratti sovrapposti */}
-          <div style={{
+          <div className="about-photos" style={{
             position: "relative",
             height: "580px",
             marginBottom: "3rem",
@@ -281,7 +281,7 @@ export default function About() {
             </div>
 
             {/* Ritratto secondario — hoodie, sfalsato in basso a destra */}
-            <div style={{
+            <div className="about-photo-secondary" style={{
               position: "absolute",
               bottom: 0,
               right: 0,
@@ -445,6 +445,7 @@ export default function About() {
                   </span>
                 </div>
                 <div
+                  className="about-formation-detail"
                   style={{
                     fontFamily: '"Outfit", sans-serif',
                     fontSize: "0.8rem",
