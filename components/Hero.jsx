@@ -143,12 +143,20 @@ export default function Hero({ ready }) {
               display: "block",
             }}
           />
-          {/* Luce rossa da destra — radiale, come faretto reale che abbaglia */}
+          {/* Alone diffuso — si propaga dal basso a destra come nell'originale */}
           <div style={{
             position: "absolute",
             inset: 0,
-            background: "radial-gradient(ellipse 110% 22% at 105% 46%, rgba(225,18,4,0.82) 0%, rgba(200,14,4,0.55) 35%, rgba(170,10,3,0.22) 60%, transparent 80%)",
-            animation: "red-breathe 5s ease-in-out infinite",
+            background: "radial-gradient(ellipse 160% 55% at 112% 52%, rgba(190,12,3,0.45) 0%, rgba(160,8,2,0.22) 45%, transparent 72%)",
+            animation: "red-light-live 11s ease-in-out infinite",
+            pointerEvents: "none",
+          }} />
+          {/* Fascio principale — concentrato al livello occhi, più intenso */}
+          <div style={{
+            position: "absolute",
+            inset: 0,
+            background: "radial-gradient(ellipse 130% 28% at 108% 45%, rgba(225,18,4,0.78) 0%, rgba(205,14,4,0.48) 38%, rgba(170,10,3,0.18) 62%, transparent 78%)",
+            animation: "red-light-live 7s ease-in-out infinite 1.5s",
             pointerEvents: "none",
           }} />
         </div>
