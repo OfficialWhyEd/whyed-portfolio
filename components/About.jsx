@@ -214,13 +214,13 @@ export default function About() {
                   period: "mag – ott 2023",
                   role: "Dealer Telecomunicazioni",
                   company: "Vodafone — Bologna",
-                  desc: "Gestione stazioni dealer business. Telecomunicazioni B2B, negoziazione contratti aziendali.",
+                  desc: "Gestione stazioni dealer business, telecomunicazioni B2B. Ma come sempre in ogni città: il lavoro è il mezzo, lo scopo è produrre musica e conoscere nuove persone con cui farla.",
                 },
                 {
                   period: "mag – set 2025",
                   role: "Front-of-House Specialist",
                   company: "051 Osteria — Bologna, Quadrilatero",
-                  desc: "Eccellenza operativa in contesto luxury. Gestione clientela internazionale, coordinamento flussi, supervisione team. Di fronte alla Fontana del Nettuno.",
+                  desc: "Eccellenza operativa in contesto luxury. Gestione clientela internazionale, coordinamento flussi, supervisione team — di fronte alla Fontana del Nettuno. Produceva musica e costruiva collaborazioni in parallelo: lo scopo di ogni città è sempre stato fare incontrare il suono con le persone giuste.",
                 },
               ].map((exp) => (
                 <div key={exp.role + exp.period} style={{ borderBottom: "1px solid var(--line)", paddingBottom: "1.2rem", marginBottom: "1.2rem" }}>
@@ -246,6 +246,45 @@ export default function About() {
 
         {/* Colonna stats + stack */}
         <Reveal delay={0.12}>
+          {/* Foto profilo */}
+          <div style={{ position: "relative", marginBottom: "3rem", overflow: "hidden" }}>
+            <img
+              src="/edoardo-portrait-green.jpg"
+              alt="Edoardo Porcu"
+              style={{
+                width: "100%",
+                maxHeight: "520px",
+                objectFit: "cover",
+                objectPosition: "top center",
+                display: "block",
+                filter: "grayscale(0%) contrast(1.05)",
+                mixBlendMode: "normal",
+              }}
+            />
+            {/* Gradient fade bottom */}
+            <div style={{
+              position: "absolute",
+              bottom: 0,
+              left: 0,
+              right: 0,
+              height: "120px",
+              background: "linear-gradient(to bottom, transparent, var(--ink))",
+              pointerEvents: "none",
+            }} />
+            <div style={{
+              position: "absolute",
+              bottom: "1.2rem",
+              left: "1.5rem",
+              fontFamily: '"JetBrains Mono", monospace',
+              fontSize: "0.52rem",
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: "var(--faint)",
+            }}>
+              EDOARDO PORCU — CAGLIARI / ELMAS, SARDEGNA
+            </div>
+          </div>
+
           <div
             style={{
               display: "grid",

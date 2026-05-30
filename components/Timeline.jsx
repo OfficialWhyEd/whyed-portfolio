@@ -54,19 +54,19 @@ const events = [
     year: "2023",
     label: "STUDIO",
     title: "Studio a Cagliari/Elmas + Vodafone Bologna",
-    desc: "Apre lo studio fisico. Mixing e mastering freelance: album indie, EP pop-rock. Dealer Vodafone Bologna (mag–ott 2023) — telecomunicazioni B2B. Bartender Sphera Locura Milano (mar–giu 2023).",
-  },
-  {
-    year: "2024",
-    label: "DEVELOPER",
-    title: "WhyCremisi — il primo plugin",
-    desc: "Nasce il Why Ecosystem. Primo plugin VST3 con AI integrata — la svolta: il suono non basta, servono strumenti che pensano. RAGEWINGS: Stars feat. WhyEd (ott 2024).",
+    desc: "Apre lo studio fisico. Mixing e mastering freelance: album indie, EP pop-rock. Dealer Vodafone Bologna (mag–ott 2023) — ma il vero motivo era produrre, conoscere gente nuova, fare musica. Bartender Sphera Locura Milano (mar–giu 2023).",
   },
   {
     year: "2025",
     label: "BOLOGNA",
     title: "051 Osteria + Ecosistema",
-    desc: "Front-of-House Specialist — 051 Osteria, Quadrilatero di Bologna, di fronte alla Fontana del Nettuno (mag–set 2025). Bartender a Cagliari in parallelo. WhyPost, WhyCalendar, CLACK attivi.",
+    desc: "Front-of-House Specialist — 051 Osteria, Quadrilatero di Bologna, di fronte alla Fontana del Nettuno (mag–set 2025). Come sempre: lavorare intensamente mentre lo scopo reale è produrre, conoscere artisti, costruire nuove collaborazioni musicali. WhyPost, WhyCalendar, CLACK attivi.",
+  },
+  {
+    year: "2026",
+    label: "DEVELOPER",
+    title: "WhyCremisi — il primo plugin",
+    desc: "Nasce il Why Ecosystem. Primo plugin VST3 con AI integrata — la svolta: il suono non basta, servono strumenti che pensano. RAGEWINGS: Stars feat. WhyEd (ott 2024). WhyCremisi prende forma e vita propria.",
   },
   {
     year: "2026",
