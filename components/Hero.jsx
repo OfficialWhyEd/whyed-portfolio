@@ -60,7 +60,7 @@ export default function Hero({ ready }) {
       .to(".h-tagline",   { opacity: 1, y: 0, duration: 0.9 }, "-=0.45")
       .to(".h-coord",     { opacity: 1, stagger: 0.12, duration: 0.9 }, "-=0.6");
 
-    // Cross-fade scroll: rosso → naturale mentre scorri via dall'hero
+    // Cross-fade scroll: rosso → naturale — range lungo per vedere la transizione
     if (redLayerRef.current) {
       gsap.to(redLayerRef.current, {
         opacity: 0,
@@ -68,8 +68,8 @@ export default function Hero({ ready }) {
         scrollTrigger: {
           trigger: root.current,
           start: "top top",
-          end:   "80% top",
-          scrub: 1.2,
+          end:   "bottom center",
+          scrub: 2,
         },
       });
     }
@@ -96,7 +96,7 @@ export default function Hero({ ready }) {
       {/* Atmospheric beams */}
       <BackgroundBeams />
 
-      {/* Ritratto — destra bleeding, due layer per cross-fade su scroll */}
+      {/* Ritratto — cross-fade scroll: rosso CSS → naturale, stessa foto */}
       <div
         style={{
           position: "absolute",
@@ -108,7 +108,7 @@ export default function Hero({ ready }) {
           pointerEvents: "none",
         }}
       >
-        {/* Layer base: versione naturale (occhi ambra/caldi) — sempre visibile */}
+        {/* Layer base: foto naturale — sempre visibile */}
         <img
           src="/edoardo-eyes-dark.jpg"
           alt=""
@@ -123,13 +123,10 @@ export default function Hero({ ready }) {
           }}
         />
 
-        {/* Layer sopra: versione rossa — si dissolve mentre scorri */}
-        <div
-          ref={redLayerRef}
-          style={{ position: "absolute", inset: 0 }}
-        >
+        {/* Layer rosso: stessa foto + overlay color rosso — si dissolve su scroll */}
+        <div ref={redLayerRef} style={{ position: "absolute", inset: 0 }}>
           <img
-            src="/edoardo-eyes-amber.jpg"
+            src="/edoardo-eyes-dark.jpg"
             alt=""
             style={{
               width: "100%",
@@ -139,17 +136,25 @@ export default function Hero({ ready }) {
               display: "block",
             }}
           />
+          {/* Overlay che tinge di rosso — mix-blend-mode:color preserva le luci */}
+          <div style={{
+            position: "absolute",
+            inset: 0,
+            background: "rgba(180, 30, 10, 0.82)",
+            mixBlendMode: "color",
+            pointerEvents: "none",
+          }} />
         </div>
 
-        {/* Fade sinistro — la foto emerge dal void */}
+        {/* Fade sinistro */}
         <div style={{
           position: "absolute",
           inset: 0,
-          background: "linear-gradient(to right, var(--void) 0%, rgba(8,9,14,0.6) 35%, transparent 70%)",
+          background: "linear-gradient(to right, var(--void) 0%, rgba(8,9,14,0.55) 30%, transparent 65%)",
           pointerEvents: "none",
           zIndex: 2,
         }} />
-        {/* Fade in basso */}
+        {/* Fade basso */}
         <div style={{
           position: "absolute",
           bottom: 0, left: 0, right: 0,
