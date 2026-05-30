@@ -118,7 +118,7 @@ export default function Hero({ ready }) {
             width: "100%",
             height: "100%",
             objectFit: "cover",
-            objectPosition: "45% 47%",
+            objectPosition: "38% 52%",
             display: "block",
           }}
         />
@@ -132,7 +132,7 @@ export default function Hero({ ready }) {
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              objectPosition: "45% 47%",
+              objectPosition: "38% 52%",
               display: "block",
             }}
           />
