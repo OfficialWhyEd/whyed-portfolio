@@ -7,8 +7,8 @@
   --void:    #08090e;
   --void2:   #0e1018;
   --paper:   #f0ede8;
-  --dim:     #6a6860;
-  --faint:   #2a2c34;
+  --dim:     #8a8782;
+  --faint:   #4a4d58;
   --signal:  #c94b25;
   --signal2: #e8603a;
   --line:    rgba(255,255,255,0.06);
@@ -261,3 +261,126 @@ html.lenis { height: auto; }
 /* ── Contact tactile ───────────────────────────────────────────── */
 .contact-link { transition: transform 0.15s ease, background 0.25s; display: block; }
 .contact-link:active { transform: translateY(2px); }
+
+/* ── Mobile (iPhone first) ─────────────────────────────────────── */
+@media (max-width: 768px) {
+
+  /* Alza tutti i colori dimmed su mobile per leggibilità */
+  :root {
+    --dim:   #b0ada7;
+    --faint: #787570;
+  }
+
+  /* Hero — portrait full-bleed, molto trasparente */
+  .hero-portrait-mobile {
+    left: 0 !important;
+    top: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    opacity: 0.18 !important;
+  }
+
+  /* Hero — padding */
+  #top {
+    padding: 5.5rem 1.25rem 2.5rem !important;
+  }
+
+  /* Hero — eyebrow in colonna, testo più luminoso */
+  .h-eyebrow {
+    flex-direction: column !important;
+    gap: 0.35rem !important;
+  }
+  .h-eyebrow span:last-child {
+    margin-left: 0 !important;
+  }
+
+  /* Hero — tagline nascosta */
+  .h-tagline {
+    display: none !important;
+  }
+
+  /* Hero — tags in riga wrappata */
+  .h-tags {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    gap: 0.25rem 1rem !important;
+  }
+  /* Tags text più leggibile su mobile */
+  .h-tags span {
+    color: var(--dim) !important;
+    font-size: 0.65rem !important;
+  }
+
+  /* Hero coordinate — più visibili */
+  .h-coord span {
+    color: var(--faint) !important;
+    font-size: 0.58rem !important;
+  }
+
+  /* Titoli display */
+  h1.display, h2.display {
+    line-height: 0.9 !important;
+  }
+
+  /* Marquee */
+  .marquee-track { animation-duration: 18s !important; }
+
+  /* Work — 1 colonna */
+  #lavori section > div:last-child,
+  #lavori > section > div > div:last-child {
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Timeline */
+  #cronologia {
+    padding: 5rem 1.25rem !important;
+  }
+  .tl-item {
+    grid-template-columns: 3.2rem 1fr !important;
+    gap: 0.75rem !important;
+    margin-bottom: 2.5rem !important;
+  }
+  /* Anno nella timeline — leggibile */
+  .tl-item span[style] {
+    color: var(--dim) !important;
+    font-size: 0.6rem !important;
+  }
+  /* Desc nella timeline */
+  .tl-item p {
+    font-size: 0.84rem !important;
+    color: var(--dim) !important;
+  }
+
+  /* About — una foto */
+  #profilo .about-photos {
+    height: 280px !important;
+  }
+  #profilo .about-photos img:last-child {
+    display: none !important;
+  }
+
+  /* Sezioni */
+  #lavori, #ecosistema, #profilo, #contatti {
+    padding: 5rem 1.25rem !important;
+  }
+
+  /* Contact — 1 colonna */
+  #contatti > footer > div:nth-child(2) {
+    grid-template-columns: 1fr !important;
+  }
+  #contatti > footer > div:nth-child(2) a {
+    border-right: none !important;
+    border-bottom: 1px solid var(--line) !important;
+  }
+}
+
+/* ── iPhone SE / piccoli (max 390px) ──────────────────────────── */
+@media (max-width: 390px) {
+  #top {
+    padding: 5rem 1rem 1.5rem !important;
+  }
+  .tl-item {
+    grid-template-columns: 2.8rem 1fr !important;
+    gap: 0.5rem !important;
+  }
+}

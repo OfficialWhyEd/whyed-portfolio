@@ -168,10 +168,10 @@ export default function Timeline() {
       <div
         style={{
           position: "relative",
-          maxWidth: "1000px",
+          maxWidth: "940px",
         }}
       >
-        {/* Vertical line — animata al scroll */}
+        {/* Linea verticale sinistra — animata al scroll */}
         <div
           ref={lineRef}
           style={{
@@ -180,10 +180,20 @@ export default function Timeline() {
             top: 0,
             bottom: 0,
             width: "1px",
-            background: "linear-gradient(to bottom, var(--signal), var(--line2) 60%)",
+            background: "linear-gradient(to bottom, var(--signal), rgba(201,75,37,0.15) 70%, transparent)",
             transformOrigin: "top center",
           }}
         />
+        {/* Linea verticale destra — simmetria */}
+        <div style={{
+          position: "absolute",
+          right: 0,
+          top: 0,
+          bottom: 0,
+          width: "1px",
+          background: "linear-gradient(to bottom, transparent 0%, var(--line2) 8%, var(--line2) 92%, transparent 100%)",
+          pointerEvents: "none",
+        }} />
 
         {events.map((ev, i) => (
           <div
@@ -218,10 +228,11 @@ export default function Timeline() {
               <span
                 style={{
                   fontFamily: '"JetBrains Mono", monospace',
-                  fontSize: "0.58rem",
-                  letterSpacing: "0.1em",
-                  color: "var(--faint)",
+                  fontSize: "0.62rem",
+                  letterSpacing: "0.08em",
+                  color: "var(--dim)",
                   display: "block",
+                  lineHeight: 1.2,
                 }}
               >
                 {ev.year}

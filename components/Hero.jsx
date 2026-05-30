@@ -98,15 +98,16 @@ export default function Hero({ ready }) {
       {/* Atmospheric beams */}
       <BackgroundBeams />
 
-      {/* Ritratto — leggermente spostato sinistra/basso, tra EDOARDO e Porcu */}
+      {/* Ritratto */}
       <div
         ref={portraitRef}
+        className="hero-portrait-mobile"
         style={{
           position: "absolute",
           right: 0,
-          top: "4%",
-          left: "52%",
-          height: "96%",
+          top: "2%",
+          left: "46%",
+          height: "98%",
           zIndex: 0,
           pointerEvents: "none",
           willChange: "transform",
@@ -336,7 +337,7 @@ export default function Hero({ ready }) {
             fontFamily: '"JetBrains Mono", monospace',
             fontSize: "0.6rem",
             letterSpacing: "0.15em",
-            color: "var(--faint)",
+            color: "var(--dim)",
             textTransform: "uppercase",
           }}
         >
@@ -347,7 +348,7 @@ export default function Hero({ ready }) {
             fontFamily: '"JetBrains Mono", monospace',
             fontSize: "0.6rem",
             letterSpacing: "0.15em",
-            color: "var(--faint)",
+            color: "var(--dim)",
             textTransform: "uppercase",
           }}
         >
