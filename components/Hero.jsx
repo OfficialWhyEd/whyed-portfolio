@@ -108,7 +108,7 @@ export default function Hero({ ready }) {
           pointerEvents: "none",
         }}
       >
-        {/* Layer base: foto naturale — qualità originale, zero filtri */}
+        {/* Foto originale — una sola, qualità 100%, mai toccata */}
         <img
           src="/edoardo-eyes-dark.jpg"
           alt=""
@@ -123,20 +123,16 @@ export default function Hero({ ready }) {
           }}
         />
 
-        {/* Layer top: foto rossa VERA — qualità originale, zero filtri, fades su scroll */}
-        <div ref={redLayerRef} style={{ position: "absolute", inset: 0 }}>
-          <img
-            src="/edoardo-eyes-amber.jpg"
-            alt=""
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "center 30%",
-              display: "block",
-            }}
-          />
-        </div>
+        {/* Velo rosso — overlay puro sopra la foto, sparisce con lo scroll */}
+        <div
+          ref={redLayerRef}
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: "rgba(160, 18, 6, 0.48)",
+            pointerEvents: "none",
+          }}
+        />
 
         {/* Fade sinistro */}
         <div style={{
