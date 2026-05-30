@@ -408,8 +408,8 @@ function MusicRow({ p, i }) {
           </p>
         </div>
         {screens.length > 0 && (
-          <div style={{ width: "130px", height: "90px", overflow: "hidden", flexShrink: 0, position: "relative", background: imgData?.bg || "var(--void2)" }}>
-            <GalleryImgs screens={screens} imgData={imgData} imgIdx={imgIdx} hovered={hovered} />
+          <div style={{ width: "110px", height: "110px", overflow: "hidden", flexShrink: 0, position: "relative", background: imgData?.bg || "var(--void2)" }}>
+            <GalleryImgs screens={screens} imgData={{ ...imgData, fit: "cover", pad: false }} imgIdx={imgIdx} hovered={hovered} />
           </div>
         )}
       </div>
@@ -449,7 +449,7 @@ function ProjectCard({ p, i, featured = false, wide = false }) {
     }
   }, []);
 
-  const thumbH = featured ? 320 : wide ? 220 : 180;
+  const thumbH = 200;
 
   return (
     <Reveal delay={i * 0.05}>
@@ -616,7 +616,7 @@ function ProjectCard({ p, i, featured = false, wide = false }) {
   );
 }
 
-const spanPattern = [2, 1, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1];
+// griglia 2 colonne uniforme — niente span casuali
 
 function SectionHeader({ label, sectionNum }) {
   return (
@@ -639,16 +639,13 @@ function DevSection({ label, sectionNum, projects }) {
   return (
     <div style={{ marginBottom: "8rem" }}>
       <SectionHeader label={label} sectionNum={sectionNum} />
-      {featured && <div style={{ marginBottom: "1.2rem" }}><FeaturedCard p={featured} i={0} /></div>}
-      <div className="work-grid" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.2rem" }}>
-        {rest.map((p, i) => {
-          const span = spanPattern[i] ?? 1;
-          return (
-            <div key={p.id} className="work-grid-item" style={{ gridColumn: `span ${span}` }}>
-              <ProjectCard p={p} i={i + 1} wide={span === 2} />
-            </div>
-          );
-        })}
+      {featured && <div style={{ marginBottom: "1.6rem" }}><FeaturedCard p={featured} i={0} /></div>}
+      <div className="work-grid" style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.6rem" }}>
+        {rest.map((p, i) => (
+          <div key={p.id} className="work-grid-item">
+            <ProjectCard p={p} i={i + 1} />
+          </div>
+        ))}
       </div>
     </div>
   );
