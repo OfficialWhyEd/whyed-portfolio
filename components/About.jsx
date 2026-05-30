@@ -259,6 +259,7 @@ export default function About() {
               left: 0,
               width: "68%",
               height: "88%",
+              overflow: "hidden",
             }}>
               <img
                 src="/edoardo-portrait-green.jpg"
@@ -269,9 +270,14 @@ export default function About() {
                   objectFit: "cover",
                   objectPosition: "top center",
                   display: "block",
-                  mixBlendMode: "screen",
                 }}
               />
+              <div style={{
+                position: "absolute",
+                inset: 0,
+                background: "linear-gradient(to bottom, transparent 60%, var(--void) 100%)",
+                pointerEvents: "none",
+              }} />
             </div>
 
             {/* Ritratto secondario — hoodie, sfalsato in basso a destra */}
@@ -281,6 +287,8 @@ export default function About() {
               right: 0,
               width: "52%",
               height: "72%",
+              overflow: "hidden",
+              outline: "1px solid var(--line2)",
             }}>
               <img
                 src="/edoardo-portrait-green2.jpg"
@@ -291,9 +299,14 @@ export default function About() {
                   objectFit: "cover",
                   objectPosition: "top center",
                   display: "block",
-                  mixBlendMode: "screen",
                 }}
               />
+              <div style={{
+                position: "absolute",
+                inset: 0,
+                background: "linear-gradient(to top, transparent 60%, var(--void) 100%)",
+                pointerEvents: "none",
+              }} />
             </div>
 
             {/* Label */}
