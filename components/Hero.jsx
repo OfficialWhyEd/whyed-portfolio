@@ -138,7 +138,7 @@ export default function Hero({ ready }) {
               width: "100%",
               height: "100%",
               objectFit: "cover",
-              objectPosition: "34% 44%",
+              objectPosition: "34% 54%",
               display: "block",
             }}
           />
