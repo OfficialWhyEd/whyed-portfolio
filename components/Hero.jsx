@@ -67,9 +67,9 @@ export default function Hero({ ready }) {
         ease: "none",
         scrollTrigger: {
           trigger: root.current,
-          start: "20% top",
-          end:   "70% top",
-          scrub: 1.5,
+          start: "40% top",
+          end:   "bottom top",
+          scrub: 2,
         },
       });
     }
@@ -123,20 +123,25 @@ export default function Hero({ ready }) {
           }}
         />
 
-        {/* Layer rosso: stessa foto, filtro CSS rosso diretto — si dissolve su scroll */}
-        <div ref={redLayerRef} style={{ position: "absolute", inset: 0 }}>
-          <img
-            src="/edoardo-eyes-dark.jpg"
-            alt=""
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "center 30%",
-              display: "block",
-              filter: "sepia(1) saturate(8) hue-rotate(310deg) brightness(0.9)",
-            }}
-          />
+        {/* Luce rossa — overlay puro, ZERO filtri sull'immagine */}
+        <div ref={redLayerRef} style={{ position: "absolute", inset: 0, pointerEvents: "none" }}>
+          {/* Bagliore radiale centrato sugli occhi */}
+          <div style={{
+            position: "absolute",
+            inset: 0,
+            background: "radial-gradient(ellipse 75% 35% at 52% 44%, rgba(201,75,37,0.52) 0%, rgba(160,20,8,0.28) 55%, transparent 80%)",
+            animation: "red-breathe 4.5s ease-in-out infinite",
+          }} />
+          {/* Fascia orizzontale — simula striscia di luce reale */}
+          <div style={{
+            position: "absolute",
+            top: "38%",
+            left: 0,
+            right: 0,
+            height: "16%",
+            background: "linear-gradient(to bottom, transparent, rgba(201,75,37,0.38) 35%, rgba(201,75,37,0.42) 50%, rgba(201,75,37,0.38) 65%, transparent)",
+            animation: "red-shift 7s ease-in-out infinite",
+          }} />
         </div>
 
         {/* Fade sinistro */}

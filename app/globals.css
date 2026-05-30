@@ -204,6 +204,17 @@ html.lenis { height: auto; }
 ::-webkit-scrollbar-track { background: var(--void); }
 ::-webkit-scrollbar-thumb { background: var(--faint); }
 
+/* ── Red light overlay animations ─────────────────────────────── */
+@keyframes red-breathe {
+  0%, 100% { opacity: 0.85; }
+  50%       { opacity: 1;    }
+}
+@keyframes red-shift {
+  0%, 100% { transform: translateY(0px)  scaleX(1);    }
+  40%       { transform: translateY(-3px) scaleX(1.02); }
+  70%       { transform: translateY(2px)  scaleX(0.99); }
+}
+
 /* ── Card alive dot ────────────────────────────────────────────── */
 @keyframes alive-dot {
   0%, 100% { opacity: 1;   transform: scale(1);   }
