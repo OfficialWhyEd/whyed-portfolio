@@ -111,8 +111,8 @@ export default function Hero({ ready }) {
           zIndex: 0,
           pointerEvents: "none",
           willChange: "transform",
-          WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 22%)",
-          maskImage: "linear-gradient(to right, transparent 0%, black 22%)",
+          WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 22%, black 80%, transparent 100%)",
+          maskImage: "linear-gradient(to right, transparent 0%, black 22%, black 80%, transparent 100%)",
           overflow: "hidden",
         }}
       >
