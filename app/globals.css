@@ -267,8 +267,8 @@ html.lenis { height: auto; }
 
   /* Alza tutti i colori dimmed su mobile per leggibilità */
   :root {
-    --dim:   #b0ada7;
-    --faint: #787570;
+    --dim:   #d0cdc8;
+    --faint: #a8a5a0;
   }
 
   /* Hero — portrait full-bleed, molto trasparente */
