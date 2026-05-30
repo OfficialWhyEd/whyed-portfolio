@@ -67,9 +67,9 @@ export default function Hero({ ready }) {
         ease: "none",
         scrollTrigger: {
           trigger: root.current,
-          start: "top top",
-          end:   "bottom center",
-          scrub: 2,
+          start: "20% top",
+          end:   "70% top",
+          scrub: 1.5,
         },
       });
     }
@@ -123,7 +123,7 @@ export default function Hero({ ready }) {
           }}
         />
 
-        {/* Layer rosso: stessa foto + overlay color rosso — si dissolve su scroll */}
+        {/* Layer rosso: stessa foto, filtro CSS rosso diretto — si dissolve su scroll */}
         <div ref={redLayerRef} style={{ position: "absolute", inset: 0 }}>
           <img
             src="/edoardo-eyes-dark.jpg"
@@ -134,16 +134,9 @@ export default function Hero({ ready }) {
               objectFit: "cover",
               objectPosition: "center 30%",
               display: "block",
+              filter: "sepia(1) saturate(8) hue-rotate(310deg) brightness(0.9)",
             }}
           />
-          {/* Overlay che tinge di rosso — mix-blend-mode:color preserva le luci */}
-          <div style={{
-            position: "absolute",
-            inset: 0,
-            background: "rgba(180, 30, 10, 0.82)",
-            mixBlendMode: "color",
-            pointerEvents: "none",
-          }} />
         </div>
 
         {/* Fade sinistro */}
