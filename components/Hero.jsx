@@ -106,7 +106,7 @@ export default function Hero({ ready }) {
           position: "absolute",
           right: 0,
           top: 0,
-          left: "38%",
+          left: "46%",
           height: "100%",
           zIndex: 0,
           pointerEvents: "none",
