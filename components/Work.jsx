@@ -6,14 +6,14 @@ import HyperText from "./HyperText";
 
 /* ── Immagini per progetto — screens[] include tutte le immagini disponibili ── */
 const images = {
-  "001": { screens: ["/projects/whycremisi-live.png", "/projects/whycremisi.jpg", "/projects/whycremisi-2.jpg"], fit: "cover",   bg: "#050505", pad: false },
-  "002": { screens: ["/projects/whypost-dashboard.jpg", "/projects/whypost-2.png", "/projects/whypost-3.png"],  fit: "cover",   bg: "#0a120e", pad: false },
-  "003": { screens: ["/projects/whycalendar-live.png", "/projects/whycalendar-dark.png", "/projects/whycalendar-screen.png"], fit: "cover", bg: "#040c10", pad: false, icon: "/projects/whycalendar.png" },
-  "004": { screens: ["/projects/whyemugba-2.png", "/projects/whyemugba-3.png", "/projects/whyemugba.png"],      fit: "contain", bg: "#cc0008", pad: true  },
-  "005": { screens: ["/projects/whycavalry-live.png", "/projects/whycavalry-2.png", "/projects/whycavalry-3.png"], fit: "cover", bg: "#1a2e30", pad: false },
-  "007": { screens: ["/projects/hyperframes.png", "/projects/hyperframes-2.png"],                               fit: "contain", bg: "#f5f5f5", pad: true  },
-  "009": { screens: ["/projects/whygrommit-openclaw-monitor.png", "/projects/whygrommit-openclaw-monitor-2.png"], fit: "cover", bg: "#050a0a", pad: false },
-  "010": { screens: ["/projects/whycremisi-2.jpg", "/projects/whycremisi-live.png"],                            fit: "contain", bg: "#050505", pad: true  },
+  "001": { screens: ["/projects/whycremisi.jpg",    "/projects/whycremisi-live.png", "/projects/whycremisi-2.jpg"],          fit: "contain", bg: "#050505", pad: true  },
+  "002": { screens: ["/projects/whypost-dashboard.jpg", "/projects/whypost-2.png",  "/projects/whypost-3.png"],             fit: "cover",   bg: "#0a120e", pad: false },
+  "003": { screens: ["/projects/whycalendar-dark.png",  "/projects/whycalendar-live.png", "/projects/whycalendar-screen.png"], fit: "cover", bg: "#040c10", pad: false, icon: "/projects/whycalendar.png" },
+  "004": { screens: ["/projects/whyemugba.png",     "/projects/whyemugba-2.png",    "/projects/whyemugba-3.png"],            fit: "contain", bg: "#cc0008", pad: true  },
+  "005": { screens: ["/projects/whycavalry.jpg",    "/projects/whycavalry-live.png", "/projects/whycavalry-2.png"],          fit: "contain", bg: "#1a2e30", pad: true  },
+  "007": { screens: ["/projects/hyperframes.png",   "/projects/hyperframes-2.png"],                                         fit: "contain", bg: "#f5f5f5", pad: true  },
+  "009": { screens: ["/projects/whygrommit-openclaw-monitor.png", "/projects/whygrommit-openclaw-monitor-2.png"],           fit: "cover",   bg: "#050a0a", pad: false },
+  "010": { screens: ["/projects/whycremisi-2.jpg",  "/projects/whycremisi-live.png"],                                       fit: "contain", bg: "#050505", pad: true  },
 };
 
 /* ── Palette visiva (fallback SVG) ── */
@@ -254,12 +254,12 @@ function ProjectCard({ p, i, featured = false, wide = false }) {
   const imgData = images[p.id];
   const screens = imgData?.screens || [];
 
-  // Auto-ciclo immagini ogni 3s quando in hover
+  // Auto-ciclo immagini ogni 3.5s sempre, indipendente dall'hover
   useEffect(() => {
-    if (!hovered || screens.length <= 1) return;
-    const id = setInterval(() => setImgIdx(n => (n + 1) % screens.length), 3000);
+    if (screens.length <= 1) return;
+    const id = setInterval(() => setImgIdx(n => (n + 1) % screens.length), 3500);
     return () => clearInterval(id);
-  }, [hovered, screens.length]);
+  }, [screens.length]);
 
   const onMouseMove = useCallback((e) => {
     const el = cardRef.current;
