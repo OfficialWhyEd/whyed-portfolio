@@ -63,6 +63,13 @@ const events = [
     desc: "Front-of-House Specialist — 051 Osteria, Quadrilatero di Bologna, di fronte alla Fontana del Nettuno (mag–set 2025). Come sempre: lavorare intensamente mentre lo scopo reale è produrre, conoscere artisti, costruire nuove collaborazioni musicali. WhyPost, WhyCalendar, CLACK attivi.",
   },
   {
+    year: "2025",
+    label: "MEDIA",
+    title: "People Podcast — \"Il Fallimento come Elogio\"",
+    desc: "Ospite al People Podcast: una conversazione pubblica sulla storia di riscatto, sul fallimento come strumento e sulla scelta di costruire un ecosistema personale invece di seguire le vie convenzionali. Una storia di riscatto raccontata in prima persona.",
+    image: "/people-podcast.png",
+  },
+  {
     year: "2026",
     label: "DEVELOPER",
     title: "WhyCremisi — il primo plugin",
@@ -254,10 +261,26 @@ export default function Timeline() {
                   color: "var(--dim)",
                   lineHeight: 1.68,
                   maxWidth: "38rem",
+                  marginBottom: ev.image ? "1rem" : 0,
                 }}
               >
                 {ev.desc}
               </p>
+              {ev.image && (
+                <div style={{
+                  maxWidth: "38rem",
+                  borderRadius: "2px",
+                  overflow: "hidden",
+                  border: "1px solid var(--line2)",
+                  marginTop: "0.8rem",
+                }}>
+                  <img
+                    src={ev.image}
+                    alt={ev.title}
+                    style={{ width: "100%", display: "block", objectFit: "cover", maxHeight: "220px" }}
+                  />
+                </div>
+              )}
             </div>
           </div>
         ))}

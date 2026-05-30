@@ -6,12 +6,14 @@ import HyperText from "./HyperText";
 
 /* ── Immagini reali per progetto ── */
 const images = {
-  "001": { src: "/projects/whycremisi.jpg",                        fit: "contain", bg: "#050505",    pad: true  },
-  "003": { src: "/projects/whycalendar-screen.png",                fit: "cover",   bg: "#0a0e14",    pad: false, icon: "/projects/whycalendar.png" },
-  "004": { src: "/projects/whyemugba-2.png",                       fit: "contain", bg: "#cc0008",    pad: true  },
-  "005": { src: "/projects/whycavalry-2.png",                      fit: "contain", bg: "#1a2e30",    pad: true  },
-  "007": { src: "/projects/hyperframes.png",                       fit: "contain", bg: "#f5f5f5",    pad: true  },
-  "010": { src: "/projects/whycremisi-2.jpg",                       fit: "contain", bg: "#050505",    pad: true  },
+  "001": { src: "/projects/whycremisi.jpg",       fit: "contain", bg: "#050505", pad: true  },
+  "002": { src: "/whypost-dashboard.jpg",          fit: "cover",   bg: "#0a120e", pad: false },
+  "003": { src: "/whycalendar-dark.png",           fit: "cover",   bg: "#040c10", pad: false, icon: "/projects/whycalendar.png" },
+  "004": { src: "/projects/whyemugba-2.png",       fit: "contain", bg: "#cc0008", pad: true  },
+  "005": { src: "/projects/whycavalry-2.png",      fit: "contain", bg: "#1a2e30", pad: true  },
+  "007": { src: "/projects/hyperframes.png",       fit: "contain", bg: "#f5f5f5", pad: true  },
+  "009": { src: "/projects/whygrommit-openclaw-monitor.png", fit: "cover", bg: "#050a0a", pad: false },
+  "010": { src: "/projects/whycremisi-2.jpg",      fit: "contain", bg: "#050505", pad: true  },
 };
 
 /* ── Palette visiva (fallback SVG) ── */

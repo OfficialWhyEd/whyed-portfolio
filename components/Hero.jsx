@@ -168,9 +168,9 @@ export default function Hero({ ready }) {
         >
           <div className="h-tags" style={{ display: "flex", flexDirection: "column", gap: "0.45rem" }}>
             {[
-              ["CA", "Ingegnere del Suono"],
-              ["IT", "Sviluppatore Audio-Tech"],
-              ["WW", "Costruttore Ecosistema Why"],
+              ["CA", "Musicista dal 2003 — pianoforte, canto, produzione"],
+              ["IT", "Sviluppatore — plugin VST3, app macOS, AI tools"],
+              ["WW", "Costruttore del Why Ecosystem — 15 progetti attivi"],
             ].map(([code, role]) => (
               <span
                 key={code}
