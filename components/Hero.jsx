@@ -105,7 +105,7 @@ export default function Hero({ ready }) {
           position: "absolute",
           right: 0,
           top: "4%",
-          left: "48%",
+          left: "43%",
           height: "96%",
           zIndex: 0,
           pointerEvents: "none",
@@ -162,22 +162,6 @@ export default function Hero({ ready }) {
           zIndex: 2,
         }} />
       </div>
-
-      {/* Luce rossa che sanguina a sinistra — tocco artistico, fades con scroll */}
-      <div
-        className="hero-red-layer"
-        style={{
-          position: "absolute",
-          right: "52%",
-          top: "30%",
-          width: "28%",
-          height: "30%",
-          background: "radial-gradient(ellipse 100% 60% at 100% 48%, rgba(210,16,4,0.22) 0%, rgba(185,10,3,0.1) 50%, transparent 80%)",
-          animation: "red-breathe 6s ease-in-out infinite 0.8s",
-          pointerEvents: "none",
-          zIndex: 1,
-        }}
-      />
 
       {/* Cursor spotlight */}
       <div
