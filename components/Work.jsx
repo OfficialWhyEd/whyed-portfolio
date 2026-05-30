@@ -324,23 +324,27 @@ function ProjectCard({ p, i, featured = false, wide = false }) {
         >
           {screens.length > 0 ? (
             <>
-              <img
-                key={imgIdx}
-                src={screens[imgIdx]}
-                alt={p.title}
-                style={{
-                  position: "absolute",
-                  inset: 0,
-                  width: "100%",
-                  height: "100%",
-                  objectFit: imgData.fit,
-                  objectPosition: "center top",
-                  display: "block",
-                  padding: imgData.pad ? "1.5rem" : "0",
-                  transition: "transform 0.6s cubic-bezier(0.16,1,0.3,1), opacity 0.5s",
-                  transform: hovered ? "scale(1.03)" : "scale(1)",
-                }}
-              />
+              {screens.map((src, di) => (
+                <img
+                  key={src}
+                  src={src}
+                  alt={di === 0 ? p.title : ""}
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    width: "100%",
+                    height: "100%",
+                    objectFit: imgData.fit,
+                    objectPosition: "center top",
+                    display: "block",
+                    padding: imgData.pad ? "1.5rem" : "0",
+                    opacity: di === imgIdx ? 1 : 0,
+                    transition: "opacity 0.8s cubic-bezier(0.4,0,0.2,1), transform 0.6s cubic-bezier(0.16,1,0.3,1)",
+                    transform: hovered ? "scale(1.03)" : "scale(1)",
+                    zIndex: di === imgIdx ? 1 : 0,
+                  }}
+                />
+              ))}
               {/* Dot gallery indicator */}
               {screens.length > 1 && (
                 <div style={{
