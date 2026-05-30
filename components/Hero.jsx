@@ -107,7 +107,7 @@ export default function Hero({ ready }) {
           position: "absolute",
           right: 0,
           top: "4%",
-          left: "44%",
+          left: "48%",
           height: "96%",
           zIndex: 0,
           pointerEvents: "none",
@@ -143,15 +143,12 @@ export default function Hero({ ready }) {
               display: "block",
             }}
           />
-          {/* Fascia luce — sottile, animata, non piatta */}
+          {/* Luce rossa da destra — radiale, come faretto reale che abbaglia */}
           <div style={{
             position: "absolute",
-            top: "41%",
-            left: 0,
-            right: 0,
-            height: "16%",
-            background: "linear-gradient(175deg, transparent 10%, rgba(195,25,6,0.38) 35%, rgba(205,28,8,0.44) 50%, rgba(195,25,6,0.38) 65%, transparent 90%)",
-            animation: "red-shift 9s ease-in-out infinite",
+            inset: 0,
+            background: "radial-gradient(ellipse 110% 22% at 105% 46%, rgba(225,18,4,0.82) 0%, rgba(200,14,4,0.55) 35%, rgba(170,10,3,0.22) 60%, transparent 80%)",
+            animation: "red-breathe 5s ease-in-out infinite",
             pointerEvents: "none",
           }} />
         </div>
