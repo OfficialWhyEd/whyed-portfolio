@@ -108,7 +108,7 @@ export default function Hero({ ready }) {
           pointerEvents: "none",
         }}
       >
-        {/* Layer base: foto naturale */}
+        {/* Foto originale — qualità 100%, mai toccata */}
         <img
           src="/edoardo-eyes-dark.jpg"
           alt=""
@@ -123,20 +123,23 @@ export default function Hero({ ready }) {
           }}
         />
 
-        {/* Layer top: foto rossa — stessa posizione, si dissolve su scroll */}
-        <div ref={redLayerRef} style={{ position: "absolute", inset: 0 }}>
-          <img
-            src="/edoardo-eyes-amber.jpg"
-            alt=""
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "50% 42%",
-              display: "block",
-            }}
-          />
-        </div>
+        {/* Luce rossa — gradiente radiale centrato sugli occhi, non un rettangolo piatto */}
+        <div
+          ref={redLayerRef}
+          style={{
+            position: "absolute",
+            inset: 0,
+            background: `
+              radial-gradient(ellipse 90% 50% at 52% 44%,
+                rgba(210, 35, 10, 0.72) 0%,
+                rgba(185, 22, 8, 0.52) 28%,
+                rgba(150, 12, 5, 0.28) 58%,
+                transparent 82%
+              )
+            `,
+            pointerEvents: "none",
+          }}
+        />
 
         {/* Fade sinistro */}
         <div style={{
