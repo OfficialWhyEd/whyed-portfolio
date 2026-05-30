@@ -16,11 +16,14 @@ const stats = [
 ];
 
 const stack = [
-  "Logic Pro X", "Pro Tools", "Ableton Live",
-  "JUCE / C++", "React", "Next.js", "Tauri",
-  "Node.js", "Python", "Rust", "OpenCL / DSP",
-  "Claude Code", "GSAP", "Electron", "Remotion",
-  "TypeScript", "Framer Motion", "Vite",
+  "Logic Pro X", "Pro Tools", "Ableton Live", "Cubase Pro", "Reason",
+  "JUCE / C++", "React", "Next.js", "Tauri", "Electron",
+  "Node.js", "Python", "Rust", "TypeScript", "OpenCL / DSP",
+  "Claude Code", "GSAP", "Framer Motion", "Vite", "Remotion",
+  "Premiere Pro", "After Effects", "Photoshop", "Illustrator", "Audition",
+  "Final Cut Pro", "Cinema 4D", "Figma",
+  "Shopify", "Google Analytics", "WordPress",
+  "Excel", "Photoshop", "AutoCAD",
 ];
 
 const piattaforme = [
@@ -141,7 +144,10 @@ export default function About() {
             <p>
               La musica viene prima di tutto.{" "}
               <span style={{ color: "var(--paper)", fontWeight: 500 }}>Pianoforte a 3 anni</span> —
-              poi scuola di musica, canto. Voce altissima, formazione in inglese.
+              poi chitarra alla Scuola Civica di Cagliari, canto.
+              Voce altissima, formazione in inglese.{" "}
+              <span style={{ color: "var(--paper)", fontWeight: 500 }}>Vincitore di The Voice ufficiale su Costa Crociere</span>{" "}
+              — prima edizione.
               Tutti, amici e famiglia, lo hanno sempre conosciuto così: quello che fa musica.
               Non è una scelta di carriera. È quello che è sempre stato.
             </p>
@@ -179,6 +185,62 @@ export default function About() {
               Aramald Productions (videoclip). Piattaforme attive:{" "}
               {piattaforme.join(" · ")}.
             </p>
+
+            {/* Esperienze professionali tech */}
+            <div style={{ marginTop: "2.5rem" }}>
+              <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: "0.58rem", letterSpacing: "0.18em", textTransform: "uppercase", color: "var(--signal)", marginBottom: "1.4rem" }}>
+                ESPERIENZE PROFESSIONALI
+              </div>
+              {[
+                {
+                  period: "ott 2022 – giu 2023",
+                  role: "Digital Project Manager",
+                  company: "Rare Game — Milano",
+                  desc: "Aperto e-commerce profittevole nel settore videoludico. Integrazione AI per migliorare operazioni e customer experience. Prima esposizione sistematica a sistemi AI applicati al business.",
+                },
+                {
+                  period: "mar 2019 – nov 2022",
+                  role: "Social Media Manager & Producer",
+                  company: "ITALY Properties — Milano",
+                  desc: "Gestione completa della presenza digitale. Produzione contenuti, campagne marketing, community management. 3+ anni di digital marketing ad alto volume.",
+                },
+                {
+                  period: "gen – dic 2022",
+                  role: "Tecnico Specializzato + Sales Manager",
+                  company: "ENEL — Cagliari",
+                  desc: "Tecnico specializzato telecomunicazioni ed energia. Street Coach e Sales Team Manager per Enel Energia Mercato Libero. Gestione team, negoziazione B2C e B2B.",
+                },
+                {
+                  period: "mag – ott 2023",
+                  role: "Dealer Telecomunicazioni",
+                  company: "Vodafone — Bologna",
+                  desc: "Gestione stazioni dealer business. Telecomunicazioni B2B, negoziazione contratti aziendali.",
+                },
+                {
+                  period: "mag – set 2025",
+                  role: "Front-of-House Specialist",
+                  company: "051 Osteria — Bologna, Quadrilatero",
+                  desc: "Eccellenza operativa in contesto luxury. Gestione clientela internazionale, coordinamento flussi, supervisione team. Di fronte alla Fontana del Nettuno.",
+                },
+              ].map((exp) => (
+                <div key={exp.role + exp.period} style={{ borderBottom: "1px solid var(--line)", paddingBottom: "1.2rem", marginBottom: "1.2rem" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "baseline", gap: "1rem", flexWrap: "wrap", marginBottom: "0.3rem" }}>
+                    <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: "0.72rem", color: "var(--paper)", letterSpacing: "0.04em" }}>
+                      {exp.role}
+                    </span>
+                    <span style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: "0.52rem", color: "var(--signal)", letterSpacing: "0.1em", flexShrink: 0 }}>
+                      {exp.period}
+                    </span>
+                  </div>
+                  <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: "0.58rem", color: "var(--faint)", letterSpacing: "0.08em", marginBottom: "0.4rem" }}>
+                    {exp.company}
+                  </div>
+                  <p style={{ fontFamily: '"Outfit", sans-serif', fontWeight: 300, fontSize: "0.82rem", color: "var(--dim)", lineHeight: 1.6 }}>
+                    {exp.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </Reveal>
 
@@ -209,9 +271,15 @@ export default function About() {
           >
             STACK TECNICO
           </div>
-          {/* Icone brand con colori originali */}
-          <div style={{ marginBottom: "1.5rem" }}>
+          {/* Icone dev stack */}
+          <div style={{ marginBottom: "0.6rem" }}>
+            <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: "0.54rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--faint)", marginBottom: "0.8rem" }}>DEV</div>
             <IconGrid filter={["react", "nextdotjs", "typescript", "nodedotjs", "python", "rust", "cplusplus", "juce", "electron", "tauri", "vite", "gsap", "framer", "remotion", "anthropic", "github"]} />
+          </div>
+          {/* Icone creative */}
+          <div style={{ marginBottom: "1.5rem", marginTop: "1.2rem" }}>
+            <div style={{ fontFamily: '"JetBrains Mono", monospace', fontSize: "0.54rem", letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--faint)", marginBottom: "0.8rem" }}>CREATIVE & BUSINESS</div>
+            <IconGrid filter={["adobephotoshop", "adobepremierepro", "adobeaftereffects", "adobeillustrator", "adobeaudition", "finalcutpro", "cinema4d", "figma", "shopify", "googleanalytics", "wordpress", "microsoftexcel"]} />
           </div>
           <div style={{ display: "flex", flexWrap: "wrap", gap: "0.5rem", marginBottom: "3rem" }}>
             {stack.map((s) => (
@@ -258,6 +326,8 @@ export default function About() {
           </div>
           <div style={{ display: "flex", flexDirection: "column", gap: "1rem" }}>
             {[
+              { year: "2003→",   name: "Scuola Civica di Cagliari", detail: "Pianoforte · Chitarra · Canto — formazione classica dalla prima infanzia" },
+              { year: "~2015",   name: "The Voice — Costa Crociere", detail: "Vincitore prima edizione ufficiale · Voce altissima in inglese" },
               { year: "2016–19", name: "London School of Sound", detail: "Certificate of Completion · Mix, Mastering, Sound Design · Londra" },
               { year: "2016–19", name: "Garnish Music Production School", detail: "Mix & Mastering, Sound Design, Music Business · Londra" },
               { year: "2019",    name: "European Bartender School", detail: "Londra — formazione internazionale" },

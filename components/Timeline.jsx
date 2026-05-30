@@ -12,13 +12,19 @@ const events = [
     year: "2003",
     label: "INIZIO",
     title: "Pianoforte a 3 anni",
-    desc: "La musica prima di tutto il resto. A 3 anni inizia al pianoforte. Cresce con scuola di musica e canto — voce altissima in inglese. Amici e famiglia lo conoscono da sempre così: quello che fa musica.",
+    desc: "La musica prima di tutto il resto. A 3 anni inizia al pianoforte. Poi chitarra alla Scuola Civica di Cagliari. Canto, voce altissima in inglese. Amici e famiglia lo conoscono da sempre così: quello che fa musica.",
   },
   {
     year: "2013",
     label: "PRODUZIONE",
     title: "I primi beat",
-    desc: "A 13 anni scopre la produzione. La passione che ha sempre avuto trova uno strumento nuovo: la DAW. L'orecchio formato da anni di musica classica incontra l'elettronica.",
+    desc: "A 13 anni scopre la produzione. L'orecchio formato da anni di pianoforte, chitarra e canto incontra la DAW.",
+  },
+  {
+    year: "~2015",
+    label: "VITTORIA",
+    title: "The Voice — Costa Crociere",
+    desc: "Vince la prima edizione ufficiale di The Voice organizzata su Costa Crociere. La conferma pubblica di una voce fuori dal comune — altissima, in inglese, riconosciuta su un palco vero davanti a centinaia di persone.",
   },
   {
     year: "2016–19",
