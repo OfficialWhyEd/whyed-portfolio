@@ -68,8 +68,8 @@ export default function Hero({ ready }) {
         scrollTrigger: {
           trigger: root.current,
           start: "top top",
-          end:   "55% top",
-          scrub: 1,
+          end:   "22% top",
+          scrub: 0.4,
         },
       });
     }
